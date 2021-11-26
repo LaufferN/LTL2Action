@@ -1,4 +1,5 @@
 # import ring
+import torch
 import numpy as np
 import pydot
 from ltlf2dfa.parser.ltlf import LTLfParser
@@ -7,8 +8,9 @@ from networkx.drawing.nx_agraph import to_agraph
 import dgl
 import networkx as nx
 from sklearn.preprocessing import OneHotEncoder
+import utils
 
-edge_types = {k:v for (v, k) in enumerate(["self", "arg", "arg1", "arg2"])}
+MAX_GUARD_LEN = 100
 
 """
 A class that can take an LTL formula and generate a minimal DFA of it. This
@@ -27,20 +29,37 @@ class DFABuilder(object):
     #     return "DFABuilder"
 
     # @ring.lru(maxsize=30000)
-    def __call__(self, formula_str, library="dgl"):
+    def __call__(self, formula, library="dgl"):
+        formula_str = utils.formatLTL(formula, self.props)
         parser = LTLfParser()
         formula = parser(formula_str)
+        print("Trying to convert", formula_str, "to a DFA...")
         dfa_dot = formula.to_dfa()
+        print("Done!")
 
         nxg = self._to_graph(dfa_dot)
 
-        nx.set_node_attributes(nxg, 0., "init_state")
+        #nx.set_node_attributes(nxg, 0, "init_state")
         # nxg.nodes[0]["init_state"] = 1.
+        nxg.remove_node("\\n")
+        for e in nxg.edges:
+            if len(nxg.edges[e]) == 0:
+                nxg.edges[e]["label"] = torch.zeros(MAX_GUARD_LEN)
+            else:
+                guard = nxg.edges[e]["label"][1:-1]
+                if guard == "true":
+                    nxg.edges[e]["label"] = torch.zeros(MAX_GUARD_LEN)
+                else:
+                    guard_tensor = torch.tensor(list(map(lambda x: ord(x), guard)))
+                    # For padding, we can try both A and B. We might need a smarter encoding for guards.
+                    padded_guard_tensor = torch.nn.functional.pad(guard_tensor, (0, MAX_GUARD_LEN - len(guard_tensor))) # A
+                    #padded_guard_tensor = torch.nn.functional.pad(guard_tensor, (MAX_GUARD_LEN - len(guard_tensor), 0)) # B
+                    nxg.edges[e]["label"] = padded_guard_tensor
         if (library == "networkx"): return nxg
 
         # convert the Networkx graph to dgl graph and pass the 'feat' attribute
         g = dgl.DGLGraph()
-        g.from_networkx(nxg, node_attrs=["feat", "init_state"], edge_attrs=["type"]) # dgl does not support string attributes (i.e., token)
+        g.from_networkx(nxg, node_attrs=[], edge_attrs=[]) # dgl does not support string attributes (i.e., token)
         return g
 
     # A helper function that returns the networkx version of the dfa
@@ -75,7 +94,6 @@ if __name__ == '__main__':
     sys.path.append('.')
     sys.path.append('..')
     from ltl_samplers import getLTLSampler
-    from format_ltl import formatLTL
 
     sampler_id = "Default"
     draw_path = "sample_dfa.png"
@@ -85,8 +103,6 @@ if __name__ == '__main__':
     builder = DFABuilder(list(set(list(props))))
     formula = sampler.sample()
     print("LTL Formula:", formula)
-    formula = formatLTL(formula, props)
-    print("Formatted LTL Formula:", formula)
     graph = builder(formula, library="networkx")
     # pre = list(nx.dfs_preorder_nodes(graph, source=0))
     print("Output DFA image to", draw_path)

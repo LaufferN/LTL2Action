@@ -132,7 +132,9 @@ if __name__ == '__main__':
     import itertools
     import matplotlib.pyplot as plt
 
-    sys.path.insert(0, '../../')
+    #sys.path.insert(0, '../../')
+    sys.path.append('.')
+    sys.path.append('..')
     from ltl_samplers import getLTLSampler
 
     for sampler_id, _ in itertools.product(["Default", "Sequence_2_20"], range(20)):

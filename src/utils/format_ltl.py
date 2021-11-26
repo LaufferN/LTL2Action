@@ -32,6 +32,6 @@ def formatLTL(formula, props):
     if formula in props:
         return formula
 
-    assert False, "Format error in ast_builder.ASTBuilder._to_graph()"
+    assert False, "Format error in format_ltl.formatLTL()"
 
     return None

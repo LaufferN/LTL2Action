@@ -116,6 +116,7 @@ parser.add_argument("--int-reward", type=float, default=0.0, help="the intrinsic
 parser.add_argument("--pretrained-gnn", action="store_true", default=False, help="load a pre-trained LTL module.")
 parser.add_argument("--dumb-ac", action="store_true", default=False,help="Use a single-layer actor-critic")
 parser.add_argument("--freeze-ltl", action="store_true", default=False,help="Freeze the gradient updates of the LTL module")
+parser.add_argument("--use-dfa", action="store_true", default=False,help="Use DFA encoding of the LTL formula instead of AST")
 
 args = parser.parse_args()
 
@@ -210,7 +211,7 @@ if pretrained_model_dir is not None:
 
 # Load observations preprocessor
 using_gnn = (args.gnn != "GRU" and args.gnn != "LSTM")
-obs_space, preprocess_obss = utils.get_obss_preprocessor(envs[0], using_gnn, progression_mode)
+obs_space, preprocess_obss = utils.get_obss_preprocessor(envs[0], using_gnn, progression_mode, args.use_dfa)
 if "vocab" in status and preprocess_obss.vocab is not None:
     preprocess_obss.vocab.load_vocab(status["vocab"])
 txt_logger.info("Observations preprocessor loaded.\n")
@@ -269,7 +270,6 @@ start_time = time.time()
 
 while num_frames < args.frames:
     # Update model parameters
-
     update_start_time = time.time()
     exps, logs1 = algo.collect_experiences()
     logs2 = algo.update_parameters(exps)
