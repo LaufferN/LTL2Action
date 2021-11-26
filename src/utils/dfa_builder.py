@@ -9,6 +9,8 @@ import dgl
 import networkx as nx
 from sklearn.preprocessing import OneHotEncoder
 import utils
+from utils.ast_builder import edge_types
+import time
 
 MAX_GUARD_LEN = 100
 
@@ -34,32 +36,45 @@ class DFABuilder(object):
         parser = LTLfParser()
         formula = parser(formula_str)
         print("Trying to convert", formula_str, "to a DFA...")
+        start = time.time()
         dfa_dot = formula.to_dfa()
-        print("Done!")
+        end = time.time()
+        print("Done! It took", (end - start), "seconds")
 
         nxg = self._to_graph(dfa_dot)
 
-        #nx.set_node_attributes(nxg, 0, "init_state")
-        # nxg.nodes[0]["init_state"] = 1.
+        # The implementation below is just a place holder for us get an output from RGCN.
+        # We can find a better model than RGCN for our purpose, e.g., DGI.
         nxg.remove_node("\\n")
+        nx.set_node_attributes(nxg, 0., "is_root")
+        nx.set_node_attributes(nxg, torch.ones(22), "feat")
         for e in nxg.edges:
+            if e[0] == "init":
+                # If there is an incoming edge from the special node init, then it is the initial node
+                nxg.nodes[e[1]]["is_root"] = 1.
+            if e[0] != e[1]:
+                # If there is an outgoing edge to another node, then it is not an accepting node.
+                nxg.nodes[e[0]]["feat"][0] = 0.
             if len(nxg.edges[e]) == 0:
-                nxg.edges[e]["label"] = torch.zeros(MAX_GUARD_LEN)
+                nxg.edges[e]["type"] = 0
+                #nxg.edges[e]["label"] = torch.zeros(MAX_GUARD_LEN)
             else:
                 guard = nxg.edges[e]["label"][1:-1]
                 if guard == "true":
-                    nxg.edges[e]["label"] = torch.zeros(MAX_GUARD_LEN)
+                    nxg.edges[e]["type"] = 0
+                    #nxg.edges[e]["label"] = torch.zeros(MAX_GUARD_LEN)
                 else:
-                    guard_tensor = torch.tensor(list(map(lambda x: ord(x), guard)))
+                    nxg.edges[e]["type"] = sum(map(lambda x: ord(x), guard)) % (len(edge_types) - 1) + 1 # This is just a place holder
+                    #guard_tensor = torch.tensor(list(map(lambda x: ord(x), guard)))
                     # For padding, we can try both A and B. We might need a smarter encoding for guards.
-                    padded_guard_tensor = torch.nn.functional.pad(guard_tensor, (0, MAX_GUARD_LEN - len(guard_tensor))) # A
+                    #padded_guard_tensor = torch.nn.functional.pad(guard_tensor, (0, MAX_GUARD_LEN - len(guard_tensor))) # A
                     #padded_guard_tensor = torch.nn.functional.pad(guard_tensor, (MAX_GUARD_LEN - len(guard_tensor), 0)) # B
-                    nxg.edges[e]["label"] = padded_guard_tensor
+                    #nxg.edges[e]["label"] = padded_guard_tensor
         if (library == "networkx"): return nxg
 
         # convert the Networkx graph to dgl graph and pass the 'feat' attribute
         g = dgl.DGLGraph()
-        g.from_networkx(nxg, node_attrs=[], edge_attrs=[]) # dgl does not support string attributes (i.e., token)
+        g.from_networkx(nxg, node_attrs=["feat", "is_root"], edge_attrs=["type"]) # dgl does not support string attributes (i.e., token)
         return g
 
     # A helper function that returns the networkx version of the dfa

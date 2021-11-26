@@ -27,13 +27,14 @@ from model import LSTMModel, GRUModel, init_params
 
 
 class RecurrentACModel(nn.Module, torch_ac.RecurrentACModel):
-    def __init__(self, env, obs_space, action_space, ignoreLTL, gnn_type, dumb_ac, freeze_ltl):
+    def __init__(self, env, obs_space, action_space, ignoreLTL, gnn_type, dumb_ac, freeze_ltl, use_dfa):
         super().__init__()
 
         # Decide which components are enabled
         self.use_progression_info = "progress_info" in obs_space
         self.use_text = not ignoreLTL and (gnn_type == "GRU" or gnn_type == "LSTM") and "text" in obs_space
-        self.use_ast = not ignoreLTL and ("GCN" in gnn_type) and "text" in obs_space
+        self.use_ast = not ignoreLTL and ("GCN" in gnn_type) and "text" in obs_space and not use_dfa
+        self.use_dfa = not ignoreLTL and ("GCN" in gnn_type) and "text" in obs_space and use_dfa
         self.gnn_type = gnn_type
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.action_space = action_space
@@ -72,6 +73,13 @@ class RecurrentACModel(nn.Module, torch_ac.RecurrentACModel):
             self.gnn = GNNMaker(self.gnn_type, obs_space["text"], self.text_embedding_size).to(self.device)
             print("GNN Number of parameters:", sum(p.numel() for p in self.gnn.parameters() if p.requires_grad))
 
+        elif self.use_dfa:
+            # We might need a different GNN architecture for DFAs
+            hidden_dim = 32
+            self.text_embedding_size = 32
+            self.gnn = GNNMaker(self.gnn_type, obs_space["text"], self.text_embedding_size).to(self.device)
+            print("GNN Number of parameters:", sum(p.numel() for p in self.gnn.parameters() if p.requires_grad))
+
 
         # Memory specific code. 
         self.image_embedding_size = self.env_model.size()
@@ -79,7 +87,7 @@ class RecurrentACModel(nn.Module, torch_ac.RecurrentACModel):
         self.embedding_size = self.semi_memory_size
 
         print("embedding size:", self.embedding_size)
-        if self.use_text or self.use_ast or self.use_progression_info:
+        if self.use_text or self.use_ast or self.use_progression_info or self.use_dfa:
             self.embedding_size += self.text_embedding_size
 
         if self.dumb_ac:
@@ -133,6 +141,11 @@ class RecurrentACModel(nn.Module, torch_ac.RecurrentACModel):
 
         # Adding GNN
         elif self.use_ast:
+            embed_gnn = self.gnn(obs.text)
+            embedding = torch.cat((embedding, embed_gnn), dim=1) if embedding is not None else embed_gnn
+
+        # Adding GNN
+        elif self.use_dfa:
             embed_gnn = self.gnn(obs.text)
             embedding = torch.cat((embedding, embed_gnn), dim=1) if embedding is not None else embed_gnn
 
