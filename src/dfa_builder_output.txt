@@ -1,0 +1,2939 @@
+Last login: Tue Nov 30 21:57:34 on ttys004
+beyazit@C02G22U9ML85 src % python3.6 utils/dfa_builder.py 
+Using backend: pytorch
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'p'), 'r')
+There are 31 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'g', ('eventually', ('and', 'q', ('eventually', 'l'))))), ('and', ('eventually', 's'), ('and', ('eventually', 'l'), ('eventually', ('and', 'n', ('eventually', ('and', 'j', ('eventually', 's'))))))))
+There are 31 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F x_2))))) & ((F x_3) & ((F x_2) & (F (x_4 & (F (x_5 & (F x_3)))))))) to a DFA...
+Done! It took 1.3233890533447266 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'p'), ('and', 'h', ('until', ('not', 'q'), 's')))
+There are 32 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 32 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 't'), 'g'), ('until', ('not', 'k'), ('and', 'j', ('until', ('not', 'h'), 'b'))))
+There are 32 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U x_5)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'g', 'q'), ('eventually', ('or', 'e', 'c')))), ('and', ('eventually', ('and', 't', ('eventually', ('and', 'h', ('eventually', ('and', ('or', 'k', 'n'), ('eventually', ('and', 't', ('eventually', 'l'))))))))), ('eventually', ('and', ('or', 'c', 'q'), ('eventually', ('and', ('or', 'o', 'f'), ('eventually', 'j')))))))
+There are 32 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 | x_3)))) & ((F (x_4 & (F (x_5 & (F ((x_6 | x_7) & (F (x_4 & (F x_8))))))))) & (F ((x_3 | x_1) & (F ((x_9 | x_10) & (F x_11))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'k'), ('and', 'm', ('until', ('not', 'f'), 'h')))
+There are 32 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 32 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'a'), ('and', 'g', ('until', ('not', 'b'), ('and', 'm', ('until', ('not', 'c'), 's'))))), ('until', ('not', 't'), 'r'))
+There are 32 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U x_7)) to a DFA...
+Done! It took 320.26950001716614 seconds
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'o', 'm'), ('eventually', 'f'))), ('and', ('eventually', 'f'), ('and', ('eventually', ('and', 'q', ('eventually', ('or', 'd', 'o')))), ('eventually', ('or', 'i', 'k')))))
+There are 33 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F x_2))) & ((F x_2) & ((F (x_3 & (F (x_4 | x_0)))) & (F (x_5 | x_6))))) to a DFA...
+Done! It took 9.487514019012451 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), ('and', 'j', ('until', ('not', 'i'), 'l')))
+There are 34 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 34 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'k'), ('and', 'e', ('until', ('not', 'm'), ('and', 'j', ('until', ('not', 't'), 'a'))))), ('until', ('not', 'd'), ('and', 'o', ('until', ('not', 'p'), 'b'))))
+There are 34 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U x_9)))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', ('or', 't', 'g'), ('eventually', ('and', 'h', ('eventually', ('and', 's', ('eventually', ('and', 'p', ('eventually', 'a')))))))))
+There are 34 entries in the dfa_db!
+Found (F ((x_0 | x_1) & (F (x_2 & (F (x_3 & (F (x_4 & (F x_5))))))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'r'), 's')
+There are 34 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 34 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'j'), ('and', 'p', ('until', ('not', 'b'), ('and', 'c', ('until', ('not', 'm'), 'h')))))
+There are 34 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', ('or', 'a', 'e'), ('eventually', ('and', 'k', ('eventually', ('and', 'm', ('eventually', 'n')))))))
+There are 34 entries in the dfa_db!
+Trying to convert (F ((x_0 | x_1) & (F (x_2 & (F (x_3 & (F x_4))))))) to a DFA...
+Done! It took 0.17291593551635742 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'b'), ('and', 'a', ('until', ('not', 'p'), 't')))
+There are 35 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 35 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'g'), 'n')
+There are 35 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', ('or', 'k', 'a'), ('eventually', ('and', 'm', ('eventually', ('or', 'c', 'n'))))))
+There are 35 entries in the dfa_db!
+Trying to convert (F ((x_0 | x_1) & (F (x_2 & (F (x_3 | x_4)))))) to a DFA...
+Done! It took 0.14261317253112793 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'm'), ('and', 'e', ('until', ('not', 'j'), 'f')))
+There are 36 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 36 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'h'), ('and', 'l', ('until', ('not', 'd'), ('and', 't', ('until', ('not', 'a'), 'j'))))), ('until', ('not', 'e'), 'o'))
+There are 36 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U x_7)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'n', ('eventually', ('and', 's', ('eventually', ('and', 'c', ('eventually', ('and', 'a', ('eventually', ('or', 'b', 'q')))))))))), ('and', ('eventually', ('and', 'f', ('eventually', 't'))), ('and', ('eventually', ('and', 'a', ('eventually', ('and', 'f', ('eventually', 'n'))))), ('eventually', ('and', 'c', ('eventually', ('and', 'e', ('eventually', ('and', 'j', ('eventually', ('and', ('or', 'h', 'i'), ('eventually', 'q'))))))))))))
+There are 36 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F (x_4 | x_5)))))))))) & ((F (x_6 & (F x_7))) & ((F (x_3 & (F (x_6 & (F x_0))))) & (F (x_2 & (F (x_8 & (F (x_9 & (F ((x_10 | x_11) & (F x_5)))))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'a'), 'm')
+There are 36 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 36 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 's'), ('and', 'm', ('until', ('not', 'q'), ('and', 'l', ('until', ('not', 'd'), 'j'))))), ('until', ('not', 'f'), 'g'))
+There are 36 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U x_7)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'q', ('eventually', ('and', 'b', ('eventually', 't'))))), ('and', ('eventually', ('and', 'd', ('eventually', 's'))), ('eventually', ('and', 'r', ('eventually', ('and', 'o', ('eventually', ('and', 'e', ('eventually', ('or', 'h', 'a'))))))))))
+There are 36 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F x_2))))) & ((F (x_3 & (F x_4))) & (F (x_5 & (F (x_6 & (F (x_7 & (F (x_8 | x_9)))))))))) to a DFA...
+Done! It took 483.2878532409668 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'j'), 'm')
+There are 37 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 37 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'j'), ('and', 'e', ('until', ('not', 'p'), ('and', 'd', ('until', ('not', 'q'), 'c')))))
+There are 37 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'r', 'q'), ('eventually', ('and', 's', ('eventually', ('and', 'a', ('eventually', ('and', 'm', ('eventually', ('or', 'r', 'a')))))))))), ('and', ('eventually', ('and', ('or', 'o', 'm'), ('eventually', ('and', 'q', ('eventually', ('and', ('or', 'b', 'i'), ('eventually', ('and', 'f', ('eventually', 'd'))))))))), ('and', ('eventually', ('or', 't', 'b')), ('eventually', 'o'))))
+There are 37 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 & (F (x_3 & (F (x_4 & (F (x_0 | x_3)))))))))) & ((F ((x_5 | x_4) & (F (x_1 & (F ((x_6 | x_7) & (F (x_8 & (F x_9))))))))) & ((F (x_10 | x_6)) & (F x_5)))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'k'), ('and', 'i', ('until', ('not', 'e'), 'd')))
+There are 37 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 37 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'd'), ('and', 'e', ('until', ('not', 'i'), 'n'))), ('until', ('not', 'b'), ('and', 'l', ('until', ('not', 't'), 'q'))))
+There are 37 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U x_7)))) to a DFA...
+Done! It took 276.2077839374542 seconds
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'f', ('eventually', ('and', 'c', ('eventually', 'n'))))), ('eventually', ('and', 'a', ('eventually', ('and', 'h', ('eventually', ('and', 'i', ('eventually', ('and', 'r', ('eventually', 'n'))))))))))
+There are 38 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F x_2))))) & (F (x_3 & (F (x_4 & (F (x_5 & (F (x_6 & (F x_2)))))))))) to a DFA...
+Done! It took 3.375598192214966 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'd'), ('and', 'k', ('until', ('not', 'e'), 'l')))
+There are 39 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 39 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'o'), 'h')
+There are 39 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'k', ('eventually', ('and', 'j', ('eventually', 'p')))))
+There are 39 entries in the dfa_db!
+Trying to convert (F (x_0 & (F (x_1 & (F x_2))))) to a DFA...
+Done! It took 0.031072139739990234 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), 'd')
+There are 40 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 40 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'l'), ('and', 'g', ('until', ('not', 'c'), 'i')))
+There are 40 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'k', ('eventually', ('and', 'n', ('eventually', ('or', 'r', 'm')))))), ('and', ('eventually', ('and', 'f', ('eventually', ('and', 'k', ('eventually', ('and', 'h', ('eventually', 'r'))))))), ('eventually', ('and', ('or', 'p', 'o'), ('eventually', 'a')))))
+There are 40 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 | x_3)))))) & ((F (x_4 & (F (x_0 & (F (x_5 & (F x_2))))))) & (F ((x_6 | x_7) & (F x_8))))) to a DFA...
+Done! It took 241.94611525535583 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'a'), ('and', 'n', ('until', ('not', 'm'), 'q')))
+There are 41 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 41 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'e'), ('and', 'p', ('until', ('not', 'i'), ('and', 'c', ('until', ('not', 'f'), 'm')))))
+There are 41 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'k', ('eventually', ('and', 'j', ('eventually', 'a')))))
+There are 41 entries in the dfa_db!
+Found (F (x_0 & (F (x_1 & (F x_2))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'k'), 's')
+There are 41 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 41 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'b'), ('and', 'i', ('until', ('not', 'j'), 'o')))
+There are 41 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'b'), ('and', ('eventually', ('and', ('or', 'j', 'b'), ('eventually', ('and', ('or', 'l', 'o'), ('eventually', ('and', 'g', ('eventually', ('or', 'r', 'e')))))))), ('eventually', ('and', ('or', 'a', 'd'), ('eventually', ('and', 'c', ('eventually', ('and', 'h', ('eventually', ('and', 's', ('eventually', 'j')))))))))))
+There are 41 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F ((x_1 | x_0) & (F ((x_2 | x_3) & (F (x_4 & (F (x_5 | x_6)))))))) & (F ((x_7 | x_8) & (F (x_9 & (F (x_10 & (F (x_11 & (F x_1))))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), ('and', 'a', ('until', ('not', 'd'), 's')))
+There are 41 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 41 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'n'), ('and', 'h', ('until', ('not', 'r'), ('and', 'p', ('until', ('not', 'l'), 'g'))))), ('until', ('not', 'j'), ('and', 'd', ('until', ('not', 'b'), ('and', 'm', ('until', ('not', 'e'), 'k'))))))
+There are 41 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U (x_9 & ((! x_10) U x_11)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'b', 'i'), ('eventually', ('and', 'l', ('eventually', ('and', ('or', 'h', 't'), ('eventually', 'p'))))))), ('and', ('eventually', ('and', 'a', ('eventually', 't'))), ('and', ('eventually', ('or', 'n', 'i')), ('eventually', 'g'))))
+There are 41 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 & (F ((x_3 | x_4) & (F x_5))))))) & ((F (x_6 & (F x_4))) & ((F (x_7 | x_1)) & (F x_8)))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'c'), ('and', 'l', ('until', ('not', 'q'), 't')))
+There are 41 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 41 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'n'), 's')
+There are 41 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'h'), ('eventually', ('and', ('or', 'l', 'p'), ('eventually', 'n'))))
+There are 41 entries in the dfa_db!
+Found ((F x_0) & (F ((x_1 | x_2) & (F x_3)))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), 'd')
+There are 41 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 41 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'k'), 'h')
+There are 41 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'h'), ('and', ('eventually', ('and', 'd', ('eventually', ('and', 'a', ('eventually', 'm'))))), ('and', ('eventually', 'c'), ('eventually', 'b'))))
+There are 41 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F (x_1 & (F (x_2 & (F x_3))))) & ((F x_4) & (F x_5)))) to a DFA...
+Done! It took 1.88112473487854 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'c'), ('and', 'q', ('until', ('not', 'f'), 'g')))
+There are 42 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 42 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'o'), ('and', 't', ('until', ('not', 'b'), 'c')))
+There are 42 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 't', ('eventually', ('and', 's', ('eventually', 'n'))))), ('and', ('eventually', ('or', 'm', 'p')), ('eventually', ('and', 'i', ('eventually', 'r')))))
+There are 42 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F x_2))))) & ((F (x_3 | x_4)) & (F (x_5 & (F x_6))))) to a DFA...
+Done! It took 7.681881904602051 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'i'), 's')
+There are 43 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 43 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'p'), 'o'), ('until', ('not', 'n'), ('and', 'd', ('until', ('not', 'h'), 'q'))))
+There are 43 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U x_5)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'f', ('eventually', ('or', 'q', 'e')))), ('and', ('eventually', ('and', 'q', ('eventually', ('and', 'r', ('eventually', ('and', 'd', ('eventually', ('and', 't', ('eventually', 'g'))))))))), ('and', ('eventually', ('and', 'n', ('eventually', ('and', 'o', ('eventually', ('and', ('or', 'r', 'g'), ('eventually', ('or', 'b', 'i')))))))), ('eventually', ('and', 'c', ('eventually', ('and', ('or', 'n', 'e'), ('eventually', ('and', ('or', 'c', 'f'), ('eventually', ('or', 'l', 'n')))))))))))
+There are 43 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 | x_2)))) & ((F (x_1 & (F (x_3 & (F (x_4 & (F (x_5 & (F x_6))))))))) & ((F (x_7 & (F (x_8 & (F ((x_3 | x_6) & (F (x_9 | x_10)))))))) & (F (x_11 & (F ((x_7 | x_2) & (F ((x_11 | x_0) & (F (x_12 | x_7))))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'j'), 'o')
+There are 43 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 43 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'k'), ('and', 's', ('until', ('not', 'j'), ('and', 'i', ('until', ('not', 'r'), 'h')))))
+There are 43 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'n', ('eventually', ('and', 'm', ('eventually', 'a')))))
+There are 43 entries in the dfa_db!
+Found (F (x_0 & (F (x_1 & (F x_2))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'g'), ('and', 'n', ('until', ('not', 'h'), 'i')))
+There are 43 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 43 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'm'), ('and', 'j', ('until', ('not', 'o'), 'a')))
+There are 43 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'i'), ('and', ('eventually', ('and', 'f', ('eventually', 's'))), ('and', ('eventually', ('and', 'r', ('eventually', ('and', 'q', ('eventually', ('and', 'a', ('eventually', ('and', 'b', ('eventually', 'j'))))))))), ('eventually', ('and', 'a', ('eventually', ('and', ('or', 'q', 'b'), ('eventually', ('and', 'k', ('eventually', ('and', 'p', ('eventually', ('or', 'l', 'a')))))))))))))
+There are 43 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F (x_1 & (F x_2))) & ((F (x_3 & (F (x_4 & (F (x_5 & (F (x_6 & (F x_7))))))))) & (F (x_5 & (F ((x_4 | x_6) & (F (x_8 & (F (x_9 & (F (x_10 | x_5))))))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'g'), 'j')
+There are 43 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 43 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'd'), ('and', 't', ('until', ('not', 'k'), ('and', 'p', ('until', ('not', 'f'), 'e')))))
+There are 43 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'f', ('eventually', 'n'))), ('and', ('eventually', ('and', 'd', ('eventually', 'a'))), ('and', ('eventually', ('and', 'm', ('eventually', 'l'))), ('eventually', ('and', 't', ('eventually', 'd'))))))
+There are 43 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & ((F (x_2 & (F x_3))) & ((F (x_4 & (F x_5))) & (F (x_6 & (F x_2)))))) to a DFA...
+Done! It took 42.76142883300781 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'h'), ('and', 'd', ('until', ('not', 'f'), 'p')))
+There are 44 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 44 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'p'), ('and', 'g', ('until', ('not', 's'), ('and', 'f', ('until', ('not', 'i'), 'q'))))), ('until', ('not', 'd'), ('and', 'a', ('until', ('not', 'h'), 'l'))))
+There are 44 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U x_9)))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'o', ('eventually', ('and', ('or', 'c', 'f'), ('eventually', ('or', 't', 'k')))))), ('and', ('eventually', ('and', ('or', 'e', 'm'), ('eventually', 'b'))), ('and', ('eventually', ('and', 'c', ('eventually', ('and', 'q', ('eventually', ('and', ('or', 'l', 's'), ('eventually', ('or', 'f', 'm')))))))), ('eventually', ('and', 'i', ('eventually', ('and', 'r', ('eventually', ('and', 'o', ('eventually', 'i'))))))))))
+There are 44 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F ((x_1 | x_2) & (F (x_3 | x_4)))))) & ((F ((x_5 | x_6) & (F x_7))) & ((F (x_1 & (F (x_8 & (F ((x_9 | x_10) & (F (x_2 | x_6)))))))) & (F (x_11 & (F (x_12 & (F (x_0 & (F x_11)))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'j'), ('and', 'h', ('until', ('not', 'k'), 's')))
+There are 44 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 44 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'n'), 'g')
+There are 44 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'q', 'o'), ('eventually', ('and', ('or', 'e', 'f'), ('eventually', ('and', ('or', 'a', 'm'), ('eventually', 't'))))))), ('and', ('eventually', ('and', 'h', ('eventually', 'n'))), ('and', ('eventually', ('and', 'p', ('eventually', ('and', 'd', ('eventually', ('and', 'q', ('eventually', 'i'))))))), ('eventually', ('and', ('or', 'q', 'p'), ('eventually', ('and', 'e', ('eventually', 'i'))))))))
+There are 44 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F ((x_2 | x_3) & (F ((x_4 | x_5) & (F x_6))))))) & ((F (x_7 & (F x_8))) & ((F (x_9 & (F (x_10 & (F (x_0 & (F x_11))))))) & (F ((x_0 | x_9) & (F (x_2 & (F x_11)))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'j'), 'g')
+There are 44 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 44 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'j'), 'n')
+There are 44 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 's', ('eventually', ('and', 'o', ('eventually', ('and', 'p', ('eventually', ('and', 'g', ('eventually', 'n'))))))))), ('eventually', 'm'))
+There are 44 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F x_4))))))))) & (F x_5)) to a DFA...
+Done! It took 0.4201359748840332 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 't'), ('and', 'a', ('until', ('not', 'e'), 'p')))
+There are 45 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 45 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'e'), ('and', 'n', ('until', ('not', 'j'), ('and', 'a', ('until', ('not', 'h'), 'q'))))), ('until', ('not', 'i'), ('and', 's', ('until', ('not', 'p'), 'b'))))
+There are 45 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U x_9)))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'j', ('eventually', ('and', 't', ('eventually', ('and', 'd', ('eventually', 'r'))))))), ('eventually', ('and', ('or', 'i', 'n'), ('eventually', 'o'))))
+There are 45 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F x_3))))))) & (F ((x_4 | x_5) & (F x_6)))) to a DFA...
+Done! It took 4.502436876296997 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), 'g')
+There are 46 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 46 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'n'), ('and', 'l', ('until', ('not', 'q'), 'h'))), ('until', ('not', 'k'), ('and', 'g', ('until', ('not', 't'), ('and', 'p', ('until', ('not', 'd'), 's'))))))
+There are 46 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U (x_7 & ((! x_8) U x_9)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'o', 's'), ('eventually', ('and', 'i', ('eventually', 'j'))))), ('and', ('eventually', ('and', 't', ('eventually', ('and', 'o', ('eventually', ('and', ('or', 'd', 'h'), ('eventually', ('or', 'f', 'a')))))))), ('and', ('eventually', ('and', 'h', ('eventually', 's'))), ('eventually', ('and', ('or', 't', 'h'), ('eventually', ('and', 'q', ('eventually', ('and', ('or', 'i', 'k'), ('eventually', 'b'))))))))))
+There are 46 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 & (F x_3))))) & ((F (x_4 & (F (x_0 & (F ((x_5 | x_6) & (F (x_7 | x_8)))))))) & ((F (x_6 & (F x_1))) & (F ((x_4 | x_6) & (F (x_9 & (F ((x_2 | x_10) & (F x_11)))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'l'), 'f')
+There are 46 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 46 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'n'), ('and', 'f', ('until', ('not', 'h'), 'q'))), ('until', ('not', 'r'), 'b'))
+There are 46 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U x_5)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'a', ('eventually', ('and', ('or', 'r', 'b'), ('eventually', 'e'))))), ('and', ('eventually', ('and', 'j', ('eventually', ('and', ('or', 'p', 's'), ('eventually', ('and', ('or', 'c', 'h'), ('eventually', 'g'))))))), ('and', ('eventually', 's'), ('eventually', ('and', ('or', 'r', 'o'), ('eventually', 's'))))))
+There are 46 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F ((x_1 | x_2) & (F x_3))))) & ((F (x_4 & (F ((x_5 | x_6) & (F ((x_7 | x_8) & (F x_9))))))) & ((F x_6) & (F ((x_1 | x_10) & (F x_6)))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'i'), ('and', 'n', ('until', ('not', 'e'), 'o')))
+There are 46 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 46 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'l'), ('and', 'c', ('until', ('not', 'a'), 'r')))
+There are 46 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'p', 't'), ('eventually', ('and', 'h', ('eventually', 'i'))))), ('and', ('eventually', 'j'), ('and', ('eventually', ('and', 'b', ('eventually', ('and', 'o', ('eventually', 'e'))))), ('eventually', ('and', ('or', 'o', 'm'), ('eventually', ('and', ('or', 'r', 'k'), ('eventually', ('or', 'g', 'f')))))))))
+There are 46 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 & (F x_3))))) & ((F x_4) & ((F (x_5 & (F (x_6 & (F x_7))))) & (F ((x_6 | x_8) & (F ((x_9 | x_10) & (F (x_11 | x_12))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'g'), 'k')
+There are 46 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 46 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'b'), ('and', 'c', ('until', ('not', 'q'), 'd')))
+There are 46 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'f', 't'), ('eventually', ('and', 'e', ('eventually', ('or', 'q', 'f')))))), ('eventually', ('and', ('or', 'p', 'd'), ('eventually', ('and', 'f', ('eventually', ('and', 'n', ('eventually', 'r'))))))))
+There are 46 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 & (F (x_3 | x_0)))))) & (F ((x_4 | x_5) & (F (x_0 & (F (x_6 & (F x_7)))))))) to a DFA...
+Done! It took 1.7295191287994385 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'l'), 'j')
+There are 47 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 47 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'q'), ('and', 'j', ('until', ('not', 'k'), 'e')))
+There are 47 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 't', ('eventually', 'd'))), ('and', ('eventually', ('or', 'l', 'o')), ('eventually', ('and', 'a', ('eventually', ('and', 'k', ('eventually', ('and', 'h', ('eventually', ('and', 'c', ('eventually', 'h')))))))))))
+There are 47 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & ((F (x_2 | x_3)) & (F (x_4 & (F (x_5 & (F (x_6 & (F (x_7 & (F x_6))))))))))) to a DFA...
+Done! It took 59.816165924072266 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'm'), 'd')
+There are 48 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 48 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'a'), ('and', 'j', ('until', ('not', 'b'), ('and', 'f', ('until', ('not', 'r'), 'c'))))), ('until', ('not', 'q'), 'h'))
+There are 48 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U x_7)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'l'), ('and', ('eventually', 'b'), ('eventually', ('and', ('or', 'f', 'p'), ('eventually', ('and', 'j', ('eventually', ('and', ('or', 'm', 'c'), ('eventually', ('and', 'o', ('eventually', 'a')))))))))))
+There are 48 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F x_1) & (F ((x_2 | x_3) & (F (x_4 & (F ((x_5 | x_6) & (F (x_7 & (F x_8))))))))))) to a DFA...
+Done! It took 155.52493691444397 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), 'q')
+There are 49 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 49 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'm'), ('and', 'g', ('until', ('not', 's'), 't'))), ('until', ('not', 'r'), ('and', 'j', ('until', ('not', 'l'), 'n'))))
+There are 49 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U x_7)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'd'), ('eventually', ('and', 'f', ('eventually', 'a'))))
+There are 49 entries in the dfa_db!
+Trying to convert ((F x_0) & (F (x_1 & (F x_2)))) to a DFA...
+Done! It took 0.04510498046875 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), ('and', 'm', ('until', ('not', 'k'), 's')))
+There are 50 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 50 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'd'), ('and', 'a', ('until', ('not', 's'), ('and', 'e', ('until', ('not', 'p'), 'g'))))), ('until', ('not', 'o'), ('and', 'f', ('until', ('not', 'c'), ('and', 'j', ('until', ('not', 'm'), 'l'))))))
+There are 50 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U (x_9 & ((! x_10) U x_11)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'p', ('eventually', ('and', 'n', ('eventually', ('and', 'g', ('eventually', ('and', ('or', 'i', 'a'), ('eventually', ('or', 'c', 't')))))))))), ('and', ('eventually', ('and', 'r', ('eventually', ('and', 'p', ('eventually', ('and', 'i', ('eventually', 'k'))))))), ('eventually', ('and', 'l', ('eventually', ('and', ('or', 'b', 'q'), ('eventually', 'k')))))))
+There are 50 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F ((x_3 | x_4) & (F (x_5 | x_6)))))))))) & ((F (x_7 & (F (x_0 & (F (x_3 & (F x_8))))))) & (F (x_9 & (F ((x_10 | x_11) & (F x_8))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'c'), ('and', 'b', ('until', ('not', 'd'), 'f')))
+There are 50 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 50 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'n'), ('and', 'b', ('until', ('not', 'c'), 's')))
+There are 50 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'b', ('eventually', ('and', 'n', ('eventually', ('and', ('or', 'e', 'm'), ('eventually', ('and', 'r', ('eventually', 'o'))))))))), ('and', ('eventually', ('and', 'n', ('eventually', ('and', ('or', 'l', 's'), ('eventually', ('and', 'm', ('eventually', 'o'))))))), ('eventually', ('and', 'f', ('eventually', 'q')))))
+There are 50 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F ((x_2 | x_3) & (F (x_4 & (F x_5))))))))) & ((F (x_1 & (F ((x_6 | x_7) & (F (x_3 & (F x_5))))))) & (F (x_8 & (F x_9))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'n'), 'o')
+There are 50 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 50 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'd'), 's')
+There are 50 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'c', 'l'), ('eventually', ('and', ('or', 'a', 'e'), ('eventually', ('and', 'r', ('eventually', ('and', 'n', ('eventually', 'm'))))))))), ('and', ('eventually', 'h'), ('and', ('eventually', ('and', 'g', ('eventually', ('and', 'o', ('eventually', ('and', 'i', ('eventually', ('and', 't', ('eventually', ('or', 'b', 'h')))))))))), ('eventually', ('and', ('or', 'm', 'n'), ('eventually', ('and', ('or', 'a', 'p'), ('eventually', ('and', 'd', ('eventually', ('and', ('or', 'p', 'b'), ('eventually', 'j'))))))))))))
+There are 50 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F ((x_2 | x_3) & (F (x_4 & (F (x_5 & (F x_6))))))))) & ((F x_7) & ((F (x_8 & (F (x_9 & (F (x_10 & (F (x_11 & (F (x_12 | x_7)))))))))) & (F ((x_6 | x_5) & (F ((x_2 | x_13) & (F (x_14 & (F ((x_13 | x_12) & (F x_15)))))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'a'), ('and', 'q', ('until', ('not', 'm'), 'l')))
+There are 50 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 50 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'c'), ('and', 'k', ('until', ('not', 'i'), ('and', 'o', ('until', ('not', 'q'), 'm'))))), ('until', ('not', 'h'), ('and', 't', ('until', ('not', 'g'), ('and', 'b', ('until', ('not', 'p'), 'l'))))))
+There are 50 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U (x_9 & ((! x_10) U x_11)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'q', 'b'), ('eventually', ('and', ('or', 'n', 'e'), ('eventually', ('and', 'h', ('eventually', ('and', ('or', 'b', 'e'), ('eventually', 'a'))))))))), ('and', ('eventually', ('and', 's', ('eventually', 'r'))), ('eventually', ('and', ('or', 'e', 'b'), ('eventually', ('and', 'm', ('eventually', ('or', 'c', 'l'))))))))
+There are 50 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F ((x_2 | x_3) & (F (x_4 & (F ((x_1 | x_3) & (F x_5))))))))) & ((F (x_6 & (F x_7))) & (F ((x_3 | x_1) & (F (x_8 & (F (x_9 | x_10)))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'k'), 'j')
+There are 50 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 50 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'j'), ('and', 'f', ('until', ('not', 't'), 'p'))), ('until', ('not', 'r'), ('and', 'b', ('until', ('not', 'o'), 'q'))))
+There are 50 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U x_7)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'l', ('eventually', ('and', 's', ('eventually', ('and', 'p', ('eventually', 't'))))))), ('eventually', ('and', 't', ('eventually', 'a'))))
+There are 50 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F x_3))))))) & (F (x_3 & (F x_4)))) to a DFA...
+Done! It took 0.2931549549102783 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 's'), ('and', 'p', ('until', ('not', 'a'), 'c')))
+There are 51 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 51 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'b'), 'o'), ('until', ('not', 't'), 'h'))
+There are 51 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U x_3)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', ('or', 'q', 'o'), ('eventually', ('and', ('or', 's', 'n'), ('eventually', ('and', 'h', ('eventually', ('and', 'b', ('eventually', 'k')))))))))
+There are 51 entries in the dfa_db!
+Trying to convert (F ((x_0 | x_1) & (F ((x_2 | x_3) & (F (x_4 & (F (x_5 & (F x_6))))))))) to a DFA...
+Done! It took 1.8725838661193848 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'd'), ('and', 'a', ('until', ('not', 'm'), 'o')))
+There are 52 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 52 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'a'), ('and', 'q', ('until', ('not', 's'), ('and', 'j', ('until', ('not', 't'), 'c'))))), ('until', ('not', 'k'), ('and', 'm', ('until', ('not', 'e'), ('and', 'g', ('until', ('not', 'l'), 'r'))))))
+There are 52 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U (x_9 & ((! x_10) U x_11)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 't', ('eventually', ('and', 'h', ('eventually', ('and', 'q', ('eventually', ('and', 'r', ('eventually', 'a'))))))))), ('and', ('eventually', ('and', 'r', ('eventually', 'h'))), ('and', ('eventually', 's'), ('eventually', ('and', 'r', ('eventually', 'j'))))))
+There are 52 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F x_4))))))))) & ((F (x_3 & (F x_1))) & ((F x_5) & (F (x_3 & (F x_6)))))) to a DFA...
+Done! It took 11.284900903701782 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'l'), 'c')
+There are 53 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 53 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'n'), ('and', 't', ('until', ('not', 'k'), 'i')))
+There are 53 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'e'), ('and', ('eventually', ('and', ('or', 'k', 'b'), ('eventually', 'f'))), ('and', ('eventually', ('and', ('or', 'l', 'd'), ('eventually', ('and', ('or', 'j', 'a'), ('eventually', ('and', ('or', 'q', 'o'), ('eventually', ('and', 'r', ('eventually', 'h'))))))))), ('eventually', ('or', 'a', 'b')))))
+There are 53 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F ((x_1 | x_2) & (F x_3))) & ((F ((x_4 | x_5) & (F ((x_6 | x_7) & (F ((x_8 | x_9) & (F (x_10 & (F x_11))))))))) & (F (x_7 | x_2))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'a'), 'c')
+There are 53 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 53 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'c'), 'q'), ('until', ('not', 'l'), ('and', 'f', ('until', ('not', 'n'), ('and', 's', ('until', ('not', 'k'), 'o'))))))
+There are 53 entries in the dfa_db!
+Trying to convert (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U (x_5 & ((! x_6) U x_7)))))) to a DFA...
+Done! It took 237.02860689163208 seconds
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'a', 'j'), ('eventually', ('and', ('or', 'm', 'q'), ('eventually', ('and', ('or', 'f', 'n'), ('eventually', 'l'))))))), ('eventually', ('or', 'n', 'f')))
+There are 54 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F ((x_2 | x_3) & (F ((x_4 | x_5) & (F x_6))))))) & (F (x_5 | x_4))) to a DFA...
+Done! It took 1.881493091583252 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'h'), ('and', 'd', ('until', ('not', 'r'), 'n')))
+There are 55 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 55 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 't'), ('and', 'j', ('until', ('not', 'd'), ('and', 'g', ('until', ('not', 'e'), 's'))))), ('until', ('not', 'i'), 'm'))
+There are 55 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U x_7)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'h', 'n'), ('eventually', ('and', 'l', ('eventually', ('and', 't', ('eventually', 'j'))))))), ('eventually', ('and', 'b', ('eventually', ('and', 'p', ('eventually', 'l'))))))
+There are 55 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 & (F (x_3 & (F x_4))))))) & (F (x_5 & (F (x_6 & (F x_2)))))) to a DFA...
+Done! It took 4.568047046661377 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'b'), ('and', 's', ('until', ('not', 'k'), 'i')))
+There are 56 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 56 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'i'), 't')
+There are 56 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'n', ('eventually', ('and', ('or', 'o', 'r'), ('eventually', 'e')))))
+There are 56 entries in the dfa_db!
+Trying to convert (F (x_0 & (F ((x_1 | x_2) & (F x_3))))) to a DFA...
+Done! It took 0.06845808029174805 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'j'), ('and', 's', ('until', ('not', 'o'), 'q')))
+There are 57 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 57 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 's'), ('and', 'n', ('until', ('not', 'r'), ('and', 'f', ('until', ('not', 'b'), 'q')))))
+There are 57 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', 'j')
+There are 57 entries in the dfa_db!
+Found (F x_0) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 's'), ('and', 'l', ('until', ('not', 'b'), 'k')))
+There are 57 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 57 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'q'), ('and', 'j', ('until', ('not', 'n'), 's'))), ('until', ('not', 'g'), 'c'))
+There are 57 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U x_5)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'i', ('eventually', ('and', 'g', ('eventually', 'h'))))), ('eventually', ('and', ('or', 'a', 'c'), ('eventually', 'l'))))
+There are 57 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F x_2))))) & (F ((x_3 | x_4) & (F x_5)))) to a DFA...
+Done! It took 0.8418917655944824 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'q'), 'd')
+There are 58 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 58 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'a'), ('and', 'l', ('until', ('not', 'f'), 'c'))), ('until', ('not', 'i'), ('and', 'h', ('until', ('not', 'q'), 't'))))
+There are 58 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U x_7)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'l', ('eventually', ('and', 'h', ('eventually', 's')))))
+There are 58 entries in the dfa_db!
+Found (F (x_0 & (F (x_1 & (F x_2))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), 'a')
+There are 58 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 58 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'd'), ('and', 'o', ('until', ('not', 'c'), ('and', 't', ('until', ('not', 'f'), 'h')))))
+There are 58 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'g', ('eventually', ('and', ('or', 'e', 'l'), ('eventually', ('and', 'p', ('eventually', 'd'))))))), ('and', ('eventually', ('and', ('or', 'a', 'o'), ('eventually', ('and', 'm', ('eventually', 'l'))))), ('eventually', 'r')))
+There are 58 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F ((x_1 | x_2) & (F (x_3 & (F x_4))))))) & ((F ((x_5 | x_6) & (F (x_7 & (F x_2))))) & (F x_8))) to a DFA...
+Done! It took 442.5298309326172 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'p'), ('and', 'r', ('until', ('not', 's'), 'c')))
+There are 59 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 59 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'l'), ('and', 'i', ('until', ('not', 'd'), ('and', 't', ('until', ('not', 'g'), 'r'))))), ('until', ('not', 'n'), ('and', 'o', ('until', ('not', 'e'), 'j'))))
+There are 59 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U x_9)))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'k'), ('and', ('eventually', ('and', 't', ('eventually', ('or', 'b', 'j')))), ('eventually', ('and', 'p', ('eventually', ('and', 'c', ('eventually', 't')))))))
+There are 59 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F (x_1 & (F (x_2 | x_3)))) & (F (x_4 & (F (x_5 & (F x_1))))))) to a DFA...
+Done! It took 5.081085920333862 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'h'), ('and', 'n', ('until', ('not', 'r'), 'g')))
+There are 60 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 60 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'd'), 'm'), ('until', ('not', 'a'), ('and', 'n', ('until', ('not', 'c'), 's'))))
+There are 60 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U x_5)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'c', ('eventually', ('and', 'd', ('eventually', ('and', 'f', ('eventually', ('and', 'p', ('eventually', 'e')))))))))
+There are 60 entries in the dfa_db!
+Found (F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F x_4))))))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'h'), 'b')
+There are 60 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 60 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 's'), 'm')
+There are 60 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'b', 'l'), ('eventually', ('or', 't', 'i')))), ('and', ('eventually', ('and', 'm', ('eventually', ('and', 'o', ('eventually', ('and', 'h', ('eventually', 't'))))))), ('and', ('eventually', ('and', 't', ('eventually', ('and', 'l', ('eventually', ('and', 'b', ('eventually', 'a'))))))), ('eventually', ('and', 'g', ('eventually', ('and', 'o', ('eventually', 'b'))))))))
+There are 60 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 | x_3)))) & ((F (x_4 & (F (x_5 & (F (x_6 & (F x_2))))))) & ((F (x_2 & (F (x_1 & (F (x_0 & (F x_7))))))) & (F (x_8 & (F (x_5 & (F x_0)))))))) to a DFA...
+Done! It took 498.0425229072571 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'j'), 'f')
+There are 61 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 61 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'm'), ('and', 'd', ('until', ('not', 'i'), 'p')))
+There are 61 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'c', 'e'), ('eventually', ('and', 'f', ('eventually', ('and', 'b', ('eventually', ('and', ('or', 'r', 'e'), ('eventually', ('or', 'h', 'k')))))))))), ('eventually', ('and', 'n', ('eventually', ('and', 'j', ('eventually', ('and', 'n', ('eventually', 's'))))))))
+There are 61 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 & (F (x_3 & (F ((x_4 | x_1) & (F (x_5 | x_6)))))))))) & (F (x_7 & (F (x_8 & (F (x_7 & (F x_9)))))))) to a DFA...
+Done! It took 398.57910084724426 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'i'), 'g')
+There are 62 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 62 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'e'), 'l')
+There are 62 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'r', ('eventually', ('and', ('or', 't', 'a'), ('eventually', ('and', 'k', ('eventually', ('or', 'o', 's')))))))), ('and', ('eventually', ('and', 'p', ('eventually', ('and', 'h', ('eventually', ('and', 'm', ('eventually', ('and', 'e', ('eventually', 'h'))))))))), ('and', ('eventually', ('and', 'j', ('eventually', ('and', 'a', ('eventually', 'f'))))), ('eventually', ('and', 'd', ('eventually', 'm'))))))
+There are 62 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F ((x_1 | x_2) & (F (x_3 & (F (x_4 | x_5)))))))) & ((F (x_6 & (F (x_7 & (F (x_8 & (F (x_9 & (F x_7))))))))) & ((F (x_10 & (F (x_2 & (F x_11))))) & (F (x_12 & (F x_8)))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), ('and', 'e', ('until', ('not', 't'), 'r')))
+There are 62 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 62 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'd'), 'k'), ('until', ('not', 'r'), ('and', 'a', ('until', ('not', 'l'), 's'))))
+There are 62 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U x_5)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'k', ('eventually', 'r')))
+There are 62 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'i'), 's')
+There are 62 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 62 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'm'), ('and', 'h', ('until', ('not', 'o'), ('and', 't', ('until', ('not', 's'), 'g'))))), ('until', ('not', 'r'), ('and', 'i', ('until', ('not', 'f'), ('and', 'd', ('until', ('not', 'k'), 'c'))))))
+There are 62 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U (x_9 & ((! x_10) U x_11)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'i', ('eventually', 'e'))), ('eventually', ('and', 'k', ('eventually', ('and', 'c', ('eventually', ('and', 'a', ('eventually', ('and', 'l', ('eventually', ('or', 'b', 't')))))))))))
+There are 62 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & (F (x_2 & (F (x_3 & (F (x_4 & (F (x_5 & (F (x_6 | x_7))))))))))) to a DFA...
+Done! It took 25.24921488761902 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'o'), 'h')
+There are 63 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 63 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'd'), ('and', 'f', ('until', ('not', 'n'), 'b')))
+There are 63 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'e', ('eventually', 'g'))), ('and', ('eventually', ('and', 'j', ('eventually', ('and', 'g', ('eventually', ('and', 's', ('eventually', 'm'))))))), ('eventually', ('and', 'l', ('eventually', ('and', ('or', 'c', 'h'), ('eventually', 'p')))))))
+There are 63 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & ((F (x_2 & (F (x_1 & (F (x_3 & (F x_4))))))) & (F (x_5 & (F ((x_6 | x_7) & (F x_8))))))) to a DFA...
+Done! It took 317.38727283477783 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'q'), 'p')
+There are 64 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 64 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'k'), ('and', 'l', ('until', ('not', 'd'), 'f')))
+There are 64 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'c', ('eventually', ('and', 'f', ('eventually', ('and', ('or', 'l', 's'), ('eventually', 'b'))))))), ('and', ('eventually', ('and', 'e', ('eventually', ('or', 'b', 'n')))), ('eventually', ('and', 'a', ('eventually', ('and', 'c', ('eventually', ('and', ('or', 'n', 'p'), ('eventually', 'q')))))))))
+There are 64 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F ((x_2 | x_3) & (F x_4))))))) & ((F (x_5 & (F (x_4 | x_6)))) & (F (x_7 & (F (x_0 & (F ((x_6 | x_8) & (F x_9))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'c'), 'l')
+There are 64 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 64 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'q'), ('and', 'g', ('until', ('not', 'r'), ('and', 'd', ('until', ('not', 'p'), 'l'))))), ('until', ('not', 'k'), 'b'))
+There are 64 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U x_7)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'j'), ('and', ('eventually', ('and', 'm', ('eventually', ('and', 'b', ('eventually', ('and', 'k', ('eventually', 'q'))))))), ('eventually', ('and', 'n', ('eventually', ('and', 'j', ('eventually', 'g')))))))
+There are 64 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F (x_1 & (F (x_2 & (F (x_3 & (F x_4))))))) & (F (x_5 & (F (x_0 & (F x_6))))))) to a DFA...
+Done! It took 3.0870301723480225 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'j'), 's')
+There are 65 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 65 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'o'), ('and', 'q', ('until', ('not', 'i'), 'l'))), ('until', ('not', 'j'), ('and', 's', ('until', ('not', 'g'), 't'))))
+There are 65 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U x_7)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'f', 'c'), ('eventually', 's'))), ('and', ('eventually', ('and', 'n', ('eventually', 'd'))), ('eventually', 'h')))
+There are 65 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F x_2))) & ((F (x_3 & (F x_4))) & (F x_5))) to a DFA...
+Done! It took 1.7067699432373047 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 't'), ('and', 'e', ('until', ('not', 'o'), 'i')))
+There are 66 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 66 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'd'), ('and', 'r', ('until', ('not', 'i'), 'h'))), ('until', ('not', 'g'), 'c'))
+There are 66 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U x_5)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('or', 'g', 'c')), ('and', ('eventually', 'j'), ('eventually', ('and', ('or', 's', 'd'), ('eventually', ('and', ('or', 'm', 'l'), ('eventually', ('and', ('or', 'j', 'c'), ('eventually', ('or', 'f', 'e'))))))))))
+There are 66 entries in the dfa_db!
+Trying to convert ((F (x_0 | x_1)) & ((F x_2) & (F ((x_3 | x_4) & (F ((x_5 | x_6) & (F ((x_2 | x_1) & (F (x_7 | x_8)))))))))) to a DFA...
+Done! It took 222.41604781150818 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'h'), 'j')
+There are 67 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 67 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'h'), ('and', 'o', ('until', ('not', 'c'), ('and', 'q', ('until', ('not', 'r'), 'i')))))
+There are 67 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'h', ('eventually', ('and', 'e', ('eventually', ('and', 'p', ('eventually', ('and', 'm', ('eventually', 'p'))))))))), ('eventually', ('and', 'j', ('eventually', ('and', ('or', 'r', 'e'), ('eventually', ('and', 'j', ('eventually', ('and', 'a', ('eventually', 't'))))))))))
+There are 67 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F x_2))))))))) & (F (x_4 & (F ((x_5 | x_1) & (F (x_4 & (F (x_6 & (F x_7)))))))))) to a DFA...
+Done! It took 27.171200037002563 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), ('and', 'c', ('until', ('not', 's'), 'h')))
+There are 68 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 68 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'j'), ('and', 't', ('until', ('not', 'h'), 'k'))), ('until', ('not', 'r'), 'a'))
+There are 68 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U x_5)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'd', ('eventually', ('and', 'q', ('eventually', 'g'))))), ('and', ('eventually', ('and', ('or', 'j', 'k'), ('eventually', 't'))), ('and', ('eventually', 'q'), ('eventually', ('and', 'a', ('eventually', ('and', 'o', ('eventually', ('and', 'a', ('eventually', ('and', 'f', ('eventually', 'g'))))))))))))
+There are 68 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F x_2))))) & ((F ((x_3 | x_4) & (F x_5))) & ((F x_1) & (F (x_6 & (F (x_7 & (F (x_6 & (F (x_8 & (F x_2)))))))))))) to a DFA...
+Done! It took 436.9693250656128 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'g'), 'i')
+There are 69 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 69 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'f'), 'l'), ('until', ('not', 'd'), 'a'))
+There are 69 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U x_3)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'i', 'q'), ('eventually', 'l'))), ('eventually', ('and', 'e', ('eventually', 'b'))))
+There are 69 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F x_2))) & (F (x_3 & (F x_4)))) to a DFA...
+Done! It took 0.2980918884277344 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'l'), 'g')
+There are 70 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 70 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'n'), ('and', 'f', ('until', ('not', 'g'), 'b')))
+There are 70 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', ('or', 's', 'r'), ('eventually', ('and', 'l', ('eventually', 'r')))))
+There are 70 entries in the dfa_db!
+Trying to convert (F ((x_0 | x_1) & (F (x_2 & (F x_1))))) to a DFA...
+Done! It took 0.05260014533996582 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'd'), ('and', 'n', ('until', ('not', 'h'), 'k')))
+There are 71 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 71 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'a'), 'q'), ('until', ('not', 'm'), ('and', 'n', ('until', ('not', 'e'), ('and', 'c', ('until', ('not', 'f'), 'h'))))))
+There are 71 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U (x_5 & ((! x_6) U x_7)))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', ('or', 'e', 's'), ('eventually', ('and', 'g', ('eventually', 'h')))))
+There are 71 entries in the dfa_db!
+Trying to convert (F ((x_0 | x_1) & (F (x_2 & (F x_3))))) to a DFA...
+Done! It took 0.05696821212768555 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'n'), ('and', 'p', ('until', ('not', 'd'), 'h')))
+There are 72 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 72 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'i'), ('and', 'd', ('until', ('not', 'c'), 'm'))), ('until', ('not', 's'), 'f'))
+There are 72 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U x_5)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'g', ('eventually', ('and', ('or', 's', 'c'), ('eventually', ('and', 'k', ('eventually', 't'))))))), ('and', ('eventually', ('and', 'i', ('eventually', 'q'))), ('eventually', ('and', ('or', 'b', 'j'), ('eventually', ('and', 'd', ('eventually', ('and', 't', ('eventually', ('and', 'i', ('eventually', ('or', 'e', 'k'))))))))))))
+There are 72 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F ((x_1 | x_2) & (F (x_3 & (F x_4))))))) & ((F (x_5 & (F x_6))) & (F ((x_7 | x_8) & (F (x_9 & (F (x_4 & (F (x_5 & (F (x_10 | x_3)))))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), ('and', 'h', ('until', ('not', 'q'), 'k')))
+There are 72 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 72 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'h'), ('and', 'a', ('until', ('not', 'k'), ('and', 's', ('until', ('not', 'b'), 'f'))))), ('until', ('not', 'q'), ('and', 'g', ('until', ('not', 'm'), ('and', 'i', ('until', ('not', 'j'), 'd'))))))
+There are 72 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U (x_9 & ((! x_10) U x_11)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'o'), ('and', ('eventually', ('and', 'b', ('eventually', ('and', 'j', ('eventually', 'o'))))), ('and', ('eventually', ('and', ('or', 'b', 'o'), ('eventually', ('and', 'd', ('eventually', ('or', 'e', 'j')))))), ('eventually', ('and', ('or', 'j', 'm'), ('eventually', 'r'))))))
+There are 72 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F (x_1 & (F (x_2 & (F x_0))))) & ((F ((x_1 | x_0) & (F (x_3 & (F (x_4 | x_2)))))) & (F ((x_2 | x_5) & (F x_6)))))) to a DFA...
+Done! It took 4.658275127410889 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'q'), 'b')
+There are 73 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 73 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'f'), ('and', 'p', ('until', ('not', 'o'), ('and', 'c', ('until', ('not', 'r'), 'h')))))
+There are 73 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('or', 'p', 'k'))
+There are 73 entries in the dfa_db!
+Trying to convert (F (x_0 | x_1)) to a DFA...
+Done! It took 0.043688058853149414 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), 'a')
+There are 74 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 74 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'o'), 'a'), ('until', ('not', 'e'), ('and', 'g', ('until', ('not', 's'), 'l'))))
+There are 74 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U x_5)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'c', ('eventually', ('or', 'b', 'j')))), ('and', ('eventually', ('and', 'g', ('eventually', ('and', 'a', ('eventually', ('and', 's', ('eventually', ('and', 'c', ('eventually', ('or', 'k', 'r')))))))))), ('eventually', ('and', ('or', 'h', 'k'), ('eventually', 's')))))
+There are 74 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 | x_2)))) & ((F (x_3 & (F (x_4 & (F (x_5 & (F (x_0 & (F (x_6 | x_7)))))))))) & (F ((x_8 | x_6) & (F x_5))))) to a DFA...
+Done! It took 310.0990102291107 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'r'), ('and', 'f', ('until', ('not', 'm'), 'k')))
+There are 75 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 75 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'h'), 'd')
+There are 75 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'h', ('eventually', ('and', 'e', ('eventually', ('and', ('or', 'g', 'f'), ('eventually', ('and', 'e', ('eventually', ('or', 'b', 'm')))))))))), ('eventually', ('and', 'm', ('eventually', 'o'))))
+There are 75 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F ((x_2 | x_3) & (F (x_1 & (F (x_4 | x_5)))))))))) & (F (x_5 & (F x_6)))) to a DFA...
+Done! It took 6.753453969955444 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'a'), 'o')
+There are 76 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 76 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'r'), ('and', 'h', ('until', ('not', 'd'), 'b'))), ('until', ('not', 'i'), ('and', 'l', ('until', ('not', 'a'), 'n'))))
+There are 76 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U x_7)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'q', ('eventually', ('and', ('or', 's', 'r'), ('eventually', ('or', 'f', 'e'))))))
+There are 76 entries in the dfa_db!
+Trying to convert (F (x_0 & (F ((x_1 | x_2) & (F (x_3 | x_4)))))) to a DFA...
+Done! It took 0.18381214141845703 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'c'), ('and', 'q', ('until', ('not', 'n'), 'j')))
+There are 77 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 77 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'n'), ('and', 'o', ('until', ('not', 'g'), ('and', 'q', ('until', ('not', 'p'), 'l'))))), ('until', ('not', 'd'), ('and', 'r', ('until', ('not', 'j'), 'h'))))
+There are 77 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U x_9)))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'g'), ('eventually', ('and', 'c', ('eventually', ('and', 'r', ('eventually', 'c'))))))
+There are 77 entries in the dfa_db!
+Trying to convert ((F x_0) & (F (x_1 & (F (x_2 & (F x_1)))))) to a DFA...
+Done! It took 0.07503199577331543 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), ('and', 'f', ('until', ('not', 'g'), 'j')))
+There are 78 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 78 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'd'), 'b'), ('until', ('not', 'o'), ('and', 'g', ('until', ('not', 'i'), 'j'))))
+There are 78 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U x_5)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'j', 'n'), ('eventually', ('and', ('or', 'h', 'k'), ('eventually', ('or', 'i', 'o')))))), ('and', ('eventually', 'f'), ('and', ('eventually', ('and', 'a', ('eventually', ('and', 't', ('eventually', ('and', 'l', ('eventually', ('and', 'd', ('eventually', 'q'))))))))), ('eventually', 'a'))))
+There are 78 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F ((x_2 | x_3) & (F (x_4 | x_5)))))) & ((F x_6) & ((F (x_7 & (F (x_8 & (F (x_9 & (F (x_10 & (F x_11))))))))) & (F x_7)))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'o'), ('and', 'e', ('until', ('not', 'l'), 'n')))
+There are 78 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 78 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'n'), ('and', 's', ('until', ('not', 'c'), 'g'))), ('until', ('not', 'p'), ('and', 'r', ('until', ('not', 'b'), ('and', 't', ('until', ('not', 'e'), 'i'))))))
+There are 78 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U (x_7 & ((! x_8) U x_9)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'o', ('eventually', ('and', 'q', ('eventually', ('and', 'f', ('eventually', 'p'))))))), ('eventually', ('and', ('or', 'k', 'i'), ('eventually', ('and', 'q', ('eventually', 'k'))))))
+There are 78 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F x_3))))))) & (F ((x_4 | x_5) & (F (x_1 & (F x_4)))))) to a DFA...
+Done! It took 0.9035232067108154 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'k'), 'c')
+There are 79 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 79 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'g'), ('and', 'j', ('until', ('not', 'e'), ('and', 'n', ('until', ('not', 'h'), 'd')))))
+There are 79 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'c', ('eventually', ('and', 'j', ('eventually', ('and', 'g', ('eventually', ('and', 'r', ('eventually', ('or', 'i', 'e')))))))))), ('eventually', ('and', 'h', ('eventually', 'o'))))
+There are 79 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F (x_4 | x_5)))))))))) & (F (x_6 & (F x_7)))) to a DFA...
+Done! It took 25.155224800109863 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'd'), 'p')
+There are 80 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 80 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'h'), ('and', 't', ('until', ('not', 'o'), 'k'))), ('until', ('not', 'c'), ('and', 'a', ('until', ('not', 's'), 'l'))))
+There are 80 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U x_7)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('or', 't', 'b'))
+There are 80 entries in the dfa_db!
+Found (F (x_0 | x_1)) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'j'), 'g')
+There are 80 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 80 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'c'), 'd'), ('until', ('not', 'o'), 'i'))
+There are 80 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U x_3)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 's', ('eventually', ('and', 'n', ('eventually', ('and', 'h', ('eventually', ('and', ('or', 'i', 'q'), ('eventually', 'g'))))))))), ('and', ('eventually', ('and', 'n', ('eventually', ('and', 'o', ('eventually', ('and', 'g', ('eventually', ('and', 'j', ('eventually', 'b'))))))))), ('eventually', 'o')))
+There are 80 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F ((x_3 | x_4) & (F x_5))))))))) & ((F (x_1 & (F (x_6 & (F (x_5 & (F (x_7 & (F x_8))))))))) & (F x_6))) to a DFA...
+Done! It took 139.6527819633484 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'n'), ('and', 'a', ('until', ('not', 'd'), 'j')))
+There are 81 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 81 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'o'), 'm'), ('until', ('not', 'j'), ('and', 'r', ('until', ('not', 'b'), 'n'))))
+There are 81 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U x_5)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'k', ('eventually', ('or', 'e', 'r')))), ('and', ('eventually', ('and', 'e', ('eventually', ('and', 's', ('eventually', ('and', ('or', 'r', 'd'), ('eventually', ('and', ('or', 'c', 'n'), ('eventually', 'g'))))))))), ('and', ('eventually', ('and', 'g', ('eventually', ('and', 'e', ('eventually', ('and', 'p', ('eventually', ('and', 't', ('eventually', ('or', 'o', 'f')))))))))), ('eventually', ('and', 'b', ('eventually', 'd'))))))
+There are 81 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 | x_2)))) & ((F (x_1 & (F (x_3 & (F ((x_2 | x_4) & (F ((x_5 | x_6) & (F x_7))))))))) & ((F (x_7 & (F (x_1 & (F (x_8 & (F (x_9 & (F (x_10 | x_11)))))))))) & (F (x_12 & (F x_4)))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), ('and', 'i', ('until', ('not', 'b'), 's')))
+There are 81 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 81 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'e'), 'h'), ('until', ('not', 'p'), ('and', 'o', ('until', ('not', 't'), ('and', 'n', ('until', ('not', 'a'), 'm'))))))
+There are 81 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U (x_5 & ((! x_6) U x_7)))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'k', ('eventually', 'j'))), ('eventually', ('and', 'n', ('eventually', ('or', 'l', 'a')))))
+There are 81 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & (F (x_2 & (F (x_3 | x_4))))) to a DFA...
+Done! It took 0.2746610641479492 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 't'), 'd')
+There are 82 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 82 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'p'), ('and', 'm', ('until', ('not', 'g'), 'r')))
+There are 82 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'm', ('eventually', ('or', 'b', 'f')))), ('and', ('eventually', ('and', ('or', 'b', 'g'), ('eventually', ('and', 'j', ('eventually', ('and', 'd', ('eventually', 'g'))))))), ('and', ('eventually', ('and', 'h', ('eventually', ('and', 'k', ('eventually', ('or', 'o', 'l')))))), ('eventually', ('and', 's', ('eventually', ('and', ('or', 'l', 'q'), ('eventually', ('and', 'n', ('eventually', 'b'))))))))))
+There are 82 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 | x_2)))) & ((F ((x_1 | x_3) & (F (x_4 & (F (x_5 & (F x_3))))))) & ((F (x_6 & (F (x_7 & (F (x_8 | x_9)))))) & (F (x_10 & (F ((x_9 | x_11) & (F (x_12 & (F x_1)))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'h'), 'e')
+There are 82 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 82 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'k'), ('and', 'e', ('until', ('not', 'q'), 'a'))), ('until', ('not', 'c'), 't'))
+There are 82 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U x_5)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'd', ('eventually', ('and', 'k', ('eventually', 'd'))))), ('and', ('eventually', ('and', 'l', ('eventually', ('and', 'j', ('eventually', 'r'))))), ('and', ('eventually', ('or', 'p', 'k')), ('eventually', 'g'))))
+There are 82 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F x_0))))) & ((F (x_2 & (F (x_3 & (F x_4))))) & ((F (x_5 | x_1)) & (F x_6)))) to a DFA...
+Done! It took 2.862417221069336 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'g'), ('and', 'b', ('until', ('not', 'o'), 't')))
+There are 83 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 83 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'n'), ('and', 'f', ('until', ('not', 'd'), 'j')))
+There are 83 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'o', ('eventually', 'm'))), ('and', ('eventually', ('and', 'b', ('eventually', ('and', 'g', ('eventually', ('and', ('or', 'o', 'n'), ('eventually', 'r'))))))), ('eventually', ('and', 'n', ('eventually', ('and', 'l', ('eventually', ('or', 'i', 'e'))))))))
+There are 83 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & ((F (x_2 & (F (x_3 & (F ((x_0 | x_4) & (F x_5))))))) & (F (x_4 & (F (x_6 & (F (x_7 | x_8)))))))) to a DFA...
+Done! It took 599.8267130851746 seconds
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'a'), 'g')
+There are 83 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 83 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'd'), ('and', 'c', ('until', ('not', 'r'), 'i'))), ('until', ('not', 'h'), ('and', 't', ('until', ('not', 'b'), 'p'))))
+There are 83 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U x_7)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'q', 'l'), ('eventually', ('and', 'h', ('eventually', ('and', ('or', 'a', 'k'), ('eventually', ('and', 'n', ('eventually', 'j'))))))))), ('and', ('eventually', ('and', 'b', ('eventually', ('and', 'c', ('eventually', ('and', 'r', ('eventually', 'l'))))))), ('and', ('eventually', ('and', 'h', ('eventually', ('and', ('or', 'c', 'p'), ('eventually', ('and', 'o', ('eventually', ('and', 'c', ('eventually', 'a'))))))))), ('eventually', 'q'))))
+There are 83 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 & (F ((x_3 | x_4) & (F (x_5 & (F x_6))))))))) & ((F (x_7 & (F (x_8 & (F (x_9 & (F x_1))))))) & ((F (x_2 & (F ((x_8 | x_10) & (F (x_11 & (F (x_8 & (F x_3))))))))) & (F x_0)))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 's'), ('and', 't', ('until', ('not', 'n'), 'e')))
+There are 83 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 83 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'e'), 'p')
+There are 83 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'b', 'g'), ('eventually', ('and', 'a', ('eventually', ('and', 'd', ('eventually', 'j'))))))), ('eventually', 'j'))
+There are 83 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 & (F (x_3 & (F x_4))))))) & (F x_4)) to a DFA...
+Done! It took 0.12473011016845703 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 't'), ('and', 's', ('until', ('not', 'p'), 'n')))
+There are 84 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 84 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'c'), 'e'), ('until', ('not', 'j'), ('and', 'q', ('until', ('not', 't'), ('and', 'b', ('until', ('not', 'd'), 'g'))))))
+There are 84 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U (x_5 & ((! x_6) U x_7)))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'a', ('eventually', 'q'))), ('eventually', ('and', ('or', 'm', 'p'), ('eventually', ('or', 'g', 'k')))))
+There are 84 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & (F ((x_2 | x_3) & (F (x_4 | x_5))))) to a DFA...
+Done! It took 0.8685588836669922 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'r'), ('and', 'l', ('until', ('not', 'i'), 'm')))
+There are 85 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 85 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'b'), ('and', 's', ('until', ('not', 'm'), 'l'))), ('until', ('not', 'j'), 't'))
+There are 85 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U x_5)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('or', 'f', 'd'))
+There are 85 entries in the dfa_db!
+Found (F (x_0 | x_1)) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'p'), 'k')
+There are 85 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 85 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'n'), ('and', 'i', ('until', ('not', 'o'), 'c')))
+There are 85 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', 'p')
+There are 85 entries in the dfa_db!
+Found (F x_0) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'd'), ('and', 'h', ('until', ('not', 'q'), 't')))
+There are 85 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 85 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'g'), ('and', 'j', ('until', ('not', 'q'), 'e'))), ('until', ('not', 'n'), ('and', 'm', ('until', ('not', 'd'), ('and', 'o', ('until', ('not', 'k'), 'l'))))))
+There are 85 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U (x_7 & ((! x_8) U x_9)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'i', ('eventually', ('and', 'h', ('eventually', ('and', 'd', ('eventually', ('and', 'p', ('eventually', ('or', 'g', 'o')))))))))), ('and', ('eventually', ('and', ('or', 'k', 'b'), ('eventually', ('and', 'd', ('eventually', ('and', 'f', ('eventually', 't'))))))), ('and', ('eventually', ('and', 'r', ('eventually', ('and', 'o', ('eventually', ('and', 's', ('eventually', ('and', 'h', ('eventually', 'g'))))))))), ('eventually', 'b'))))
+There are 85 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F (x_4 | x_5)))))))))) & ((F ((x_6 | x_7) & (F (x_2 & (F (x_8 & (F x_9))))))) & ((F (x_10 & (F (x_5 & (F (x_11 & (F (x_1 & (F x_4))))))))) & (F x_7)))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), ('and', 'c', ('until', ('not', 't'), 'j')))
+There are 85 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 85 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'g'), ('and', 'k', ('until', ('not', 'q'), ('and', 's', ('until', ('not', 'l'), 'f')))))
+There are 85 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'l', ('eventually', ('and', 'j', ('eventually', 'i')))))
+There are 85 entries in the dfa_db!
+Found (F (x_0 & (F (x_1 & (F x_2))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'o'), ('and', 'm', ('until', ('not', 'f'), 'c')))
+There are 85 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 85 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'r'), ('and', 'q', ('until', ('not', 't'), ('and', 'g', ('until', ('not', 'f'), 'h'))))), ('until', ('not', 'j'), ('and', 'a', ('until', ('not', 'l'), ('and', 'd', ('until', ('not', 'o'), 'n'))))))
+There are 85 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U (x_9 & ((! x_10) U x_11)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'e', ('eventually', 'r')))
+There are 85 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'p'), 's')
+There are 85 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 85 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'i'), ('and', 'r', ('until', ('not', 'c'), 'e')))
+There are 85 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'c', ('eventually', ('and', 'h', ('eventually', ('and', 'm', ('eventually', ('and', 'g', ('eventually', 'l'))))))))), ('and', ('eventually', ('and', 'h', ('eventually', ('and', 'b', ('eventually', 'e'))))), ('and', ('eventually', ('and', 'p', ('eventually', ('and', 'a', ('eventually', ('or', 'g', 'q')))))), ('eventually', ('and', 'b', ('eventually', 'j'))))))
+There are 85 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F x_4))))))))) & ((F (x_1 & (F (x_5 & (F x_6))))) & ((F (x_7 & (F (x_8 & (F (x_3 | x_9)))))) & (F (x_5 & (F x_10)))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'r'), ('and', 'e', ('until', ('not', 'a'), 'c')))
+There are 85 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 85 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'n'), 'q')
+There are 85 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'r', ('eventually', ('and', 'n', ('eventually', ('and', ('or', 'a', 'j'), ('eventually', ('and', ('or', 'o', 'g'), ('eventually', 'q'))))))))), ('and', ('eventually', ('and', 'e', ('eventually', ('and', 'd', ('eventually', ('and', 'k', ('eventually', 'n'))))))), ('and', ('eventually', ('and', ('or', 'q', 's'), ('eventually', ('and', 'j', ('eventually', ('and', ('or', 'h', 'q'), ('eventually', 'j'))))))), ('eventually', ('and', 'o', ('eventually', 'q'))))))
+There are 85 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F ((x_2 | x_3) & (F ((x_4 | x_5) & (F x_6))))))))) & ((F (x_7 & (F (x_8 & (F (x_9 & (F x_1))))))) & ((F ((x_6 | x_10) & (F (x_3 & (F ((x_11 | x_6) & (F x_3))))))) & (F (x_4 & (F x_6)))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'n'), ('and', 'd', ('until', ('not', 'g'), 'h')))
+There are 85 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 85 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'i'), ('and', 's', ('until', ('not', 'l'), ('and', 'e', ('until', ('not', 'o'), 'k')))))
+There are 85 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'o', ('eventually', ('or', 'l', 'e')))), ('and', ('eventually', ('and', 'q', ('eventually', ('and', ('or', 'j', 'd'), ('eventually', ('or', 'r', 's')))))), ('eventually', ('and', 'g', ('eventually', 'o')))))
+There are 85 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 | x_2)))) & ((F (x_3 & (F ((x_4 | x_5) & (F (x_6 | x_7)))))) & (F (x_8 & (F x_0))))) to a DFA...
+Done! It took 405.96291303634644 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'p'), 'k')
+There are 86 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 86 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'h'), ('and', 't', ('until', ('not', 'i'), 'g')))
+There are 86 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'o', ('eventually', 'f'))), ('eventually', ('and', 'k', ('eventually', ('and', 'm', ('eventually', 'a'))))))
+There are 86 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & (F (x_2 & (F (x_3 & (F x_4)))))) to a DFA...
+Done! It took 0.18647098541259766 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'o'), ('and', 'k', ('until', ('not', 't'), 'd')))
+There are 87 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 87 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'n'), 'f')
+There are 87 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'p', ('eventually', ('and', ('or', 'a', 's'), ('eventually', ('or', 'i', 'm')))))), ('and', ('eventually', ('and', 'k', ('eventually', 'e'))), ('and', ('eventually', ('and', 'r', ('eventually', ('and', ('or', 'o', 't'), ('eventually', ('or', 'k', 'c')))))), ('eventually', ('and', 'r', ('eventually', ('and', 'f', ('eventually', ('and', 'h', ('eventually', 'l'))))))))))
+There are 87 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F ((x_1 | x_2) & (F (x_3 | x_4)))))) & ((F (x_5 & (F x_6))) & ((F (x_7 & (F ((x_8 | x_9) & (F (x_5 | x_10)))))) & (F (x_7 & (F (x_11 & (F (x_12 & (F x_13)))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'g'), 'r')
+There are 87 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 87 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'q'), ('and', 'r', ('until', ('not', 'd'), 's'))), ('until', ('not', 'j'), ('and', 't', ('until', ('not', 'n'), ('and', 'h', ('until', ('not', 'f'), 'p'))))))
+There are 87 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U (x_7 & ((! x_8) U x_9)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'i', ('eventually', ('and', ('or', 't', 'h'), ('eventually', 'i')))))
+There are 87 entries in the dfa_db!
+Trying to convert (F (x_0 & (F ((x_1 | x_2) & (F x_0))))) to a DFA...
+Done! It took 0.07480907440185547 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 't'), ('and', 'e', ('until', ('not', 'k'), 'm')))
+There are 88 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 88 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'c'), ('and', 'e', ('until', ('not', 'g'), 'a'))), ('until', ('not', 'n'), ('and', 'j', ('until', ('not', 's'), 'r'))))
+There are 88 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U x_7)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'e', ('eventually', 'h'))), ('and', ('eventually', ('and', 't', ('eventually', ('and', ('or', 'n', 'j'), ('eventually', ('and', 'g', ('eventually', 'c'))))))), ('eventually', ('and', ('or', 'f', 'h'), ('eventually', ('or', 'm', 'k'))))))
+There are 88 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & ((F (x_2 & (F ((x_3 | x_4) & (F (x_5 & (F x_6))))))) & (F ((x_7 | x_1) & (F (x_8 | x_9)))))) to a DFA...
+Done! It took 563.874419927597 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'g'), 'h')
+There are 89 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 89 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 's'), ('and', 'g', ('until', ('not', 'l'), 'a'))), ('until', ('not', 'f'), ('and', 'k', ('until', ('not', 'n'), ('and', 'p', ('until', ('not', 'e'), 't'))))))
+There are 89 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U (x_7 & ((! x_8) U x_9)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 's', ('eventually', 'd')))
+There are 89 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'n'), 'o')
+There are 89 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 89 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'a'), 'r')
+There are 89 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'c', ('eventually', ('and', 'a', ('eventually', 'b')))))
+There are 89 entries in the dfa_db!
+Found (F (x_0 & (F (x_1 & (F x_2))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'a'), ('and', 'g', ('until', ('not', 'b'), 'r')))
+There are 89 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 89 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'r'), ('and', 'm', ('until', ('not', 'c'), ('and', 'g', ('until', ('not', 'i'), 'p'))))), ('until', ('not', 'b'), ('and', 'q', ('until', ('not', 'n'), ('and', 'd', ('until', ('not', 'l'), 's'))))))
+There are 89 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U (x_9 & ((! x_10) U x_11)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'f', ('eventually', 'p'))), ('and', ('eventually', ('and', 'f', ('eventually', ('and', 'n', ('eventually', ('and', 'f', ('eventually', ('and', 'r', ('eventually', 'c'))))))))), ('and', ('eventually', ('and', 'i', ('eventually', 'h'))), ('eventually', 'g'))))
+There are 89 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & ((F (x_0 & (F (x_2 & (F (x_0 & (F (x_3 & (F x_4))))))))) & ((F (x_5 & (F x_6))) & (F x_7)))) to a DFA...
+Done! It took 146.80532598495483 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'm'), 'i')
+There are 90 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 90 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'k'), ('and', 'q', ('until', ('not', 'c'), 'l'))), ('until', ('not', 'j'), ('and', 't', ('until', ('not', 's'), ('and', 'a', ('until', ('not', 'f'), 'e'))))))
+There are 90 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U (x_7 & ((! x_8) U x_9)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'k', ('eventually', 'n')))
+There are 90 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 't'), 'f')
+There are 90 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 90 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 's'), 'r'), ('until', ('not', 'l'), ('and', 't', ('until', ('not', 'o'), 'f'))))
+There are 90 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U x_5)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', ('or', 's', 'b'), ('eventually', ('and', 'a', ('eventually', ('or', 'k', 'r'))))))
+There are 90 entries in the dfa_db!
+Found (F ((x_0 | x_1) & (F (x_2 & (F (x_3 | x_4)))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'r'), ('and', 'n', ('until', ('not', 'a'), 'm')))
+There are 90 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 90 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 's'), 'i')
+There are 90 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'l', ('eventually', ('and', 'q', ('eventually', ('and', 'f', ('eventually', ('and', 'e', ('eventually', 'g'))))))))), ('eventually', ('and', ('or', 'l', 'm'), ('eventually', ('and', 'j', ('eventually', ('or', 's', 'l')))))))
+There are 90 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F x_4))))))))) & (F ((x_0 | x_5) & (F (x_6 & (F (x_7 | x_0))))))) to a DFA...
+Done! It took 4.492573022842407 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'b'), 'o')
+There are 91 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 91 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 's'), 'h')
+There are 91 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('or', 'g', 's'))
+There are 91 entries in the dfa_db!
+Found (F (x_0 | x_1)) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'r'), ('and', 'i', ('until', ('not', 'b'), 'h')))
+There are 91 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 91 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'a'), 'i'), ('until', ('not', 'q'), ('and', 'm', ('until', ('not', 'b'), 'g'))))
+There are 91 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U x_5)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'j', 'p'), ('eventually', ('and', 'i', ('eventually', ('and', 'p', ('eventually', ('and', ('or', 'r', 'c'), ('eventually', 'e'))))))))), ('eventually', ('and', 't', ('eventually', 'r'))))
+There are 91 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 & (F (x_1 & (F ((x_3 | x_4) & (F x_5))))))))) & (F (x_6 & (F x_3)))) to a DFA...
+Done! It took 7.114589214324951 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'c'), 'b')
+There are 92 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 92 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'j'), 'h')
+There are 92 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', ('or', 'j', 'g'), ('eventually', ('and', 'r', ('eventually', ('and', 'd', ('eventually', 'i')))))))
+There are 92 entries in the dfa_db!
+Found (F ((x_0 | x_1) & (F (x_2 & (F (x_3 & (F x_4))))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'i'), ('and', 'g', ('until', ('not', 't'), 'c')))
+There are 92 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 92 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'j'), 'r')
+There are 92 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'a', ('eventually', ('and', ('or', 'k', 'f'), ('eventually', ('and', 'd', ('eventually', 'f'))))))), ('and', ('eventually', ('and', ('or', 'l', 'd'), ('eventually', ('and', 'r', ('eventually', ('and', 'd', ('eventually', ('and', 't', ('eventually', ('or', 'l', 'd')))))))))), ('and', ('eventually', ('or', 'f', 't')), ('eventually', ('and', 'c', ('eventually', ('and', 'p', ('eventually', ('and', 'j', ('eventually', ('and', 'i', ('eventually', 'n'))))))))))))
+There are 92 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F ((x_1 | x_2) & (F (x_3 & (F x_2))))))) & ((F ((x_4 | x_3) & (F (x_5 & (F (x_3 & (F (x_6 & (F (x_4 | x_3)))))))))) & ((F (x_2 | x_6)) & (F (x_7 & (F (x_8 & (F (x_9 & (F (x_10 & (F x_11)))))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'p'), 'o')
+There are 92 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 92 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'b'), ('and', 'h', ('until', ('not', 'l'), 'j')))
+There are 92 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'i', ('eventually', ('and', 'm', ('eventually', ('and', 'p', ('eventually', 'e'))))))), ('and', ('eventually', ('and', 'l', ('eventually', ('and', 'g', ('eventually', ('and', 't', ('eventually', 'p'))))))), ('and', ('eventually', 'n'), ('eventually', ('and', 'h', ('eventually', ('and', 'g', ('eventually', ('and', 't', ('eventually', ('or', 'd', 'h')))))))))))
+There are 92 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F x_3))))))) & ((F (x_4 & (F (x_5 & (F (x_6 & (F x_2))))))) & ((F x_7) & (F (x_8 & (F (x_5 & (F (x_6 & (F (x_9 | x_8))))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'o'), 't')
+There are 92 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 92 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 't'), 'b')
+There are 92 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'i', ('eventually', ('and', 'k', ('eventually', ('and', 'e', ('eventually', ('and', 'l', ('eventually', 'g'))))))))), ('eventually', ('or', 'h', 'q')))
+There are 92 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F x_4))))))))) & (F (x_5 | x_6))) to a DFA...
+Done! It took 3.039695978164673 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'q'), 'r')
+There are 93 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 93 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'r'), ('and', 'q', ('until', ('not', 'm'), ('and', 'd', ('until', ('not', 't'), 'f')))))
+There are 93 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'a', 'd'), ('eventually', ('and', 'o', ('eventually', 's'))))), ('and', ('eventually', ('and', 'g', ('eventually', ('and', 'e', ('eventually', ('and', ('or', 'h', 'l'), ('eventually', ('and', 'q', ('eventually', ('or', 'c', 't')))))))))), ('and', ('eventually', ('and', 'c', ('eventually', ('and', 'm', ('eventually', 'b'))))), ('eventually', ('and', 'n', ('eventually', 's'))))))
+There are 93 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 & (F x_3))))) & ((F (x_4 & (F (x_5 & (F ((x_6 | x_7) & (F (x_8 & (F (x_9 | x_10)))))))))) & ((F (x_9 & (F (x_11 & (F x_12))))) & (F (x_13 & (F x_3)))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'g'), 'f')
+There are 93 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 93 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'e'), 'p'), ('until', ('not', 'n'), ('and', 'h', ('until', ('not', 'k'), ('and', 'l', ('until', ('not', 'b'), 'c'))))))
+There are 93 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U (x_5 & ((! x_6) U x_7)))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'k', ('eventually', ('and', 'o', ('eventually', ('and', 'i', ('eventually', 'c')))))))
+There are 93 entries in the dfa_db!
+Found (F (x_0 & (F (x_1 & (F (x_2 & (F x_3))))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'd'), 'g')
+There are 93 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 93 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'n'), ('and', 'j', ('until', ('not', 't'), 'm')))
+There are 93 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', 'a')
+There are 93 entries in the dfa_db!
+Found (F x_0) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'r'), 'j')
+There are 93 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 93 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'k'), 'q')
+There are 93 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'l'), ('and', ('eventually', ('and', 'm', ('eventually', 'g'))), ('and', ('eventually', ('and', 'p', ('eventually', ('and', 'r', ('eventually', ('and', 'f', ('eventually', ('and', 'i', ('eventually', 'm'))))))))), ('eventually', ('or', 'm', 'r')))))
+There are 93 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F (x_1 & (F x_2))) & ((F (x_3 & (F (x_4 & (F (x_5 & (F (x_6 & (F x_1))))))))) & (F (x_1 | x_4))))) to a DFA...
+Done! It took 15.838114976882935 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), 'i')
+There are 94 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 94 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'j'), ('and', 'n', ('until', ('not', 'g'), ('and', 'h', ('until', ('not', 'd'), 'e')))))
+There are 94 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'i'), ('and', ('eventually', 'j'), ('eventually', ('and', ('or', 'q', 'p'), ('eventually', ('and', 'm', ('eventually', 'q')))))))
+There are 94 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F x_1) & (F ((x_2 | x_3) & (F (x_4 & (F x_2))))))) to a DFA...
+Done! It took 0.45738816261291504 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'k'), ('and', 'c', ('until', ('not', 'd'), 'e')))
+There are 95 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 95 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'r'), ('and', 'e', ('until', ('not', 'd'), 'a'))), ('until', ('not', 'g'), 'k'))
+There are 95 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U x_5)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'r', ('eventually', ('and', 'j', ('eventually', 'n'))))), ('and', ('eventually', ('and', 'o', ('eventually', ('and', 'm', ('eventually', ('or', 'b', 'p')))))), ('and', ('eventually', ('and', ('or', 'a', 'm'), ('eventually', ('or', 'g', 'h')))), ('eventually', ('and', 'r', ('eventually', 'j'))))))
+There are 95 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F x_2))))) & ((F (x_3 & (F (x_4 & (F (x_5 | x_6)))))) & ((F ((x_7 | x_4) & (F (x_8 | x_9)))) & (F (x_0 & (F x_1)))))) to a DFA...
+Done! It took 377.56077694892883 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'g'), ('and', 'o', ('until', ('not', 'h'), 'k')))
+There are 96 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 96 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'r'), ('and', 'c', ('until', ('not', 'a'), 'l'))), ('until', ('not', 's'), ('and', 't', ('until', ('not', 'n'), ('and', 'i', ('until', ('not', 'b'), 'j'))))))
+There are 96 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U (x_7 & ((! x_8) U x_9)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'o', 'c'), ('eventually', ('and', 'r', ('eventually', 'p'))))), ('eventually', ('and', 'e', ('eventually', ('and', 'i', ('eventually', ('or', 'o', 'n')))))))
+There are 96 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 & (F x_3))))) & (F (x_4 & (F (x_5 & (F (x_0 | x_6))))))) to a DFA...
+Done! It took 3.9226303100585938 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), ('and', 'k', ('until', ('not', 'n'), 'j')))
+There are 97 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 97 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 't'), ('and', 'd', ('until', ('not', 'k'), 'p')))
+There are 97 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'h', ('eventually', ('and', 'm', ('eventually', 't'))))), ('and', ('eventually', ('and', 's', ('eventually', ('and', 'n', ('eventually', ('and', 'e', ('eventually', ('and', 'j', ('eventually', 'g'))))))))), ('eventually', ('or', 'i', 'f'))))
+There are 97 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F x_2))))) & ((F (x_3 & (F (x_4 & (F (x_5 & (F (x_6 & (F x_7))))))))) & (F (x_8 | x_9)))) to a DFA...
+Done! It took 329.66398000717163 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'i'), ('and', 'p', ('until', ('not', 'n'), 'r')))
+There are 98 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 98 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'o'), ('and', 'a', ('until', ('not', 'h'), ('and', 'q', ('until', ('not', 'p'), 'r')))))
+There are 98 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'n', ('eventually', ('and', 'i', ('eventually', ('and', 'c', ('eventually', ('and', ('or', 'e', 'o'), ('eventually', 'n'))))))))), ('eventually', 's'))
+There are 98 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F ((x_3 | x_4) & (F x_0))))))))) & (F x_5)) to a DFA...
+Done! It took 1.6271557807922363 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'g'), 'p')
+There are 99 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 99 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'k'), ('and', 'h', ('until', ('not', 'i'), ('and', 'j', ('until', ('not', 'f'), 'a')))))
+There are 99 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('or', 'k', 'e')), ('eventually', ('and', ('or', 'k', 'e'), ('eventually', ('and', 'i', ('eventually', ('and', ('or', 'k', 'd'), ('eventually', ('and', 'r', ('eventually', ('or', 'm', 's')))))))))))
+There are 99 entries in the dfa_db!
+Trying to convert ((F (x_0 | x_1)) & (F ((x_0 | x_1) & (F (x_2 & (F ((x_0 | x_3) & (F (x_4 & (F (x_5 | x_6))))))))))) to a DFA...
+Done! It took 1.839721918106079 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), ('and', 'f', ('until', ('not', 't'), 'k')))
+There are 100 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 100 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'r'), ('and', 'l', ('until', ('not', 'e'), 'q')))
+There are 100 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'i', ('eventually', 't')))
+There are 100 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'j'), ('and', 'g', ('until', ('not', 'k'), 's')))
+There are 100 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 100 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'p'), 'g')
+There are 100 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('or', 's', 'g'))
+There are 100 entries in the dfa_db!
+Found (F (x_0 | x_1)) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'o'), ('and', 'k', ('until', ('not', 'e'), 'h')))
+There are 100 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 100 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'a'), ('and', 'n', ('until', ('not', 'i'), 'j')))
+There are 100 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'c'), ('eventually', 'a'))
+There are 100 entries in the dfa_db!
+Trying to convert ((F x_0) & (F x_1)) to a DFA...
+Done! It took 0.02748703956604004 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), ('and', 'o', ('until', ('not', 'r'), 't')))
+There are 101 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 101 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'l'), ('and', 'o', ('until', ('not', 'i'), 'a')))
+There are 101 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'l'), ('eventually', ('and', 'c', ('eventually', ('and', 'm', ('eventually', ('and', 'd', ('eventually', ('or', 'c', 'm')))))))))
+There are 101 entries in the dfa_db!
+Trying to convert ((F x_0) & (F (x_1 & (F (x_2 & (F (x_3 & (F (x_1 | x_2))))))))) to a DFA...
+Done! It took 0.18086695671081543 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), ('and', 'a', ('until', ('not', 'i'), 'h')))
+There are 102 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 102 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'e'), 'o'), ('until', ('not', 'p'), 'd'))
+There are 102 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U x_3)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'd'), ('eventually', ('or', 'f', 'a')))
+There are 102 entries in the dfa_db!
+Trying to convert ((F x_0) & (F (x_1 | x_2))) to a DFA...
+Done! It took 0.06365585327148438 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), 'o')
+There are 103 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 103 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'd'), ('and', 'g', ('until', ('not', 'i'), ('and', 'p', ('until', ('not', 'b'), 'r'))))), ('until', ('not', 'k'), ('and', 'a', ('until', ('not', 't'), 'n'))))
+There are 103 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U x_9)))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', ('or', 'b', 'c'), ('eventually', ('and', 'i', ('eventually', ('and', 'g', ('eventually', 'q')))))))
+There are 103 entries in the dfa_db!
+Found (F ((x_0 | x_1) & (F (x_2 & (F (x_3 & (F x_4))))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'c'), 'p')
+There are 103 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 103 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'l'), ('and', 'e', ('until', ('not', 'k'), 'p')))
+There are 103 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'o'), ('eventually', 'e'))
+There are 103 entries in the dfa_db!
+Found ((F x_0) & (F x_1)) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'i'), ('and', 'b', ('until', ('not', 'f'), 'k')))
+There are 103 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 103 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'c'), ('and', 'a', ('until', ('not', 'k'), ('and', 'h', ('until', ('not', 'n'), 'r')))))
+There are 103 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'r', ('eventually', ('and', 'n', ('eventually', ('and', 's', ('eventually', 'r'))))))), ('eventually', ('or', 'm', 'c')))
+There are 103 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F x_0))))))) & (F (x_3 | x_4))) to a DFA...
+Done! It took 0.5499191284179688 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'o'), 'n')
+There are 104 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 104 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'b'), ('and', 'a', ('until', ('not', 'j'), 'c'))), ('until', ('not', 'f'), 'd'))
+There are 104 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U x_5)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'r', ('eventually', ('and', 'j', ('eventually', ('and', 'm', ('eventually', ('and', 'i', ('eventually', 'e'))))))))), ('eventually', ('and', 't', ('eventually', 'm'))))
+There are 104 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F x_4))))))))) & (F (x_5 & (F x_2)))) to a DFA...
+Done! It took 0.5459582805633545 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'r'), 's')
+There are 105 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 105 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'd'), ('and', 's', ('until', ('not', 'j'), 'i'))), ('until', ('not', 'a'), 'e'))
+There are 105 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U x_5)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'r', ('eventually', ('or', 'g', 'j')))), ('and', ('eventually', ('and', 'l', ('eventually', ('and', 'm', ('eventually', ('and', 's', ('eventually', ('and', 'g', ('eventually', 'a'))))))))), ('and', ('eventually', ('and', 'r', ('eventually', ('or', 'a', 'd')))), ('eventually', ('and', 'k', ('eventually', ('and', 'g', ('eventually', 'i'))))))))
+There are 105 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 | x_2)))) & ((F (x_3 & (F (x_4 & (F (x_5 & (F (x_1 & (F x_6))))))))) & ((F (x_0 & (F (x_6 | x_7)))) & (F (x_8 & (F (x_1 & (F x_9)))))))) to a DFA...
+Done! It took 48.130807876586914 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'h'), 'l')
+There are 106 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 106 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'n'), ('and', 's', ('until', ('not', 'g'), ('and', 'p', ('until', ('not', 'k'), 'm'))))), ('until', ('not', 'j'), 'q'))
+There are 106 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U x_7)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('or', 'm', 'h'))
+There are 106 entries in the dfa_db!
+Found (F (x_0 | x_1)) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'c'), ('and', 'd', ('until', ('not', 'k'), 'p')))
+There are 106 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 106 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'j'), ('and', 'o', ('until', ('not', 'c'), 'l'))), ('until', ('not', 't'), ('and', 'r', ('until', ('not', 'i'), 'd'))))
+There are 106 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U x_7)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'i', ('eventually', 'o'))), ('and', ('eventually', ('and', 'd', ('eventually', 'i'))), ('and', ('eventually', ('and', 't', ('eventually', ('and', 'c', ('eventually', 'b'))))), ('eventually', ('and', 'g', ('eventually', ('and', ('or', 'm', 'l'), ('eventually', ('and', 'a', ('eventually', ('and', 'b', ('eventually', 'l'))))))))))))
+There are 106 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & ((F (x_2 & (F x_0))) & ((F (x_3 & (F (x_4 & (F x_5))))) & (F (x_6 & (F ((x_7 | x_8) & (F (x_9 & (F (x_5 & (F x_8)))))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), 'i')
+There are 106 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 106 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'h'), 'f'), ('until', ('not', 'd'), 't'))
+There are 106 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U x_3)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'm'), ('and', ('eventually', ('and', 'p', ('eventually', 'l'))), ('and', ('eventually', 'm'), ('eventually', ('and', ('or', 's', 'b'), ('eventually', ('and', 'p', ('eventually', ('or', 'a', 'c')))))))))
+There are 106 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F (x_1 & (F x_2))) & ((F x_0) & (F ((x_3 | x_4) & (F (x_1 & (F (x_5 | x_6))))))))) to a DFA...
+Done! It took 14.496716976165771 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 's'), ('and', 'n', ('until', ('not', 'h'), 'c')))
+There are 107 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 107 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'p'), ('and', 'm', ('until', ('not', 'n'), ('and', 'r', ('until', ('not', 'i'), 'l')))))
+There are 107 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'e', ('eventually', ('and', 'n', ('eventually', ('and', 'p', ('eventually', ('and', 'j', ('eventually', 'a')))))))))
+There are 107 entries in the dfa_db!
+Found (F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F x_4))))))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'm'), 'o')
+There are 107 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 107 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'r'), ('and', 'c', ('until', ('not', 'o'), ('and', 'l', ('until', ('not', 'm'), 'g')))))
+There are 107 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'i', 'g'), ('eventually', 'l'))), ('and', ('eventually', ('and', 's', ('eventually', ('or', 'h', 'c')))), ('eventually', ('and', 'o', ('eventually', ('and', 't', ('eventually', ('and', 'm', ('eventually', ('and', ('or', 'r', 'a'), ('eventually', 'k')))))))))))
+There are 107 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F x_2))) & ((F (x_3 & (F (x_4 | x_5)))) & (F (x_6 & (F (x_7 & (F (x_8 & (F ((x_9 | x_10) & (F x_11))))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), 'r')
+There are 107 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 107 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'n'), ('and', 'k', ('until', ('not', 's'), 'e')))
+There are 107 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 's'), ('and', ('eventually', ('and', 'q', ('eventually', ('and', 'f', ('eventually', ('or', 'g', 'h')))))), ('eventually', ('and', 'n', ('eventually', ('and', 'p', ('eventually', 'g')))))))
+There are 107 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F (x_1 & (F (x_2 & (F (x_3 | x_4)))))) & (F (x_5 & (F (x_6 & (F x_3))))))) to a DFA...
+Done! It took 2.6334378719329834 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'd'), 'r')
+There are 108 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 108 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'b'), 'a'), ('until', ('not', 'g'), ('and', 's', ('until', ('not', 't'), ('and', 'f', ('until', ('not', 'd'), 'c'))))))
+There are 108 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U (x_5 & ((! x_6) U x_7)))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'q', ('eventually', ('and', 'e', ('eventually', ('and', 'l', ('eventually', 'c'))))))), ('and', ('eventually', ('and', 'g', ('eventually', ('and', 'd', ('eventually', ('and', 'r', ('eventually', ('and', 'f', ('eventually', 'm'))))))))), ('eventually', 'e')))
+There are 108 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F x_3))))))) & ((F (x_4 & (F (x_5 & (F (x_6 & (F (x_7 & (F x_8))))))))) & (F x_1))) to a DFA...
+Done! It took 49.62505292892456 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'l'), 'a')
+There are 109 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 109 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'i'), 't')
+There are 109 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'b', ('eventually', ('and', 'f', ('eventually', ('and', 'd', ('eventually', 't'))))))), ('eventually', ('or', 'k', 'c')))
+There are 109 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F x_3))))))) & (F (x_4 | x_5))) to a DFA...
+Done! It took 0.6542263031005859 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'q'), ('and', 'e', ('until', ('not', 'm'), 'b')))
+There are 110 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 110 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'b'), ('and', 'i', ('until', ('not', 'c'), 'o'))), ('until', ('not', 'm'), ('and', 'l', ('until', ('not', 'e'), ('and', 'f', ('until', ('not', 'p'), 'j'))))))
+There are 110 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U (x_7 & ((! x_8) U x_9)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'q', ('eventually', 'n')))
+There are 110 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'r'), 'l')
+There are 110 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 110 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'c'), ('and', 'k', ('until', ('not', 'h'), 'l')))
+There are 110 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', ('or', 'i', 'f'), ('eventually', ('and', 'd', ('eventually', ('and', 'e', ('eventually', ('and', 'i', ('eventually', 's'))))))))), ('eventually', ('and', ('or', 'j', 'd'), ('eventually', ('and', 'l', ('eventually', 'k'))))))
+There are 110 entries in the dfa_db!
+Trying to convert ((F ((x_0 | x_1) & (F (x_2 & (F (x_3 & (F (x_0 & (F x_4))))))))) & (F ((x_5 | x_2) & (F (x_6 & (F x_7)))))) to a DFA...
+Done! It took 3.180206060409546 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'q'), 'f')
+There are 111 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 111 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'o'), 'h')
+There are 111 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'f', ('eventually', ('and', 'b', ('eventually', ('and', 'm', ('eventually', ('and', ('or', 'q', 's'), ('eventually', 'a')))))))))
+There are 111 entries in the dfa_db!
+Trying to convert (F (x_0 & (F (x_1 & (F (x_2 & (F ((x_3 | x_4) & (F x_5))))))))) to a DFA...
+Done! It took 0.3821737766265869 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), ('and', 'd', ('until', ('not', 's'), 'j')))
+There are 112 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 112 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'g'), ('and', 'e', ('until', ('not', 'o'), ('and', 's', ('until', ('not', 'b'), 'q')))))
+There are 112 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', ('or', 'e', 'i'), ('eventually', ('and', ('or', 'n', 'f'), ('eventually', ('and', 'g', ('eventually', ('and', 'l', ('eventually', 'j')))))))))
+There are 112 entries in the dfa_db!
+Found (F ((x_0 | x_1) & (F ((x_2 | x_3) & (F (x_4 & (F (x_5 & (F x_6))))))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'o'), 'e')
+There are 112 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 112 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 't'), 'q')
+There are 112 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'r'), ('and', ('eventually', ('and', 'h', ('eventually', ('and', 'n', ('eventually', ('and', 'g', ('eventually', 'j'))))))), ('and', ('eventually', ('and', 'k', ('eventually', ('and', 'o', ('eventually', ('and', ('or', 'r', 'a'), ('eventually', 'g'))))))), ('eventually', 't'))))
+There are 112 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F (x_1 & (F (x_2 & (F (x_3 & (F x_4))))))) & ((F (x_5 & (F (x_6 & (F ((x_0 | x_7) & (F x_3))))))) & (F x_8)))) to a DFA...
+Done! It took 401.41774320602417 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'l'), ('and', 'h', ('until', ('not', 'j'), 't')))
+There are 113 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 113 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'l'), ('and', 'e', ('until', ('not', 'j'), 't')))
+There are 113 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'b'), ('and', ('eventually', 'h'), ('and', ('eventually', ('and', 'g', ('eventually', 'o'))), ('eventually', ('and', 'j', ('eventually', ('or', 'b', 'h')))))))
+There are 113 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F x_1) & ((F (x_2 & (F x_3))) & (F (x_4 & (F (x_0 | x_1))))))) to a DFA...
+Done! It took 0.9747047424316406 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), ('and', 'l', ('until', ('not', 'p'), 'b')))
+There are 114 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 114 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'g'), ('and', 'i', ('until', ('not', 'p'), ('and', 'm', ('until', ('not', 't'), 'q'))))), ('until', ('not', 'j'), 'f'))
+There are 114 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U x_7)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'g', ('eventually', ('and', 'o', ('eventually', ('and', ('or', 'p', 'j'), ('eventually', ('or', 'a', 'l')))))))), ('and', ('eventually', ('and', 'l', ('eventually', ('and', ('or', 'e', 'f'), ('eventually', ('and', 'o', ('eventually', ('and', 'f', ('eventually', 't'))))))))), ('eventually', ('and', 'h', ('eventually', ('and', ('or', 'l', 'c'), ('eventually', ('and', ('or', 'p', 'g'), ('eventually', ('and', 'r', ('eventually', 'c')))))))))))
+There are 114 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F ((x_2 | x_3) & (F (x_4 | x_5)))))))) & ((F (x_5 & (F ((x_6 | x_7) & (F (x_1 & (F (x_7 & (F x_8))))))))) & (F (x_9 & (F ((x_5 | x_10) & (F ((x_2 | x_0) & (F (x_11 & (F x_10))))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'n'), 'q')
+There are 114 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 114 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'n'), ('and', 's', ('until', ('not', 'm'), ('and', 'c', ('until', ('not', 'd'), 'k'))))), ('until', ('not', 'o'), ('and', 'r', ('until', ('not', 'a'), 'j'))))
+There are 114 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U x_9)))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'r', ('eventually', ('or', 'c', 'k')))), ('and', ('eventually', 'c'), ('and', ('eventually', ('and', 'a', ('eventually', 'j'))), ('eventually', ('and', 'i', ('eventually', ('and', 'e', ('eventually', ('and', 'n', ('eventually', 'r'))))))))))
+There are 114 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 | x_2)))) & ((F x_1) & ((F (x_3 & (F x_4))) & (F (x_5 & (F (x_6 & (F (x_7 & (F x_0)))))))))) to a DFA...
+Done! It took 185.50424766540527 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 's'), 'n')
+There are 115 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 115 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'o'), ('and', 'k', ('until', ('not', 'd'), ('and', 'f', ('until', ('not', 'm'), 'q'))))), ('until', ('not', 'j'), ('and', 'g', ('until', ('not', 'i'), 'r'))))
+There are 115 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U x_9)))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'f'), ('eventually', ('and', 'h', ('eventually', ('and', 't', ('eventually', ('or', 'b', 'o')))))))
+There are 115 entries in the dfa_db!
+Trying to convert ((F x_0) & (F (x_1 & (F (x_2 & (F (x_3 | x_4))))))) to a DFA...
+Done! It took 0.20654892921447754 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'd'), 't')
+There are 116 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 116 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'o'), ('and', 'i', ('until', ('not', 't'), ('and', 'a', ('until', ('not', 'q'), 'e'))))), ('until', ('not', 'm'), 'c'))
+There are 116 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U x_7)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'g', ('eventually', ('and', 's', ('eventually', 'k'))))), ('and', ('eventually', ('and', 'h', ('eventually', ('or', 'i', 'f')))), ('eventually', 'p')))
+There are 116 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F x_2))))) & ((F (x_3 & (F (x_4 | x_5)))) & (F x_6))) to a DFA...
+Done! It took 7.701204299926758 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'o'), 'f')
+There are 117 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 117 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'a'), ('and', 'f', ('until', ('not', 'o'), ('and', 'd', ('until', ('not', 's'), 'n'))))), ('until', ('not', 't'), ('and', 'j', ('until', ('not', 'e'), ('and', 'g', ('until', ('not', 'q'), 'b'))))))
+There are 117 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U (x_9 & ((! x_10) U x_11)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'p', ('eventually', ('and', 'm', ('eventually', 'i'))))), ('and', ('eventually', ('and', 'e', ('eventually', ('and', 'l', ('eventually', ('and', ('or', 'c', 'n'), ('eventually', ('and', 'j', ('eventually', 'm'))))))))), ('eventually', ('and', 'n', ('eventually', ('and', 's', ('eventually', ('or', 'd', 'i'))))))))
+There are 117 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F x_2))))) & ((F (x_3 & (F (x_4 & (F ((x_5 | x_6) & (F (x_7 & (F x_1))))))))) & (F (x_6 & (F (x_8 & (F (x_9 | x_2)))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 't'), 's')
+There are 117 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 117 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'l'), ('and', 'c', ('until', ('not', 'k'), ('and', 'a', ('until', ('not', 'p'), 'o')))))
+There are 117 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'r', ('eventually', ('and', 'q', ('eventually', ('and', 'r', ('eventually', ('and', 'm', ('eventually', ('or', 'c', 'n')))))))))), ('and', ('eventually', ('or', 's', 'h')), ('eventually', 'e')))
+There are 117 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_0 & (F (x_2 & (F (x_3 | x_4)))))))))) & ((F (x_5 | x_6)) & (F x_7))) to a DFA...
+Done! It took 100.45351099967957 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), 'd')
+There are 118 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 118 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'j'), ('and', 'c', ('until', ('not', 's'), 'o'))), ('until', ('not', 'i'), ('and', 'm', ('until', ('not', 'p'), 'q'))))
+There are 118 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U x_7)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'k', ('eventually', ('and', ('or', 'r', 'g'), ('eventually', 'd'))))), ('eventually', ('and', 'm', ('eventually', 'n'))))
+There are 118 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F ((x_1 | x_2) & (F x_3))))) & (F (x_4 & (F x_5)))) to a DFA...
+Done! It took 0.9176828861236572 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'g'), ('and', 'c', ('until', ('not', 't'), 'l')))
+There are 119 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 119 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'q'), ('and', 'c', ('until', ('not', 't'), ('and', 'j', ('until', ('not', 'd'), 'b'))))), ('until', ('not', 'f'), ('and', 'p', ('until', ('not', 'n'), 'r'))))
+There are 119 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U x_9)))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'p', ('eventually', 'm'))), ('and', ('eventually', ('and', 'o', ('eventually', ('and', 'b', ('eventually', ('and', 'a', ('eventually', 'f'))))))), ('eventually', ('and', 'q', ('eventually', ('and', 'm', ('eventually', 'g')))))))
+There are 119 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & ((F (x_2 & (F (x_3 & (F (x_4 & (F x_5))))))) & (F (x_6 & (F (x_1 & (F x_7))))))) to a DFA...
+Done! It took 48.97052597999573 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'j'), 'g')
+There are 120 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 120 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'j'), ('and', 'q', ('until', ('not', 'g'), ('and', 'n', ('until', ('not', 'l'), 'b'))))), ('until', ('not', 'o'), ('and', 'f', ('until', ('not', 'r'), ('and', 'i', ('until', ('not', 's'), 'k'))))))
+There are 120 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U (x_9 & ((! x_10) U x_11)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'l', ('eventually', ('and', 'd', ('eventually', ('and', 'q', ('eventually', ('and', 'f', ('eventually', ('or', 'q', 'm')))))))))), ('and', ('eventually', 'd'), ('and', ('eventually', ('and', 's', ('eventually', ('or', 'k', 'r')))), ('eventually', ('and', 'e', ('eventually', ('and', 'o', ('eventually', 't'))))))))
+There are 120 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F (x_2 | x_4)))))))))) & ((F x_1) & ((F (x_5 & (F (x_6 | x_7)))) & (F (x_8 & (F (x_9 & (F x_10)))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'h'), 'n')
+There are 120 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 120 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'k'), 'b')
+There are 120 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'e'), ('and', ('eventually', ('and', 'g', ('eventually', ('and', ('or', 'n', 'q'), ('eventually', ('and', 'r', ('eventually', ('and', 't', ('eventually', 'h'))))))))), ('and', ('eventually', ('and', 'g', ('eventually', ('and', 'e', ('eventually', ('and', 'a', ('eventually', 'l'))))))), ('eventually', 'a'))))
+There are 120 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F (x_1 & (F ((x_2 | x_3) & (F (x_4 & (F (x_5 & (F x_6))))))))) & ((F (x_1 & (F (x_0 & (F (x_7 & (F x_8))))))) & (F x_7)))) to a DFA...
+Done! It took 79.92020606994629 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'g'), ('and', 'r', ('until', ('not', 'i'), 'o')))
+There are 121 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 121 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'e'), ('and', 'm', ('until', ('not', 'f'), ('and', 'o', ('until', ('not', 'a'), 't'))))), ('until', ('not', 'p'), ('and', 'h', ('until', ('not', 'c'), ('and', 's', ('until', ('not', 'q'), 'd'))))))
+There are 121 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U (x_9 & ((! x_10) U x_11)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'f', ('eventually', ('and', 'k', ('eventually', ('and', 'h', ('eventually', ('and', 'j', ('eventually', ('or', 'b', 'c')))))))))), ('and', ('eventually', ('and', 'k', ('eventually', ('and', ('or', 'd', 'r'), ('eventually', ('and', 'o', ('eventually', ('and', 'i', ('eventually', ('or', 'd', 't')))))))))), ('eventually', ('and', ('or', 'j', 't'), ('eventually', ('and', 'b', ('eventually', 'l')))))))
+There are 121 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 & (F (x_4 | x_5)))))))))) & ((F (x_1 & (F ((x_6 | x_7) & (F (x_8 & (F (x_9 & (F (x_6 | x_10)))))))))) & (F ((x_3 | x_10) & (F (x_4 & (F x_11))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'e'), 'q')
+There are 121 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 121 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'q'), ('and', 'm', ('until', ('not', 'j'), 'i')))
+There are 121 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'r', ('eventually', ('and', 'f', ('eventually', ('and', 'g', ('eventually', ('or', 'p', 'e')))))))), ('eventually', ('and', 'p', ('eventually', ('and', 's', ('eventually', ('and', 'k', ('eventually', ('and', 's', ('eventually', 'g'))))))))))
+There are 121 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F (x_3 | x_4)))))))) & (F (x_3 & (F (x_5 & (F (x_6 & (F (x_5 & (F x_2)))))))))) to a DFA...
+Done! It took 10.729399919509888 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'l'), ('and', 's', ('until', ('not', 'd'), 'b')))
+There are 122 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 122 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'o'), 'h'), ('until', ('not', 'j'), ('and', 'g', ('until', ('not', 'd'), 'a'))))
+There are 122 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U x_5)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'm', ('eventually', ('and', 's', ('eventually', ('and', 'b', ('eventually', 'p'))))))), ('and', ('eventually', ('and', 'k', ('eventually', 'e'))), ('and', ('eventually', ('and', ('or', 'r', 'h'), ('eventually', ('and', 'q', ('eventually', 'b'))))), ('eventually', ('and', 'e', ('eventually', 'l'))))))
+There are 122 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F x_3))))))) & ((F (x_4 & (F x_5))) & ((F ((x_6 | x_7) & (F (x_8 & (F x_2))))) & (F (x_5 & (F x_9)))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'c'), ('and', 'k', ('until', ('not', 'l'), 'h')))
+There are 122 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 122 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'f'), 'c')
+There are 122 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'n'), ('and', ('eventually', ('and', 'r', ('eventually', ('and', 'c', ('eventually', 'd'))))), ('eventually', 'm')))
+There are 122 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F (x_1 & (F (x_2 & (F x_3))))) & (F x_4))) to a DFA...
+Done! It took 0.31827378273010254 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'l'), 'p')
+There are 123 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 123 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'e'), ('and', 'l', ('until', ('not', 'f'), 'b'))), ('until', ('not', 'p'), ('and', 'o', ('until', ('not', 'r'), 'g'))))
+There are 123 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U x_7)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('or', 'q', 'b')), ('and', ('eventually', ('and', 'm', ('eventually', ('and', ('or', 'f', 'r'), ('eventually', ('and', 'h', ('eventually', ('or', 's', 'f')))))))), ('and', ('eventually', ('and', ('or', 'h', 'r'), ('eventually', ('and', 'o', ('eventually', ('and', 'h', ('eventually', 'n'))))))), ('eventually', ('and', 'n', ('eventually', 'a'))))))
+There are 123 entries in the dfa_db!
+Trying to convert ((F (x_0 | x_1)) & ((F (x_2 & (F ((x_3 | x_4) & (F (x_5 & (F (x_6 | x_3)))))))) & ((F ((x_5 | x_4) & (F (x_7 & (F (x_5 & (F x_8))))))) & (F (x_8 & (F x_9)))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'i'), ('and', 'o', ('until', ('not', 'p'), 'm')))
+There are 123 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 123 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'm'), ('and', 'p', ('until', ('not', 'r'), ('and', 'd', ('until', ('not', 'e'), 'o')))))
+There are 123 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'h', ('eventually', ('and', ('or', 's', 'm'), ('eventually', ('or', 'o', 't')))))), ('and', ('eventually', ('and', 'j', ('eventually', ('and', ('or', 'l', 's'), ('eventually', ('and', 'e', ('eventually', ('and', 'q', ('eventually', ('or', 't', 'p')))))))))), ('eventually', ('and', ('or', 'j', 'f'), ('eventually', ('and', 'm', ('eventually', ('and', 'i', ('eventually', ('and', 'o', ('eventually', ('or', 't', 'h'))))))))))))
+There are 123 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F ((x_1 | x_2) & (F (x_3 | x_4)))))) & ((F (x_5 & (F ((x_6 | x_1) & (F (x_7 & (F (x_8 & (F (x_4 | x_9)))))))))) & (F ((x_5 | x_10) & (F (x_2 & (F (x_11 & (F (x_3 & (F (x_4 | x_0)))))))))))) to a DFA...
+DFA construction timed out!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'o'), 'g')
+There are 123 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 123 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'o'), 's')
+There are 123 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'o', ('eventually', 'g'))), ('and', ('eventually', ('and', 'i', ('eventually', ('and', 'l', ('eventually', 'o'))))), ('eventually', ('and', ('or', 'r', 'b'), ('eventually', 't')))))
+There are 123 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & ((F (x_2 & (F (x_3 & (F x_0))))) & (F ((x_4 | x_5) & (F x_6))))) to a DFA...
+Done! It took 29.736850023269653 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'a'), 'd')
+There are 124 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 124 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'k'), ('and', 'h', ('until', ('not', 'e'), 'j')))
+There are 124 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'g'), ('and', ('eventually', ('and', 'e', ('eventually', ('and', ('or', 'o', 'm'), ('eventually', ('and', 'g', ('eventually', 'p'))))))), ('eventually', ('and', ('or', 's', 'a'), ('eventually', ('and', 'f', ('eventually', ('and', 'n', ('eventually', ('and', ('or', 'q', 'd'), ('eventually', 'o')))))))))))
+There are 124 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F (x_1 & (F ((x_2 | x_3) & (F (x_0 & (F x_4))))))) & (F ((x_5 | x_6) & (F (x_7 & (F (x_8 & (F ((x_9 | x_10) & (F x_2))))))))))) to a DFA...
+Done! It took 491.97635102272034 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'l'), 'e')
+There are 125 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 125 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'n'), 'b'), ('until', ('not', 'g'), ('and', 'c', ('until', ('not', 'd'), 'e'))))
+There are 125 entries in the dfa_db!
+Found (((! x_0) U x_1) & ((! x_2) U (x_3 & ((! x_4) U x_5)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'k', ('eventually', ('and', 'h', ('eventually', ('and', 't', ('eventually', ('and', ('or', 'd', 'n'), ('eventually', 'k'))))))))), ('eventually', ('and', ('or', 'q', 'n'), ('eventually', ('and', 'h', ('eventually', 'd'))))))
+There are 125 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F ((x_3 | x_4) & (F x_0))))))))) & (F ((x_5 | x_4) & (F (x_1 & (F x_3)))))) to a DFA...
+Done! It took 6.474650144577026 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'h'), ('and', 'g', ('until', ('not', 'f'), 'e')))
+There are 126 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 126 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'n'), 'c')
+There are 126 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'e', ('eventually', ('and', 'f', ('eventually', ('or', 's', 't'))))))
+There are 126 entries in the dfa_db!
+Found (F (x_0 & (F (x_1 & (F (x_2 | x_3)))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'm'), 'a')
+There are 126 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 126 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'l'), ('and', 'm', ('until', ('not', 'p'), 'h'))), ('until', ('not', 'a'), ('and', 's', ('until', ('not', 'c'), 't'))))
+There are 126 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U x_7)))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'i', ('eventually', ('and', 'f', ('eventually', ('or', 'n', 'r')))))), ('and', ('eventually', ('and', 't', ('eventually', 'f'))), ('eventually', ('and', 'c', ('eventually', ('and', 'o', ('eventually', ('and', ('or', 'q', 'f'), ('eventually', 'd')))))))))
+There are 126 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 | x_3)))))) & ((F (x_4 & (F x_1))) & (F (x_5 & (F (x_6 & (F ((x_7 | x_1) & (F x_8))))))))) to a DFA...
+Done! It took 135.16057801246643 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 't'), ('and', 'j', ('until', ('not', 'e'), 'i')))
+There are 127 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 127 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'i'), ('and', 'q', ('until', ('not', 't'), 'd')))
+There are 127 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'k', ('eventually', ('and', 't', ('eventually', 'd'))))), ('and', ('eventually', 'a'), ('eventually', ('and', 'g', ('eventually', ('and', 'e', ('eventually', ('and', ('or', 't', 'f'), ('eventually', 'j')))))))))
+There are 127 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F x_2))))) & ((F x_3) & (F (x_4 & (F (x_5 & (F ((x_1 | x_6) & (F x_7))))))))) to a DFA...
+Done! It took 22.967573165893555 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'c'), 's')
+There are 128 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 128 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'r'), ('and', 'g', ('until', ('not', 'a'), 'e')))
+There are 128 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 's', ('eventually', ('and', 'c', ('eventually', ('or', 'm', 'l')))))), ('eventually', ('and', 'm', ('eventually', 'e'))))
+There are 128 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 | x_3)))))) & (F (x_2 & (F x_4)))) to a DFA...
+Done! It took 0.2506568431854248 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 's'), ('and', 'r', ('until', ('not', 'g'), 'c')))
+There are 129 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 129 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'p'), 's')
+There are 129 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'l', ('eventually', 'n'))), ('and', ('eventually', ('and', 'j', ('eventually', ('and', 'q', ('eventually', 'f'))))), ('eventually', ('and', 'q', ('eventually', ('and', 't', ('eventually', ('and', 'n', ('eventually', ('and', 'o', ('eventually', 'k')))))))))))
+There are 129 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & ((F (x_2 & (F (x_3 & (F x_4))))) & (F (x_3 & (F (x_5 & (F (x_1 & (F (x_6 & (F x_7))))))))))) to a DFA...
+Done! It took 84.1612799167633 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 't'), ('and', 'o', ('until', ('not', 'h'), 'l')))
+There are 130 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 130 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'i'), ('and', 'm', ('until', ('not', 'l'), 'n'))), ('until', ('not', 'h'), ('and', 's', ('until', ('not', 'e'), ('and', 'o', ('until', ('not', 'c'), 'r'))))))
+There are 130 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U (x_5 & ((! x_6) U (x_7 & ((! x_8) U x_9)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', ('or', 'h', 'p'), ('eventually', 'o')))
+There are 130 entries in the dfa_db!
+Trying to convert (F ((x_0 | x_1) & (F x_2))) to a DFA...
+Done! It took 0.036895036697387695 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'o'), 'p')
+There are 131 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 131 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'b'), ('and', 'm', ('until', ('not', 'k'), 'p')))
+There are 131 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 's', ('eventually', 'f'))), ('and', ('eventually', ('and', 's', ('eventually', ('or', 'm', 'a')))), ('eventually', ('and', 'q', ('eventually', 'f')))))
+There are 131 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F x_1))) & ((F (x_0 & (F (x_2 | x_3)))) & (F (x_4 & (F x_1))))) to a DFA...
+Done! It took 0.38382983207702637 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'd'), ('and', 'm', ('until', ('not', 's'), 'n')))
+There are 132 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 132 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'k'), ('and', 'c', ('until', ('not', 'l'), ('and', 'i', ('until', ('not', 'm'), 'r')))))
+There are 132 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'c', ('eventually', ('or', 't', 'm')))), ('eventually', 'd'))
+There are 132 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 | x_2)))) & (F x_3)) to a DFA...
+Done! It took 0.11265397071838379 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 't'), ('and', 'p', ('until', ('not', 'e'), 's')))
+There are 133 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 133 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'd'), ('and', 'a', ('until', ('not', 'p'), 'q'))), ('until', ('not', 'l'), 'j'))
+There are 133 entries in the dfa_db!
+Found (((! x_0) U (x_1 & ((! x_2) U x_3))) & ((! x_4) U x_5)) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', ('and', 'l', ('eventually', ('and', 'm', ('eventually', ('and', 'j', ('eventually', 'i'))))))), ('eventually', ('and', ('or', 't', 'r'), ('eventually', ('and', ('or', 'b', 'q'), ('eventually', ('and', 's', ('eventually', 'p'))))))))
+There are 133 entries in the dfa_db!
+Trying to convert ((F (x_0 & (F (x_1 & (F (x_2 & (F x_3))))))) & (F ((x_4 | x_5) & (F ((x_6 | x_7) & (F (x_8 & (F x_9)))))))) to a DFA...
+Done! It took 210.0948190689087 seconds
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'f'), 't')
+There are 134 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'b')))
+There are 134 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('until', ('not', 'l'), ('and', 'o', ('until', ('not', 'a'), 'f')))
+There are 134 entries in the dfa_db!
+Found ((! x_0) U (x_1 & ((! x_2) U x_3))) in dfa_db!
+Eventually_1_5_1_4
+LTL Formula: ('eventually', ('and', 'o', ('eventually', ('and', 'm', ('eventually', 'f')))))
+There are 134 entries in the dfa_db!
+Found (F (x_0 & (F (x_1 & (F x_2))))) in dfa_db!
+Until_1_2_1_1
+LTL Formula: ('until', ('not', 'k'), 's')
+There are 134 entries in the dfa_db!
+Found ((! x_0) U x_1) in dfa_db!
+Adversarial
+LTL Formula: ('eventually', ('and', 'a', ('eventually', 'c')))
+There are 134 entries in the dfa_db!
+Found (F (x_0 & (F x_1))) in dfa_db!
+Until_1_3_1_2
+LTL Formula: ('and', ('until', ('not', 'e'), ('and', 'o', ('until', ('not', 'm'), ('and', 's', ('until', ('not', 'i'), 'n'))))), ('until', ('not', 'b'), ('and', 'c', ('until', ('not', 'h'), ('and', 'd', ('until', ('not', 't'), 'f'))))))
+There are 134 entries in the dfa_db!
+Trying to convert (((! x_0) U (x_1 & ((! x_2) U (x_3 & ((! x_4) U x_5))))) & ((! x_6) U (x_7 & ((! x_8) U (x_9 & ((! x_10) U x_11)))))) to a DFA...
+DFA construction timed out!
+Eventually_1_5_1_4
+LTL Formula: ('and', ('eventually', 'p'), ('and', ('eventually', ('and', 'e', ('eventually', 'f'))), ('and', ('eventually', ('and', 'o', ('eventually', ('and', 'f', ('eventually', ('and', ('or', 'q', 'a'), ('eventually', ('or', 'i', 'm')))))))), ('eventually', ('and', ('or', 'n', 'h'), ('eventually', ('and', 'e', ('eventually', 'l'))))))))
+There are 134 entries in the dfa_db!
+Trying to convert ((F x_0) & ((F (x_1 & (F x_2))) & ((F (x_3 & (F (x_2 & (F ((x_4 | x_5) & (F (x_6 | x_7)))))))) & (F ((x_8 | x_9) & (F (x_1 & (F x_10)))))))) to a DFA...
+
