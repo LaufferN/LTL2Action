@@ -7,14 +7,55 @@ given template(s).
 """
 
 import random
+import pickle
+try:
+    from utils.format_ltl import formatLTL
+except:
+    from format_ltl import formatLTL
+
+dfa_db_path = "utils/dfa_db"
 
 class LTLSampler():
     def __init__(self, propositions):
         self.propositions = propositions
+        with open(dfa_db_path, "rb") as f:
+            self.dfa_db = pickle.load(f)
 
-    def sample(self):
+    def _get_generic_formula(self, formula):
+        generic_formula = formula
+        prop_mapping = {}
+        positional_var_base = "x_"
+        positional_var_count = 0
+        for prop in formula:
+            if prop in self.propositions:
+                try:
+                    positional_var = prop_mapping[prop]
+                except:
+                    positional_var = positional_var_base + str(positional_var_count)
+                    positional_var_count += 1
+                    prop_mapping[prop] = positional_var
+                generic_formula = generic_formula.replace(prop, positional_var)
+        return generic_formula, prop_mapping
+
+    def is_in_dfa_db(self, formula):
+        formatted_formula = formatLTL(formula, self.propositions)
+        generic_formula, _ = self._get_generic_formula(formatted_formula)
+        if generic_formula in self.dfa_db:
+            return True
+        else:
+            return False
+
+    def sample_formula(self):
         raise NotImplementedError
 
+    def sample(self):
+        formula = self.sample_formula()
+        while not self.is_in_dfa_db(formula):
+            formula = self.sample_formula()
+        return formula
+
+    def sample_new(self):
+        return self.sample_formula()
 
 # Samples from one of the other samplers at random. The other samplers are sampled by their default args.
 class SuperSampler(LTLSampler):
@@ -22,7 +63,7 @@ class SuperSampler(LTLSampler):
         super().__init__(propositions)
         self.reg_samplers = getRegisteredSamplers(self.propositions)
 
-    def sample(self):
+    def sample_formula(self):
         return random.choice(self.reg_samplers).sample()
 
 # This class samples formulas of form (or, op_1, op_2), where op_1 and 2 can be either specified as samplers_ids
@@ -32,7 +73,7 @@ class OrSampler(LTLSampler):
         super().__init__(propositions)
         self.sampler_ids = sampler_ids
 
-    def sample(self):
+    def sample_formula(self):
         return ('or', getLTLSampler(self.sampler_ids[0], self.propositions).sample(),
                         getLTLSampler(self.sampler_ids[1], self.propositions).sample())
 
@@ -40,7 +81,7 @@ class OrSampler(LTLSampler):
 #   ('until',('not','a'),('and', 'b', ('until',('not','c'),'d')))
 # where p1, p2, p3, and p4 are randomly sampled propositions
 class DefaultSampler(LTLSampler):
-    def sample(self):
+    def sample_formula(self):
         p = random.sample(self.propositions,4)
         return ('until',('not',p[0]),('and', p[1], ('until',('not',p[2]),p[3])))
 
@@ -60,7 +101,7 @@ class UntilTaskSampler(LTLSampler):
         self.conjunctions = (int(min_conjunctions), int(max_conjunctions))
         assert 2*int(max_levels)*int(max_conjunctions) <= len(propositions), "The domain does not have enough propositions!"
 
-    def sample(self):
+    def sample_formula(self):
         # Sampling a conjuntion of *n_conjs* (not p[0]) Until (p[1]) formulas of *n_levels* levels
         n_conjs = random.randint(*self.conjunctions)
         p = random.sample(self.propositions,2*self.levels[1]*n_conjs)
@@ -79,7 +120,6 @@ class UntilTaskSampler(LTLSampler):
             else:           ltl = ('and',until_task,ltl)
         return ltl
 
-
 # This class generates random LTL formulas that form a sequence of actions.
 # @ min_len, max_len: min/max length of the random sequence to generate.
 class SequenceSampler(LTLSampler):
@@ -88,7 +128,7 @@ class SequenceSampler(LTLSampler):
         self.min_len = int(min_len)
         self.max_len = int(max_len)
 
-    def sample(self):
+    def sample_formula(self):
         length = random.randint(self.min_len, self.max_len)
         seq = ""
 
@@ -116,7 +156,7 @@ class EventuallySampler(LTLSampler):
         self.conjunctions = (int(min_conjunctions), int(max_conjunctions))
         self.levels = (int(min_levels), int(max_levels))
 
-    def sample(self):
+    def sample_formula(self):
         conjs = random.randint(*self.conjunctions)
         ltl = None
 
@@ -126,6 +166,7 @@ class EventuallySampler(LTLSampler):
                 ltl = task
             else:
                 ltl = ('and',task,ltl)
+
         return ltl
 
 
@@ -158,7 +199,7 @@ class EventuallySampler(LTLSampler):
 
 
 class AdversarialEnvSampler(LTLSampler):
-    def sample(self):
+    def sample_formula(self):
         p = random.randint(0,1)
         if p == 0:
             return ('eventually', ('and', 'a', ('eventually', 'b')))

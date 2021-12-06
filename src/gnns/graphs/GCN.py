@@ -48,7 +48,7 @@ class GCNRoot(GCN):
     def forward(self, g):
         g = np.array(g).reshape((1, -1)).tolist()[0]
         g = dgl.batch(g)
-        h_0 = g.ndata["feat"].float()
+        h_0 = g.ndata["feat"].float().squeeze()
         h = h_0
 
         for i in range(self.num_layers):
@@ -76,7 +76,7 @@ class GCNRootShared(GNN):
     def forward(self, g):
         g = np.array(g).reshape((1, -1)).tolist()[0]
         g = dgl.batch(g)
-        h_0 = self.linear_in(g.ndata["feat"].float())
+        h_0 = self.linear_in(g.ndata["feat"].float().squeeze())
         h = h_0
 
         # Apply convolution layers

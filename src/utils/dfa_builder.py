@@ -1,9 +1,11 @@
-#import ring
+import ring
 import torch
 import numpy as np
 import pydot
 from ltlf2dfa.parser.ltlf import LTLfParser
-from networkx.drawing.nx_agraph import to_agraph 
+from networkx.drawing.nx_agraph import to_agraph
+from pysat.solvers import Solver
+from copy import deepcopy
 
 import dgl
 import networkx as nx
@@ -38,12 +40,12 @@ generated graphs.
 class DFABuilder(object):
     def __init__(self, propositions):
         super(DFABuilder, self).__init__()
-
+        self.count = 0
         self.props = propositions
 
     # To make the caching work.
-    #def __ring_key__(self):
-    #    return "DFABuilder"
+    def __ring_key__(self):
+        return "DFABuilder"
 
     def _get_generic_formula(self, formula):
         generic_formula = formula
@@ -61,22 +63,94 @@ class DFABuilder(object):
                 generic_formula = generic_formula.replace(prop, positional_var)
         return generic_formula, prop_mapping
 
+    def _get_guard_embedding(self, guard):
+        embedding = [0] * 22
+        try:
+            guard = guard["label"].replace(" ", "").replace("(", "").replace(")", "").replace("\"", "")
+        except:
+            return embedding
+        if (guard == "true"):
+            return embedding
+        #print("Guard", guard)
+        guard = guard.split("&")
+        cnf = []
+        seen_atoms = []
+        for c in guard:
+            atoms = c.split("|")
+            clause = []
+            for atom in atoms:
+                #print(atom, self.props.index(atom) + 1 if atom[0] != "~" else -(self.props.index(atom[1:]) + 1), self.props)
+                try:
+                    index = seen_atoms.index(atom if atom[0] != "~" else atom[1:])
+                except:
+                    index = len(seen_atoms)
+                    seen_atoms.append(atom if atom[0] != "~" else atom[1:])
+                clause.append(index + 1 if atom[0] != "~" else -(index + 1))
+            #print("")
+            cnf.append(clause)
+        #print("Seen Atom", seen_atoms)
+        #print("CNF", cnf)
+        models = []
+        with Solver(bootstrap_with=cnf) as s:
+            models = list(s.enum_models())
+        #print("Models", models)
+        if len(models) == 0:
+            return embedding
+        for model in models:
+            for a in model:
+                atom = seen_atoms[abs(a) - 1]
+                #print(atom, self.props.index(atom))
+                embedding[self.props.index(atom)] += 1 if a > 0 else -1
+        for i in range(len(embedding)):
+            embedding[i] /= len(models)
+        #print("Embedding", embedding)
+        return embedding
+
+    @ring.lru(maxsize=100000)
     def __call__(self, formula, library="dgl"):
+        self.count += 1
+        #start = time.time()
+        #print(self.count)
 
         formatted_formula = formatLTL(formula, self.props)
         generic_formula, prop_mapping = self._get_generic_formula(formatted_formula)
-        try:
-            generic_nxg = self._get_generic_nxg(generic_formula)
-        except:
-            return None
+
+        generic_nxg = self._get_generic_nxg(generic_formula)
+
         nxg = self._get_nxg(generic_nxg, prop_mapping)
 
+        nxg.remove_node("\\n")
+        nx.set_node_attributes(nxg, torch.zeros(22), "feat")
+
+        edges = deepcopy(nxg.edges)
+
+        new_node_count = 0
+        new_node_name_base_str = "temp_"
+
+        for e in edges:
+            embedding = self._get_guard_embedding(nxg.edges[e])
+            if not all(i == 0 for i in embedding):
+                nxg.remove_edge(*e)
+                new_node_name = new_node_name_base_str + str(new_node_count)
+                new_node_count += 1
+                nxg.add_node(new_node_name)
+                nxg.add_edge(e[0], new_node_name)
+                nxg.add_edge(new_node_name, e[1])
+                nxg.nodes[new_node_name]["feat"] = torch.tensor(embedding)
+
+        nx.set_node_attributes(nxg, 0.0, "is_root")
+        nxg.nodes["1"]["is_root"] = 1.0
+
+        nx.set_edge_attributes(nxg, 0, "type")
         if (library == "networkx"):
             return nxg
 
         # convert the Networkx graph to dgl graph and pass the 'feat' attribute
         g = dgl.DGLGraph()
         g.from_networkx(nxg, node_attrs=["feat", "is_root"], edge_attrs=["type"]) # dgl does not support string attributes (i.e., token)
+
+        #end = time.time()
+        #print(end-start)
         return g
 
     def _get_nxg(self, generic_nxg, prop_mapping):
@@ -94,17 +168,17 @@ class DFABuilder(object):
     def _get_generic_nxg(self, formatted_formula):
         with open(dfa_db_path, "rb") as f:
             dfa_db = pickle.load(f)
-        print("There are", len(dfa_db), "entries in the dfa_db!")
+        #print("There are", len(dfa_db), "entries in the dfa_db!")
         try:
             nxg = dfa_db[formatted_formula]
-            print("Found", formatted_formula, "in dfa_db!")
+            #print("Found", formatted_formula, "in dfa_db!")
         except:
             parser = LTLfParser()
             formula = parser(formatted_formula)
             print("Trying to convert", formatted_formula, "to a DFA...")
             start = time.time()
-            signal.signal(signal.SIGALRM, alarm_handler)
-            signal.alarm(TIMEOUT_SECONDS)
+            #signal.signal(signal.SIGALRM, alarm_handler)
+            #signal.alarm(TIMEOUT_SECONDS)
             try:
                 dfa_dot = formula.to_dfa()
                 end = time.time()
@@ -117,33 +191,6 @@ class DFABuilder(object):
                 dfa_db[formatted_formula] = nxg
                 with open(dfa_db_path, "wb") as f:
                     pickle.dump(dfa_db, f)
-                # The implementation below is just a place holder for us get an output from RGCN.
-                # We can find a better model than RGCN for our purpose, e.g., DGI.
-                nxg.remove_node("\\n")
-                nx.set_node_attributes(nxg, 0., "is_root")
-                nx.set_node_attributes(nxg, torch.ones(22), "feat")
-                for e in nxg.edges:
-                    if e[0] == "init":
-                        # If there is an incoming edge from the special node init, then it is the initial node
-                        nxg.nodes[e[1]]["is_root"] = 1.
-                    if e[0] != e[1]:
-                        # If there is an outgoing edge to another node, then it is not an accepting node.
-                        nxg.nodes[e[0]]["feat"][0] = 0.
-                    if len(nxg.edges[e]) == 0:
-                        nxg.edges[e]["type"] = 0
-                        #nxg.edges[e]["label"] = torch.zeros(MAX_GUARD_LEN)
-                    else:
-                        guard = nxg.edges[e]["label"][1:-1]
-                        if guard == "true":
-                            nxg.edges[e]["type"] = 0
-                            #nxg.edges[e]["label"] = torch.zeros(MAX_GUARD_LEN)
-                        else:
-                            nxg.edges[e]["type"] = sum(map(lambda x: ord(x), guard)) % (len(edge_types) - 1) + 1 # This is just a place holder
-                            #guard_tensor = torch.tensor(list(map(lambda x: ord(x), guard)))
-                            # For padding, we can try both A and B. We might need a smarter encoding for guards.
-                            #padded_guard_tensor = torch.nn.functional.pad(guard_tensor, (0, MAX_GUARD_LEN - len(guard_tensor))) # A
-                            #padded_guard_tensor = torch.nn.functional.pad(guard_tensor, (MAX_GUARD_LEN - len(guard_tensor), 0)) # B
-                            #nxg.edges[e]["label"] = padded_guard_tensor
             except TimeOutException:
                 print("DFA construction timed out!")
                 raise TimeOutException()
@@ -175,12 +222,12 @@ if __name__ == '__main__':
     from ltl_samplers import getLTLSampler
 
     props = "abcdefghijklmnopqrst"
-    builder = DFABuilder(list(set(list(props))))
+    builder = DFABuilder(sorted(list(set(list(props)))))
     try:
         sampler_id = sys.argv[1]
         sampler = getLTLSampler(sampler_id, props)
         draw_path = "sample_dfa.png"
-        formula = sampler.sample()
+        formula = sampler.sample_new()
         print("LTL Formula:", formula)
         graph = builder(formula, library="networkx")
         print("Output DFA image to", draw_path)
@@ -190,7 +237,7 @@ if __name__ == '__main__':
             for sampler_id in ["Until_1_3_1_2", "Eventually_1_5_1_4", "Until_1_2_1_1", "Adversarial"]:
                 print(sampler_id)
                 sampler = getLTLSampler(sampler_id, props)
-                formula = sampler.sample()
+                formula = sampler.sample_new()
                 print("LTL Formula:", formula)
                 graph = builder(formula, library="networkx")
         

@@ -4,7 +4,7 @@ import numpy as np
 import dgl
 import networkx as nx
 from sklearn.preprocessing import OneHotEncoder
-
+import time
 edge_types = {k:v for (v, k) in enumerate(["self", "arg", "arg1", "arg2"])}
 
 """
@@ -15,7 +15,7 @@ generated trees.
 class ASTBuilder(object):
     def __init__(self, propositions):
         super(ASTBuilder, self).__init__()
-
+        self.count = 0
         self.props = propositions
 
         terminals = ['True', 'False'] + self.props
@@ -33,6 +33,9 @@ class ASTBuilder(object):
 
     @ring.lru(maxsize=30000)
     def __call__(self, formula, library="dgl"):
+        #start = time.time()
+        self.count += 1
+        #print(self.count)
         nxg = self._to_graph(formula)
         nx.set_node_attributes(nxg, 0., "is_root")
         nxg.nodes[0]["is_root"] = 1.
@@ -41,6 +44,8 @@ class ASTBuilder(object):
         # convert the Networkx graph to dgl graph and pass the 'feat' attribute
         g = dgl.DGLGraph()
         g.from_networkx(nxg, node_attrs=["feat", "is_root"], edge_attrs=["type"]) # dgl does not support string attributes (i.e., token)
+        #end = time.time()
+        #print(end-start)
         return g
 
     def _one_hot(self, token):

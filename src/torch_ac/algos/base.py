@@ -129,6 +129,7 @@ class BaseAlgo(ABC):
 
         for i in range(self.num_frames_per_proc):
             # Do one agent-environment interaction
+            #print(i)
 
             preprocessed_obs = self.preprocess_obss(self.obs, device=self.device)
             with torch.no_grad():
@@ -201,7 +202,6 @@ class BaseAlgo(ABC):
         #   - T is self.num_frames_per_proc,
         #   - P is self.num_procs,
         #   - D is the dimensionality.
-
         exps = DictList()
         exps.obs = [self.obss[i][j]
                     for j in range(self.num_procs)
