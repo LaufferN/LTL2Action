@@ -38,10 +38,11 @@ code can generate graphs in either Networkx or DGL formats. And uses caching to 
 generated graphs.
 """
 class DFABuilder(object):
-    def __init__(self, propositions):
+    def __init__(self, propositions, use_mean_guard_embed):
         super(DFABuilder, self).__init__()
         self.count = 0
         self.props = propositions
+        self.use_mean_guard_embed = use_mean_guard_embed
 
     # To make the caching work.
     def __ring_key__(self):
@@ -63,15 +64,14 @@ class DFABuilder(object):
                 generic_formula = generic_formula.replace(prop, positional_var)
         return generic_formula, prop_mapping
 
-    def _get_guard_embedding(self, guard):
-        embedding = [0] * 22
+    def _get_guard_embeddings(self, guard):
+        embeddings = []
         try:
             guard = guard["label"].replace(" ", "").replace("(", "").replace(")", "").replace("\"", "")
         except:
-            return embedding
+            return embeddings
         if (guard == "true"):
-            return embedding
-        #print("Guard", guard)
+            return embeddings
         guard = guard.split("&")
         cnf = []
         seen_atoms = []
@@ -79,32 +79,36 @@ class DFABuilder(object):
             atoms = c.split("|")
             clause = []
             for atom in atoms:
-                #print(atom, self.props.index(atom) + 1 if atom[0] != "~" else -(self.props.index(atom[1:]) + 1), self.props)
                 try:
                     index = seen_atoms.index(atom if atom[0] != "~" else atom[1:])
                 except:
                     index = len(seen_atoms)
                     seen_atoms.append(atom if atom[0] != "~" else atom[1:])
                 clause.append(index + 1 if atom[0] != "~" else -(index + 1))
-            #print("")
             cnf.append(clause)
-        #print("Seen Atom", seen_atoms)
-        #print("CNF", cnf)
         models = []
         with Solver(bootstrap_with=cnf) as s:
             models = list(s.enum_models())
-        #print("Models", models)
         if len(models) == 0:
-            return embedding
+            return embeddings
         for model in models:
+            temp = [0.0] * 22
             for a in model:
                 atom = seen_atoms[abs(a) - 1]
-                #print(atom, self.props.index(atom))
-                embedding[self.props.index(atom)] += 1 if a > 0 else -1
-        for i in range(len(embedding)):
-            embedding[i] /= len(models)
-        #print("Embedding", embedding)
-        return embedding
+                temp[self.props.index(atom)] = 1 if a > 0 else -1
+            embeddings.append(temp)
+        return embeddings
+
+    def _get_mean_guard_embedding(self, embeddings):
+        mean_embedding = [0.0] * 22
+        if len(embeddings) == 0:
+            return mean_embedding
+        for embedding_i in embeddings:
+            for j in range(len(mean_embedding)):
+                mean_embedding[j] += embedding_i[j]
+        for i in range(len(mean_embedding)):
+            mean_embedding[i] /= len(embeddings)
+        return mean_embedding
 
     @ring.lru(maxsize=100000)
     def __call__(self, formula, library="dgl"):
@@ -120,23 +124,46 @@ class DFABuilder(object):
         nxg = self._get_nxg(generic_nxg, prop_mapping)
 
         nxg.remove_node("\\n")
-        nx.set_node_attributes(nxg, torch.zeros(22), "feat")
+
+        for node in nxg.nodes:
+            nxg.nodes[node]["feat"] = torch.zeros(22)
+            nxg.nodes[node]["feat"][-2] = 1.0
+            is_accepting = True
+            for edge in nxg.edges:
+                if node == edge[0] and node != edge[1]:
+                    is_accepting = False
+            if is_accepting:
+                nxg.nodes[node]["feat"][-1] = 1.0
 
         edges = deepcopy(nxg.edges)
 
-        new_node_count = 0
         new_node_name_base_str = "temp_"
+        new_node_name_counter = 0
 
         for e in edges:
-            embedding = self._get_guard_embedding(nxg.edges[e])
-            if not all(i == 0 for i in embedding):
-                nxg.remove_edge(*e)
-                new_node_name = new_node_name_base_str + str(new_node_count)
-                new_node_count += 1
-                nxg.add_node(new_node_name)
-                nxg.add_edge(e[0], new_node_name)
-                nxg.add_edge(new_node_name, e[1])
-                nxg.nodes[new_node_name]["feat"] = torch.tensor(embedding)
+            embeddings = self._get_guard_embeddings(nxg.edges[e])
+            if self.use_mean_guard_embed:
+                mean_embedding = self._get_mean_guard_embedding(embeddings)
+                if not all(i == 0 for i in mean_embedding):
+                    nxg.remove_edge(*e)
+                    new_node_name = new_node_name_base_str + str(new_node_name_counter)
+                    new_node_name_counter += 1
+                    nxg.add_node(new_node_name)
+                    nxg.add_edge(e[0], new_node_name)
+                    nxg.add_edge(new_node_name, e[1])
+                    nxg.nodes[new_node_name]["feat"] = torch.tensor(mean_embedding) # Its -2th and -1th element are already 0.0.
+            else:
+                for i in range(len(embeddings)):
+                    embedding = embeddings[i]
+                    if not all(j == 0 for j in embedding):
+                        if i == 0:
+                            nxg.remove_edge(*e)
+                        new_node_name = new_node_name_base_str + str(new_node_name_counter)
+                        new_node_name_counter += 1
+                        nxg.add_node(new_node_name)
+                        nxg.add_edge(e[0], new_node_name)
+                        nxg.add_edge(new_node_name, e[1])
+                        nxg.nodes[new_node_name]["feat"] = torch.tensor(embedding) # Its -2th and -1th element are already 0.0.
 
         nx.set_node_attributes(nxg, 0.0, "is_root")
         nxg.nodes["1"]["is_root"] = 1.0
@@ -222,7 +249,7 @@ if __name__ == '__main__':
     from ltl_samplers import getLTLSampler
 
     props = "abcdefghijklmnopqrst"
-    builder = DFABuilder(sorted(list(set(list(props)))))
+    builder = DFABuilder(sorted(list(set(list(props)))), False)
     try:
         sampler_id = sys.argv[1]
         sampler = getLTLSampler(sampler_id, props)
