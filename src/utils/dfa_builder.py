@@ -112,7 +112,7 @@ class DFABuilder(object):
         formatted_formula = formatLTL(formula, self.props)
         generic_formula, prop_mapping = self._get_generic_formula(formatted_formula)
 
-        generic_nxg = self._get_generic_nxg(generic_formula)
+        generic_nxg = deepcopy(self._get_generic_nxg(generic_formula))
 
         nxg = self._get_nxg(generic_nxg, prop_mapping)
 
@@ -157,7 +157,6 @@ class DFABuilder(object):
                 nxg.add_node(new_node_name, feat=np.array(mean_embedding))
                 nxg.add_edge(e[0], new_node_name, type=1)
                 nxg.add_edge(new_node_name, e[1], type=2)
-
             else:
                 if len(embeddings) == 0:
                     embedding = [[0.0] * 22]
