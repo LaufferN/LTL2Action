@@ -6,6 +6,7 @@ from ltlf2dfa.parser.ltlf import LTLfParser
 from networkx.drawing.nx_agraph import to_agraph
 from pysat.solvers import Solver
 from copy import deepcopy
+from sympy.logic.boolalg import to_dnf
 
 import dgl
 import networkx as nx
@@ -99,6 +100,29 @@ class DFABuilder(object):
             embeddings.append(temp)
         return embeddings
 
+    def _get_minimal_guard_embeddings(self, guard):
+        guard = guard["label"].replace("\"", "")
+        print(guard)
+        if (guard == "true"):
+            return [[0.0]*22]
+        dnf_guard = str(to_dnf(guard, simplify=True, force=True))
+        print(dnf_guard)
+        dnf_guard = dnf_guard.replace(" ", "").replace("(", "").replace(")", "").replace("\"", "")
+        terms = dnf_guard.split("|")
+        embeddings = []
+        for term in terms:
+            encoding = [0.0] * 22
+            literals = term.split("&")
+            for literal in literals:
+                prop = literal.replace("~", "")
+                if literal[0] == "~":
+                    encoding[self.props.index(prop)] = -1.0
+                else:
+                    encoding[self.props.index(prop)] = 1.0
+            embeddings.append(encoding)
+
+        return embeddings
+
     def _get_mean_guard_embedding(self, embeddings):
         mean_embedding = [0.0] * 22
         if len(embeddings) == 0:
@@ -123,7 +147,9 @@ class DFABuilder(object):
 
         nxg = self._get_nxg(generic_nxg, prop_mapping)
 
-        nxg.remove_node("\\n")
+        if "\\n" in nxg.nodes:
+            nxg.remove_node("\\n")
+
 
         for node in nxg.nodes:
             nxg.nodes[node]["feat"] = torch.zeros(22)
