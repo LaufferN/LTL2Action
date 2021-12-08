@@ -35,9 +35,10 @@ code can generate graphs in either Networkx or DGL formats. And uses caching to 
 generated graphs.
 """
 class DFABuilder(object):
-    def __init__(self, propositions):
+    def __init__(self, propositions, use_mean_guard_embed):
         super(DFABuilder, self).__init__()
         self.props = propositions
+        self.use_mean_guard_embed = use_mean_guard_embed
 
     # To make the caching work.
     def __ring_key__(self):
@@ -87,12 +88,23 @@ class DFABuilder(object):
         if len(models) == 0:
             return embeddings
         for model in models:
-            temp = [0] * 22
+            temp = [0.0] * 22
             for a in model:
                 atom = seen_atoms[abs(a) - 1]
-                temp[self.props.index(atom)] = 1 if a > 0 else -1
+                temp[self.props.index(atom)] = 1.0 if a > 0 else -1.0
             embeddings.append(temp)
         return embeddings
+
+    def _get_mean_guard_embedding(self, embeddings):
+        mean_embedding = [0.0] * 22
+        if len(embeddings) == 0:
+            return mean_embedding
+        for embedding_i in embeddings:
+            for j in range(len(mean_embedding)):
+                mean_embedding[j] += embedding_i[j]
+        for i in range(len(mean_embedding)):
+            mean_embedding[i] /= len(embeddings)
+        return mean_embedding
 
     @ring.lru(maxsize=100000)
     def __call__(self, formula, library="dgl"):
@@ -114,51 +126,62 @@ class DFABuilder(object):
             pass
 
         for node in nxg.nodes:
-            nxg.nodes[node]["feat"] = np.array([[0] * 22])
+            nxg.nodes[node]["feat"] = np.array([[0.0] * 22])
             is_normal = True # Here all are normal nodes, i.e., they are not temp nodes
             is_accepting = True
             for edge in nxg.edges:
                 if node == edge[0] and node != edge[1]: # If there is an outgoing edge, then it is not an accepting state
                     is_accepting = False
             if is_normal:
-                nxg.nodes[node]["feat"][0][-3] = 1
+                nxg.nodes[node]["feat"][0][-3] = 1.0
             if is_accepting:
-                nxg.nodes[node]["feat"][0][-1] = 1
+                nxg.nodes[node]["feat"][0][-1] = 1.0
 
-        nxg.nodes["1"]["feat"][0][-4] = 1
+        nxg.nodes["1"]["feat"][0][-4] = 1.0
         edges = deepcopy(nxg.edges)
 
         new_node_name_base_str = "temp_"
         new_node_name_counter = 0
 
         for e in edges:
-            embeddings = self._get_guard_embeddings(nxg.edges[e])
-            if len(embeddings) == 0:
-                embedding = [[0] * 22]
-                embedding[0][-2] = 1
-                nxg.remove_edge(*e)
+            guard = nxg.edges[e]
+            nxg.remove_edge(*e)
+            if e[0] == e[1]:
+                continue # We define self loops below
+            embeddings = self._get_guard_embeddings(guard)
+            if self.use_mean_guard_embed:
+                mean_embedding = [self._get_mean_guard_embedding(embeddings)]
+                mean_embedding[0][-2] = 1.0
                 new_node_name = new_node_name_base_str + str(new_node_name_counter)
                 new_node_name_counter += 1
-                nxg.add_node(new_node_name, feat=np.array(embedding))
+                nxg.add_node(new_node_name, feat=np.array(mean_embedding))
                 nxg.add_edge(e[0], new_node_name, type=1)
                 nxg.add_edge(new_node_name, e[1], type=2)
+
             else:
-                for i in range(len(embeddings)):
-                    embedding = [embeddings[i]]
-                    embedding[0][-2] = 1
-                    if i == 0:
-                        nxg.remove_edge(*e)
+                if len(embeddings) == 0:
+                    embedding = [[0.0] * 22]
+                    embedding[0][-2] = 1.0
                     new_node_name = new_node_name_base_str + str(new_node_name_counter)
                     new_node_name_counter += 1
                     nxg.add_node(new_node_name, feat=np.array(embedding))
                     nxg.add_edge(e[0], new_node_name, type=1)
                     nxg.add_edge(new_node_name, e[1], type=2)
+                else:
+                    for i in range(len(embeddings)):
+                        embedding = [embeddings[i]]
+                        embedding[0][-2] = 1.0
+                        new_node_name = new_node_name_base_str + str(new_node_name_counter)
+                        new_node_name_counter += 1
+                        nxg.add_node(new_node_name, feat=np.array(embedding))
+                        nxg.add_edge(e[0], new_node_name, type=1)
+                        nxg.add_edge(new_node_name, e[1], type=2)
 
         for node in nxg.nodes:
             nxg.add_edge(node, node, type=0)
 
-        nx.set_node_attributes(nxg, 0, "is_root")
-        nxg.nodes["1"]["is_root"] = 1
+        nx.set_node_attributes(nxg, 0.0, "is_root")
+        nxg.nodes["1"]["is_root"] = 1.0
 
         """print(formula)
         print("Number of nodes:", len(nxg.nodes))
@@ -249,12 +272,12 @@ if __name__ == '__main__':
     from ltl_samplers import getLTLSampler
 
     props = "abcdefghijklmnopqrst"
-    builder = DFABuilder(sorted(list(set(list(props)))))
+    builder = DFABuilder(sorted(list(set(list(props)))), True)
     try:
         sampler_id = sys.argv[1]
         sampler = getLTLSampler(sampler_id, props)
         draw_path = "sample_dfa.png"
-        formula = ('eventually', ('and', 'a', ('eventually', 'b')))#sampler.sample_new()
+        formula = sampler.sample_new()
         print("LTL Formula:", formula)
         graph = builder(formula, library="networkx")
         print("Output DFA image to", draw_path)

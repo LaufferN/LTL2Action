@@ -15,7 +15,7 @@ import utils
 from envs import *
 from ltl_wrappers import LTLEnv
 
-def get_obss_preprocessor(env, gnn, progression_mode, use_dfa):
+def get_obss_preprocessor(env, gnn, progression_mode, use_dfa, use_mean_guard_embed):
     obs_space = env.observation_space
     vocab_space = env.get_propositions()
     vocab = None
@@ -38,7 +38,7 @@ def get_obss_preprocessor(env, gnn, progression_mode, use_dfa):
                 vocab = Vocabulary(vocab_space)
 
                 if use_dfa:
-                    tree_builder = utils.DFABuilder(vocab_space["tokens"])
+                    tree_builder = utils.DFABuilder(vocab_space["tokens"], use_mean_guard_embed)
                 else:
                     tree_builder = utils.ASTBuilder(vocab_space["tokens"])
                 def preprocess_obss(obss, device=None):
@@ -63,7 +63,7 @@ def get_obss_preprocessor(env, gnn, progression_mode, use_dfa):
                 vocab = Vocabulary(vocab_space)
 
                 if use_dfa:
-                    tree_builder = utils.DFABuilder(vocab_space["tokens"])
+                    tree_builder = utils.DFABuilder(vocab_space["tokens"], use_mean_guard_embed)
                 else:
                     tree_builder = utils.ASTBuilder(vocab_space["tokens"])
 
