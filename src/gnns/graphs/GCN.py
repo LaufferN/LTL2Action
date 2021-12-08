@@ -16,7 +16,7 @@ class GCN(GNN):
         self.num_layers = len(hidden_dims)
 
         hidden_plus_input_dims = [hd + input_dim for hd in hidden_dims]
-        self.convs = nn.ModuleList([GraphConv(in_dim, out_dim, activation=F.relu) for (in_dim, out_dim)
+        self.convs = nn.ModuleList([GraphConv(in_dim, out_dim, activation=torch.tanh) for (in_dim, out_dim)
                       in zip([input_dim] + hidden_plus_input_dims[:-1], hidden_dims)])
 
         self.g_embed = nn.Linear(hidden_dims[-1], output_dim)
@@ -70,7 +70,7 @@ class GCNRootShared(GNN):
 
         self.num_layers = num_layers
         self.linear_in = nn.Linear(input_dim, hidden_dim)
-        self.conv = GraphConv(2*hidden_dim, hidden_dim, activation=F.relu)
+        self.conv = GraphConv(2*hidden_dim, hidden_dim, activation=torch.tanh)
         self.g_embed = nn.Linear(hidden_dim, output_dim)
 
     def forward(self, g):

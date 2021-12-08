@@ -15,7 +15,6 @@ generated trees.
 class ASTBuilder(object):
     def __init__(self, propositions):
         super(ASTBuilder, self).__init__()
-        self.count = 0
         self.props = propositions
 
         terminals = ['True', 'False'] + self.props
@@ -34,12 +33,19 @@ class ASTBuilder(object):
     @ring.lru(maxsize=30000)
     def __call__(self, formula, library="dgl"):
         #start = time.time()
-        self.count += 1
-        #print(self.count)
         nxg = self._to_graph(formula)
         nx.set_node_attributes(nxg, 0., "is_root")
         nxg.nodes[0]["is_root"] = 1.
         if (library == "networkx"): return nxg
+
+        """print(formula)
+        print("Number of nodes:", len(nxg.nodes))
+        print("Number of edges:", len(nxg.edges))
+        for i in nxg.nodes:
+            print(nxg.nodes[i]["feat"].shape, type(nxg.nodes[i]["feat"]), nxg.nodes[i]["feat"], type(nxg.nodes[i]["feat"][0][0]))
+            print(nxg.nodes[i]["is_root"], type(nxg.nodes[i]["is_root"]))
+        for i in nxg.edges:
+            print(nxg.edges[i]["type"], type(nxg.edges[i]["type"]))"""
 
         # convert the Networkx graph to dgl graph and pass the 'feat' attribute
         g = dgl.DGLGraph()

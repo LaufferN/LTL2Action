@@ -14,15 +14,12 @@ try:
     from utils.format_ltl import formatLTL
 except:
     from format_ltl import formatLTL
-try:
-    from utils.ast_builder import edge_types
-except:
-    from ast_builder import edge_types
 import time
 import signal
 import pickle
 
-MAX_GUARD_LEN = 100
+edge_types = ["self", "normal-to-temp", "temp-to-normal"]
+
 TIMEOUT_SECONDS = 600
 dfa_db_path = "utils/dfa_db"
 
@@ -38,11 +35,9 @@ code can generate graphs in either Networkx or DGL formats. And uses caching to 
 generated graphs.
 """
 class DFABuilder(object):
-    def __init__(self, propositions, use_mean_guard_embed):
+    def __init__(self, propositions):
         super(DFABuilder, self).__init__()
-        self.count = 0
         self.props = propositions
-        self.use_mean_guard_embed = use_mean_guard_embed
 
     # To make the caching work.
     def __ring_key__(self):
@@ -92,29 +87,15 @@ class DFABuilder(object):
         if len(models) == 0:
             return embeddings
         for model in models:
-            temp = [0.0] * 22
+            temp = [0] * 22
             for a in model:
                 atom = seen_atoms[abs(a) - 1]
                 temp[self.props.index(atom)] = 1 if a > 0 else -1
             embeddings.append(temp)
         return embeddings
 
-    def _get_mean_guard_embedding(self, embeddings):
-        mean_embedding = [0.0] * 22
-        if len(embeddings) == 0:
-            return mean_embedding
-        for embedding_i in embeddings:
-            for j in range(len(mean_embedding)):
-                mean_embedding[j] += embedding_i[j]
-        for i in range(len(mean_embedding)):
-            mean_embedding[i] /= len(embeddings)
-        return mean_embedding
-
     @ring.lru(maxsize=100000)
     def __call__(self, formula, library="dgl"):
-        self.count += 1
-        #start = time.time()
-        #print(self.count)
 
         formatted_formula = formatLTL(formula, self.props)
         generic_formula, prop_mapping = self._get_generic_formula(formatted_formula)
@@ -123,18 +104,28 @@ class DFABuilder(object):
 
         nxg = self._get_nxg(generic_nxg, prop_mapping)
 
-        nxg.remove_node("\\n")
+        try:
+            nxg.remove_node("\\n")
+        except:
+            pass
+        try:
+            nxg.remove_node("init")
+        except:
+            pass
 
         for node in nxg.nodes:
-            nxg.nodes[node]["feat"] = torch.zeros(22)
-            nxg.nodes[node]["feat"][-2] = 1.0
+            nxg.nodes[node]["feat"] = np.array([[0] * 22])
+            is_normal = True # Here all are normal nodes, i.e., they are not temp nodes
             is_accepting = True
             for edge in nxg.edges:
-                if node == edge[0] and node != edge[1]:
+                if node == edge[0] and node != edge[1]: # If there is an outgoing edge, then it is not an accepting state
                     is_accepting = False
+            if is_normal:
+                nxg.nodes[node]["feat"][0][-3] = 1
             if is_accepting:
-                nxg.nodes[node]["feat"][-1] = 1.0
+                nxg.nodes[node]["feat"][0][-1] = 1
 
+        nxg.nodes["1"]["feat"][0][-4] = 1
         edges = deepcopy(nxg.edges)
 
         new_node_name_base_str = "temp_"
@@ -142,33 +133,44 @@ class DFABuilder(object):
 
         for e in edges:
             embeddings = self._get_guard_embeddings(nxg.edges[e])
-            if self.use_mean_guard_embed:
-                mean_embedding = self._get_mean_guard_embedding(embeddings)
-                if not all(i == 0 for i in mean_embedding):
-                    nxg.remove_edge(*e)
-                    new_node_name = new_node_name_base_str + str(new_node_name_counter)
-                    new_node_name_counter += 1
-                    nxg.add_node(new_node_name)
-                    nxg.add_edge(e[0], new_node_name)
-                    nxg.add_edge(new_node_name, e[1])
-                    nxg.nodes[new_node_name]["feat"] = torch.tensor(mean_embedding) # Its -2th and -1th element are already 0.0.
+            if len(embeddings) == 0:
+                embedding = [[0] * 22]
+                embedding[0][-2] = 1
+                nxg.remove_edge(*e)
+                new_node_name = new_node_name_base_str + str(new_node_name_counter)
+                new_node_name_counter += 1
+                nxg.add_node(new_node_name, feat=np.array(embedding))
+                nxg.add_edge(e[0], new_node_name, type=1)
+                nxg.add_edge(new_node_name, e[1], type=2)
             else:
                 for i in range(len(embeddings)):
-                    embedding = embeddings[i]
-                    if not all(j == 0 for j in embedding):
-                        if i == 0:
-                            nxg.remove_edge(*e)
-                        new_node_name = new_node_name_base_str + str(new_node_name_counter)
-                        new_node_name_counter += 1
-                        nxg.add_node(new_node_name)
-                        nxg.add_edge(e[0], new_node_name)
-                        nxg.add_edge(new_node_name, e[1])
-                        nxg.nodes[new_node_name]["feat"] = torch.tensor(embedding) # Its -2th and -1th element are already 0.0.
+                    embedding = [embeddings[i]]
+                    embedding[0][-2] = 1
+                    if i == 0:
+                        nxg.remove_edge(*e)
+                    new_node_name = new_node_name_base_str + str(new_node_name_counter)
+                    new_node_name_counter += 1
+                    nxg.add_node(new_node_name, feat=np.array(embedding))
+                    nxg.add_edge(e[0], new_node_name, type=1)
+                    nxg.add_edge(new_node_name, e[1], type=2)
 
-        nx.set_node_attributes(nxg, 0.0, "is_root")
-        nxg.nodes["1"]["is_root"] = 1.0
+        for node in nxg.nodes:
+            nxg.add_edge(node, node, type=0)
 
-        nx.set_edge_attributes(nxg, 0, "type")
+        nx.set_node_attributes(nxg, 0, "is_root")
+        nxg.nodes["1"]["is_root"] = 1
+
+        """print(formula)
+        print("Number of nodes:", len(nxg.nodes))
+        print("Number of edges:", len(nxg.edges))
+        for i in nxg.nodes:
+            print("Node:", i)
+            print(nxg.nodes[i]["feat"].shape, type(nxg.nodes[i]["feat"]), nxg.nodes[i]["feat"], type(nxg.nodes[i]["feat"][0][0]))
+            print(nxg.nodes[i]["is_root"], type(nxg.nodes[i]["is_root"]))
+        for i in nxg.edges:
+            print(nxg.edges[i]["type"], type(nxg.edges[i]["type"]))"""
+
+        nxg = nxg.reverse(copy=True)
         if (library == "networkx"):
             return nxg
 
@@ -176,8 +178,6 @@ class DFABuilder(object):
         g = dgl.DGLGraph()
         g.from_networkx(nxg, node_attrs=["feat", "is_root"], edge_attrs=["type"]) # dgl does not support string attributes (i.e., token)
 
-        #end = time.time()
-        #print(end-start)
         return g
 
     def _get_nxg(self, generic_nxg, prop_mapping):
@@ -191,7 +191,7 @@ class DFABuilder(object):
         return nxg
 
     # A helper function that returns the networkx version of the dfa
-    #@ring.lru(maxsize=1000000) # Caching the formula->graph pairs in a Last Recently Used fashion
+    @ring.lru(maxsize=100000) # Caching the formula->graph pairs in a Last Recently Used fashion
     def _get_generic_nxg(self, formatted_formula):
         with open(dfa_db_path, "rb") as f:
             dfa_db = pickle.load(f)
@@ -249,12 +249,12 @@ if __name__ == '__main__':
     from ltl_samplers import getLTLSampler
 
     props = "abcdefghijklmnopqrst"
-    builder = DFABuilder(sorted(list(set(list(props)))), False)
+    builder = DFABuilder(sorted(list(set(list(props)))))
     try:
         sampler_id = sys.argv[1]
         sampler = getLTLSampler(sampler_id, props)
         draw_path = "sample_dfa.png"
-        formula = sampler.sample_new()
+        formula = ('eventually', ('and', 'a', ('eventually', 'b')))#sampler.sample_new()
         print("LTL Formula:", formula)
         graph = builder(formula, library="networkx")
         print("Output DFA image to", draw_path)
