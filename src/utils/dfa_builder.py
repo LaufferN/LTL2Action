@@ -106,6 +106,12 @@ class DFABuilder(object):
             mean_embedding[i] /= len(embeddings)
         return mean_embedding
 
+    def _is_sink_state(self, node, nxg):
+        for edge in nxg.edges:
+            if node == edge[0] and node != edge[1]: # If there is an outgoing edge to another node, then it is not an accepting state
+                return False
+        return True
+
     @ring.lru(maxsize=100000)
     def __call__(self, formula, library="dgl"):
 
@@ -120,6 +126,20 @@ class DFABuilder(object):
             nxg.remove_node("\\n")
         except:
             pass
+
+        accepting_states = []
+        rejecting_states = []
+        is_mark_seen = False
+        for node in nxg.nodes:
+            if node == "init":
+                is_mark_seen = True
+                continue
+            if self._is_sink_state(node, nxg):
+                if not is_mark_seen:
+                    accepting_states.append(node)
+                else:
+                    rejecting_states.append(node)
+
         try:
             nxg.remove_node("init")
         except:
@@ -127,17 +147,13 @@ class DFABuilder(object):
 
         for node in nxg.nodes:
             nxg.nodes[node]["feat"] = np.array([[0.0] * 22])
-            is_normal = True # Here all are normal nodes, i.e., they are not temp nodes
-            is_accepting = True
-            for edge in nxg.edges:
-                if node == edge[0] and node != edge[1]: # If there is an outgoing edge, then it is not an accepting state
-                    is_accepting = False
-            if is_normal:
-                nxg.nodes[node]["feat"][0][-3] = 1.0
-            if is_accepting:
+            nxg.nodes[node]["feat"][0][-4] = 1.0
+            if node in accepting_states:
+                nxg.nodes[node]["feat"][0][-2] = 1.0
+            if node in rejecting_states:
                 nxg.nodes[node]["feat"][0][-1] = 1.0
 
-        nxg.nodes["1"]["feat"][0][-4] = 1.0
+        nxg.nodes["1"]["feat"][0][-5] = 1.0
         edges = deepcopy(nxg.edges)
 
         new_node_name_base_str = "temp_"
@@ -151,7 +167,7 @@ class DFABuilder(object):
             embeddings = self._get_guard_embeddings(guard)
             if self.use_mean_guard_embed:
                 mean_embedding = [self._get_mean_guard_embedding(embeddings)]
-                mean_embedding[0][-2] = 1.0
+                mean_embedding[0][-3] = 1.0
                 new_node_name = new_node_name_base_str + str(new_node_name_counter)
                 new_node_name_counter += 1
                 nxg.add_node(new_node_name, feat=np.array(mean_embedding))
@@ -160,7 +176,7 @@ class DFABuilder(object):
             else:
                 if len(embeddings) == 0:
                     embedding = [[0.0] * 22]
-                    embedding[0][-2] = 1.0
+                    embedding[0][-3] = 1.0
                     new_node_name = new_node_name_base_str + str(new_node_name_counter)
                     new_node_name_counter += 1
                     nxg.add_node(new_node_name, feat=np.array(embedding))
@@ -169,7 +185,7 @@ class DFABuilder(object):
                 else:
                     for i in range(len(embeddings)):
                         embedding = [embeddings[i]]
-                        embedding[0][-2] = 1.0
+                        embedding[0][-3] = 1.0
                         new_node_name = new_node_name_base_str + str(new_node_name_counter)
                         new_node_name_counter += 1
                         nxg.add_node(new_node_name, feat=np.array(embedding))
