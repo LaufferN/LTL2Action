@@ -15,7 +15,7 @@ via the sampler (ltl_sampler) that is passed in (model_name).
 class Eval:
     def __init__(self, env, model_name, ltl_sampler,
                 seed=0, device="cpu", argmax=False,
-                num_procs=1, ignoreLTL=False, progression_mode=True, gnn=None, recurrence=1, dumb_ac = False, discount=0.99):
+                num_procs=1, ignoreLTL=False, progression_mode=True, gnn=None, recurrence=1, dumb_ac = False, discount=0.99,  use_dfa=False, use_mean_guard_embed=False):
 
         self.env = env
         self.device = device
@@ -27,6 +27,8 @@ class Eval:
         self.recurrence = recurrence
         self.dumb_ac = dumb_ac
         self.discount = discount
+        self.use_dfa = use_dfa
+        self.use_mean_guard_embed = use_mean_guard_embed
 
         self.model_dir = utils.get_model_dir(model_name, storage_dir="")
         #self.tb_writer = tensorboardX.SummaryWriter(self.model_dir + "/eval-" + ltl_sampler)
@@ -49,9 +51,9 @@ class Eval:
     def eval(self, num_frames, episodes=100, stdout=True):
         # Load agent
             
+        print("TESTSTSTT")
         agent = utils.Agent(self.eval_envs.envs[0], self.eval_envs.observation_space, self.eval_envs.action_space, self.model_dir + "/train", 
-            self.ignoreLTL, self.progression_mode, self.gnn, recurrence = self.recurrence, dumb_ac = self.dumb_ac, device=self.device, argmax=self.argmax, num_envs=self.num_procs)
-
+            self.ignoreLTL, self.progression_mode, self.gnn, recurrence = self.recurrence, dumb_ac = self.dumb_ac, device=self.device, argmax=self.argmax, num_envs=self.num_procs, use_dfa=self.use_dfa, use_mean_guard_embed=self.use_mean_guard_embed)
 
         # Run agent
         start_time = time.time()
@@ -112,6 +114,8 @@ if __name__ == '__main__':
                     help="number of time-steps gradient is backpropagated (default: 1). If > 1, a LSTM is added to the model to have memory.")
     parser.add_argument("--gnn", default="RGCN_8x32_ROOT_SHARED", help="use gnn to model the LTL (only if ignoreLTL==True)")
 
+    parser.add_argument("--use-dfa", action="store_true", default=False, help="Use the DFA encoding of the LTL formula")
+    parser.add_argument("--use-mean_guard_embed", action="store_true", default=False, help="Average the satisfying assignments to guards")
 
     args = parser.parse_args()
 
@@ -120,11 +124,13 @@ if __name__ == '__main__':
 
     for model_path in args.model_paths:
         idx = model_path.find("seed:") + 5
+        print(model_path)
+        print(model_path[idx:])
         seed = int(model_path[idx:idx+2].strip("_"))
 
         eval = utils.Eval(args.env, model_path, args.ltl_sampler,
                      seed=seed, device=torch.device("cpu"), argmax=False,
-                     num_procs=args.procs, ignoreLTL=args.ignoreLTL, progression_mode=args.progression_mode, gnn=args.gnn, recurrence=args.recurrence, dumb_ac=False, discount=args.discount)
+                     num_procs=args.procs, ignoreLTL=args.ignoreLTL, progression_mode=args.progression_mode, gnn=args.gnn, recurrence=args.recurrence, dumb_ac=False, discount=args.discount, use_dfa=args.use_dfa, use_mean_guard_embed=args.use_mean_guard_embed)
         rpe, nfpe = eval.eval(-1, episodes=args.eval_episodes, stdout=True)
         logs_returns_per_episode += rpe
         logs_num_frames_per_episode += nfpe 
