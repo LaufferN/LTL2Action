@@ -48,7 +48,17 @@ class LTLSampler():
     def sample_formula(self):
         raise NotImplementedError
 
+    def sample_out_of_db(self):
+        formula = self.sample_formula()
+        while self.is_in_dfa_db(formula):
+            formula = self.sample_formula()
+        return formula
+
+
     def sample(self):
+        # return self.sample_out_of_db()
+        # return self.sample_new()
+
         formula = self.sample_formula()
         while not self.is_in_dfa_db(formula):
             formula = self.sample_formula()

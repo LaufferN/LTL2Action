@@ -4,6 +4,7 @@ from torch_ac.utils.penv import ParallelEnv
 #import tensorboardX
 
 import utils
+from copy import deepcopy
 import argparse
 import datetime
 from envs.gym_letters.letter_env import LetterEnv
@@ -14,7 +15,7 @@ via the sampler (ltl_sampler) that is passed in (model_name).
 """
 class Eval:
     def __init__(self, env, model_name, ltl_sampler,
-                seed=0, device="cpu", argmax=False,
+                env_seed=0, device="cpu", argmax=False,
                 num_procs=1, ignoreLTL=False, progression_mode=True, gnn=None, recurrence=1, dumb_ac = False, discount=0.99,  use_dfa=False, use_mean_guard_embed=False):
 
         self.env = env
@@ -36,9 +37,12 @@ class Eval:
         # Load environments for evaluation
         eval_envs = []
         for i in range(self.num_procs):
-            eval_envs.append(utils.make_env(env, progression_mode, ltl_sampler, seed, 0, False))
+            eval_envs.append(utils.make_env(env, progression_mode, ltl_sampler, env_seed, 0, False))
 
         eval_envs[0].reset()
+        self.props = eval_envs[0].get_propositions()
+        self.dfa_builder = utils.DFABuilder(self.props, use_mean_guard_embed)
+
         if isinstance(eval_envs[0].env, LetterEnv):
             for env in eval_envs:
                 env.env.map = eval_envs[0].env.map
@@ -51,24 +55,33 @@ class Eval:
     def eval(self, num_frames, episodes=100, stdout=True):
         # Load agent
             
-        print("TESTSTSTT")
         agent = utils.Agent(self.eval_envs.envs[0], self.eval_envs.observation_space, self.eval_envs.action_space, self.model_dir + "/train", 
             self.ignoreLTL, self.progression_mode, self.gnn, recurrence = self.recurrence, dumb_ac = self.dumb_ac, device=self.device, argmax=self.argmax, num_envs=self.num_procs, use_dfa=self.use_dfa, use_mean_guard_embed=self.use_mean_guard_embed)
+
+        obss = self.eval_envs.reset()
 
         # Run agent
         start_time = time.time()
 
-        obss = self.eval_envs.reset()
         log_counter = 0
 
         log_episode_return = torch.zeros(self.num_procs, device=self.device)
         log_episode_num_frames = torch.zeros(self.num_procs, device=self.device)
 
         # Initialize logs
-        logs = {"num_frames_per_episode": [], "return_per_episode": []}
+        logs = {"num_frames_per_episode": [], "return_per_episode": [], "dfa_size": []}
         while log_counter < episodes:
             actions = agent.get_actions(obss)
             obss, rewards, dones, _ = self.eval_envs.step(actions)
+
+            # compute the size of the DFA
+            orig_ltlgoal = self.eval_envs.envs[0].ltl_original
+            formatted_formula = utils.formatLTL(orig_ltlgoal, self.props)
+            generic_formula, prop_mapping = self.dfa_builder._get_generic_formula(formatted_formula)
+            generic_nxg = deepcopy(self.dfa_builder._get_generic_nxg(generic_formula))
+            nxg = self.dfa_builder._get_nxg(generic_nxg, prop_mapping)
+            num_nodes = nxg.number_of_nodes()
+
             agent.analyze_feedbacks(rewards, dones)
 
             log_episode_return += torch.tensor(rewards, device=self.device, dtype=torch.float)
@@ -79,15 +92,17 @@ class Eval:
                     log_counter += 1
                     logs["return_per_episode"].append(log_episode_return[i].item())
                     logs["num_frames_per_episode"].append(log_episode_num_frames[i].item())
+                    logs["dfa_size"].append(num_nodes)
 
             mask = 1 - torch.tensor(dones, device=self.device, dtype=torch.float)
             log_episode_return *= mask
             log_episode_num_frames *= mask
 
         end_time = time.time()
+        print(len(logs["return_per_episode"]))
 
 
-        return logs["return_per_episode"], logs["num_frames_per_episode"]
+        return logs["return_per_episode"], logs["num_frames_per_episode"], logs["dfa_size"]
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -101,6 +116,8 @@ if __name__ == '__main__':
                     help="number of processes (default: 1)")
     parser.add_argument("--eval-episodes", type=int,  default=5,
                     help="number of episodes to evaluate on (default: 5)")
+    parser.add_argument("--eval-formulas", type=int,  default=1,
+                    help="number of ltl formulas to evaluate on (default: 1)")
     parser.add_argument("--env", default="Letter-7x7-v3",
                         help="name of the environment to train on (REQUIRED)")
     parser.add_argument("--discount", type=float, default=0.99,
@@ -122,34 +139,41 @@ if __name__ == '__main__':
     logs_returns_per_episode = []
     logs_num_frames_per_episode = [] 
 
+    rpes = []
+    nfpes = []
+    dfa_sizes = []
+
     for model_path in args.model_paths:
-        idx = model_path.find("seed:") + 5
-        print(model_path)
-        print(model_path[idx:])
-        seed = int(model_path[idx:idx+2].strip("_"))
+        for seed in range(args.eval_formulas):
 
-        eval = utils.Eval(args.env, model_path, args.ltl_sampler,
-                     seed=seed, device=torch.device("cpu"), argmax=False,
-                     num_procs=args.procs, ignoreLTL=args.ignoreLTL, progression_mode=args.progression_mode, gnn=args.gnn, recurrence=args.recurrence, dumb_ac=False, discount=args.discount, use_dfa=args.use_dfa, use_mean_guard_embed=args.use_mean_guard_embed)
-        rpe, nfpe = eval.eval(-1, episodes=args.eval_episodes, stdout=True)
-        logs_returns_per_episode += rpe
-        logs_num_frames_per_episode += nfpe 
+            # idx = model_path.find("seed:") + 5
+            # seed = int(model_path[idx:idx+2].strip("_"))
 
-        print(sum(rpe), seed, model_path)
+            eval = utils.Eval(args.env, model_path, args.ltl_sampler,
+                         seed=seed, device=torch.device("cpu"), argmax=False,
+                         num_procs=args.procs, ignoreLTL=args.ignoreLTL, progression_mode=args.progression_mode, gnn=args.gnn, recurrence=args.recurrence, dumb_ac=False, discount=args.discount, use_dfa=args.use_dfa, use_mean_guard_embed=args.use_mean_guard_embed)
+            rpe, nfpe, dfa_size = eval.eval(-1, episodes=args.eval_episodes, stdout=True)
+            rpes.append(rpe)
+            nfpes.append(nfpe)
+            dfa_sizes.append(dfa_size)
+            logs_returns_per_episode += rpe
+            logs_num_frames_per_episode += nfpe 
+
+            print(sum(rpe), dfa_size, seed, model_path)
 
     print(logs_num_frames_per_episode)
     print(logs_returns_per_episode)
     num_frame_pe = sum(logs_num_frames_per_episode)
     return_per_episode = utils.synthesize(logs_returns_per_episode)
     num_frames_per_episode = utils.synthesize(logs_num_frames_per_episode)
-    average_discounted_return, error = utils.average_discounted_return(logs_returns_per_episode, logs_num_frames_per_episode, args.discount, include_error=True)
+    average_discounted_return = utils.average_discounted_return(logs_returns_per_episode, logs_num_frames_per_episode, args.discount)
 
     header = ["frames"]
     data   = [num_frame_pe]
     header += ["num_frames_" + key for key in num_frames_per_episode.keys()]
     data += num_frames_per_episode.values()
-    header += ["average_discounted_return", "err"]
-    data += [average_discounted_return, error]
+    header += ["average_discounted_return"]
+    data += [average_discounted_return]
 
     header += ["return_" + key for key in return_per_episode.keys()]
     data += return_per_episode.values()
