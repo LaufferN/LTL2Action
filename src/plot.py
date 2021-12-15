@@ -70,8 +70,8 @@ def read_data_and_average(tf_dirs, tag="return_mean", MAX_HORIZON=1000000000):
     for tf_dir in tf_dirs:
         X, Y = read_data(tf_dir, tag, MAX_HORIZON)
 
-        if len(Y) < 150:
-            continue
+        # if len(Y) < 150:
+        #     continue
 
         Ys.append(Y)
         if X_all is None:
@@ -112,7 +112,8 @@ def plot_minigrid_env_dfa_experiments():
     logs = [glob.glob("storage/RGCN_8x32_ROOT_SHARED_Adversarial*_use-dfa:True_*/train/"),
             glob.glob("storage/RGCN_8x32_ROOT_SHARED_Adversarial*_use-dfa:False_*/train/")]
 
-    labels = ["DFA", "AST"]
+    # labels = ["DFA", "AST"]
+    labels = ["Abstract Syntax Tree", "Deterministic Finite Automata"]
     horizon = 10000000000
 
     fig, ax1 = plt.subplots(1, 1)
@@ -120,9 +121,9 @@ def plot_minigrid_env_dfa_experiments():
     fig.set_size_inches(10,5)
     
 
-    ax1.set_ylabel("Discounted return", fontsize = 16)
+    ax1.set_ylabel("Average total reward", fontsize = 16)
     ax1.tick_params(labelsize=12)
-    ax1.set_title("Minigrid", fontsize = 16)
+    ax1.set_title("Minigrid Environment", fontsize = 16)
     # ax1.xaxis.set_major_formatter(FormatStrFormatter('%d'))
 
     for data_line, label in zip(logs, labels):
@@ -132,22 +133,57 @@ def plot_minigrid_env_dfa_experiments():
         ax1.fill_between(X, Y_lower, Y_upper, alpha=0.2)
 
     fig.text(0.5, 0.2, 'Frames (millions)', ha='center', fontsize = 16)
+    plt.grid(True)
 
     handles, labels = ax1.get_legend_handles_labels()
-    legend = fig.legend(handles, labels, loc="lower center",bbox_to_anchor = (0.5, 0), markerscale=6, fontsize=16, ncol = 3)
+    legend = plt.legend(handles, labels, loc="lower right", markerscale=6, fontsize=16, ncol = 3)
 
     for i in range(len(legend.get_lines())):
         legend.get_lines()[i].set_linewidth(3)
 
-    plt.savefig("figs/minigrid-env-dfa.pdf")
+    plt.savefig("figs/minigrid-env-dfa.pdf", bbox_inches='tight', pad_inches=0)
     # plt.show()
+
+def plot_letter_env_comparison_experiments():
+
+    eventually_logs = [glob.glob("storage/RGCN_8x32_ROOT_SHARED_Eventually*dfa:True*/train/"),
+                       glob.glob("storage/RGCN_8x32_ROOT_SHARED_Eventually*dfa:False*/train/")]
+
+    labels = ["Deterministic Finite Automata", "Abstract Syntax Tree"]
+    horizon = 10000000000
+
+    fig, ax1 = plt.subplots(1, 1)
+    plt.subplots_adjust(top = 0.92, bottom = 0.28, hspace = 0, wspace = 0.12, left=0.07, right = 0.96)
+    fig.set_size_inches(10,5)
+    
+
+    ax1.set_ylabel("Discounted return", fontsize = 16)
+    ax1.tick_params(labelsize=12)
+    ax1.set_title("Partially-Ordered Tasks", fontsize = 16)
+    # ax1.xaxis.set_major_formatter(FormatStrFormatter('%d'))
+
+    for data_line, label in zip(eventually_logs, labels):
+        X, Y_avg, Y_lower, Y_upper = read_data_and_average(data_line, tag="average_discounted_return", MAX_HORIZON=horizon) #average_discounted_return, average_discounted_return, average_reward_per_step
+        X = [x / 1000000 for x in X]
+        ax1.plot(X, Y_avg, linewidth = 2, label=label)
+        ax1.fill_between(X, Y_lower, Y_upper, alpha=0.2)
+
+    fig.text(0.5, 0.2, 'Frames (millions)', ha='center', fontsize = 16)
+
+    handles, labels = ax1.get_legend_handles_labels()
+    legend = plt.legend(handles, labels, loc="lower right", markerscale=6, fontsize=16, ncol = 2)
+
+    for i in range(len(legend.get_lines())):
+        legend.get_lines()[i].set_linewidth(3)
+
+    plt.savefig("figs/letter-env-comparison.pdf",bbox_inches='tight', pad_inches=0)
 
 def plot_letter_env_dfa_experiments():
 
-    eventually_logs = [glob.glob("storage/RGCN_8x32_ROOT_SHARED_Eventually*/train/"),
-                       glob.glob("storage/GCN_8x32_ROOT_SHARED_Eventually*/train/"),
-                       glob.glob("storage/RGCN_8x32_ROOT_Eventually*/train/"),
-                       glob.glob("storage/GCN_8x32_ROOT_Eventually*/train/")]
+    eventually_logs = [glob.glob("storage/RGCN_8x32_ROOT_SHARED_Eventually*dfa:True*/train/"),
+                       glob.glob("storage/GCN_8x32_ROOT_SHARED_Eventually*dfa:True*/train/"),
+                       glob.glob("storage/RGCN_8x32_ROOT_Eventually*dfa:True*/train/"),
+                       glob.glob("storage/GCN_8x32_ROOT_Eventually*dfa:True*/train/")]
 
     labels = ["RGCN Shared", "GCN Shared", "RGCN", "GCN"]
     horizon = 10000000000
@@ -171,12 +207,12 @@ def plot_letter_env_dfa_experiments():
     fig.text(0.5, 0.2, 'Frames (millions)', ha='center', fontsize = 16)
 
     handles, labels = ax1.get_legend_handles_labels()
-    legend = fig.legend(handles, labels, loc="lower center",bbox_to_anchor = (0.5, 0), markerscale=6, fontsize=16, ncol = 3)
+    legend = plt.legend(handles, labels, loc="lower right", markerscale=6, fontsize=16, ncol = 2)
 
     for i in range(len(legend.get_lines())):
         legend.get_lines()[i].set_linewidth(3)
 
-    plt.savefig("figs/letter-env-dfa-all.pdf")
+    plt.savefig("figs/letter-env-dfa-all.pdf",bbox_inches='tight', pad_inches=0)
     # plt.show()
 
 
@@ -604,7 +640,8 @@ def plot_toy_experiments():
 
 #plot_letter_env_experiments()
 # plot_letter_env_dfa_experiments()
-plot_minigrid_env_dfa_experiments()
+plot_letter_env_comparison_experiments()
+# plot_minigrid_env_dfa_experiments()
 # plot_pretraining_experiments()
 # plot_safety_experiments()
 # plot_toy_experiments()
