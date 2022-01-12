@@ -21,7 +21,9 @@ import pickle
 edge_types = ["self", "normal-to-temp", "temp-to-normal"]
 
 TIMEOUT_SECONDS = 600
+FEATURE_SIZE = 25
 dfa_db_path = "utils/dfa_db"
+DGL5_COMPAT = False
 
 class TimeOutException(Exception):
     pass
@@ -35,10 +37,11 @@ code can generate graphs in either Networkx or DGL formats. And uses caching to 
 generated graphs.
 """
 class DFABuilder(object):
-    def __init__(self, propositions, use_mean_guard_embed):
+    def __init__(self, propositions, use_mean_guard_embed, use_onehot_guard_embed):
         super(DFABuilder, self).__init__()
         self.props = propositions
         self.use_mean_guard_embed = use_mean_guard_embed
+        self.use_onehot_guard_embed = use_onehot_guard_embed
 
     # To make the caching work.
     def __ring_key__(self):
@@ -59,6 +62,18 @@ class DFABuilder(object):
                     prop_mapping[prop] = positional_var
                 generic_formula = generic_formula.replace(prop, positional_var)
         return generic_formula, prop_mapping
+
+    def _get_onehot_guard_embeddings(self, guard):
+        onehot_embedding = [0.0] * FEATURE_SIZE
+        full_embeddings = self._get_guard_embeddings(guard)
+        for embed in full_embeddings:
+            # discard all non-onehot embeddings (a one-hot embedding must contain only a single 1)
+            if embed.count(1.0) == 1:
+                # clean the embedding so that it's one-hot
+                var_idx = embed.index(1.0)
+                onehot_embedding[var_idx] = 1.0
+
+        return [onehot_embedding]
 
     def _get_guard_embeddings(self, guard):
         embeddings = []
@@ -88,7 +103,7 @@ class DFABuilder(object):
         if len(models) == 0:
             return embeddings
         for model in models:
-            temp = [0.0] * 22
+            temp = [0.0] * FEATURE_SIZE
             for a in model:
                 atom = seen_atoms[abs(a) - 1]
                 temp[self.props.index(atom)] = 1.0 if a > 0 else -1.0
@@ -96,7 +111,7 @@ class DFABuilder(object):
         return embeddings
 
     def _get_mean_guard_embedding(self, embeddings):
-        mean_embedding = [0.0] * 22
+        mean_embedding = [0.0] * FEATURE_SIZE
         if len(embeddings) == 0:
             return mean_embedding
         for embedding_i in embeddings:
@@ -146,7 +161,7 @@ class DFABuilder(object):
             pass
 
         for node in nxg.nodes:
-            nxg.nodes[node]["feat"] = np.array([[0.0] * 22])
+            nxg.nodes[node]["feat"] = np.array([[0.0] * FEATURE_SIZE])
             nxg.nodes[node]["feat"][0][-4] = 1.0
             if node in accepting_states:
                 nxg.nodes[node]["feat"][0][-2] = 1.0
@@ -164,7 +179,10 @@ class DFABuilder(object):
             nxg.remove_edge(*e)
             if e[0] == e[1]:
                 continue # We define self loops below
-            embeddings = self._get_guard_embeddings(guard)
+            if self.use_onehot_guard_embed:
+                embeddings = self._get_onehot_guard_embeddings(guard)
+            else:
+                embeddings = self._get_guard_embeddings(guard)
             if self.use_mean_guard_embed:
                 mean_embedding = [self._get_mean_guard_embedding(embeddings)]
                 mean_embedding[0][-3] = 1.0
@@ -175,7 +193,7 @@ class DFABuilder(object):
                 nxg.add_edge(new_node_name, e[1], type=2)
             else:
                 if len(embeddings) == 0:
-                    embedding = [[0.0] * 22]
+                    embedding = [[0.0] * FEATURE_SIZE]
                     embedding[0][-3] = 1.0
                     new_node_name = new_node_name_base_str + str(new_node_name_counter)
                     new_node_name_counter += 1
@@ -195,8 +213,12 @@ class DFABuilder(object):
         for node in nxg.nodes:
             nxg.add_edge(node, node, type=0)
 
-        nx.set_node_attributes(nxg, 0.0, "is_root")
-        nxg.nodes["1"]["is_root"] = 1.0
+        if DGL5_COMPAT:
+            nx.set_node_attributes(nxg, [0.0], "is_root")
+            nxg.nodes["1"]["is_root"] = [1.0]
+        else:
+            nx.set_node_attributes(nxg, [0.0], "is_root")
+            nxg.nodes["1"]["is_root"] = [1.0]
 
         """print(formula)
         print("Number of nodes:", len(nxg.nodes))
@@ -213,8 +235,11 @@ class DFABuilder(object):
             return nxg
 
         # convert the Networkx graph to dgl graph and pass the 'feat' attribute
-        g = dgl.DGLGraph()
-        g.from_networkx(nxg, node_attrs=["feat", "is_root"], edge_attrs=["type"]) # dgl does not support string attributes (i.e., token)
+        if DGL5_COMPAT:
+            g = dgl.from_networkx(nxg, node_attrs=["feat", "is_root"], edge_attrs=["type"]) # dgl does not support string attributes (i.e., token)
+        else:
+            g = dgl.DGLGraph()
+            g.from_networkx(nxg, node_attrs=["feat", "is_root"], edge_attrs=["type"]) # dgl does not support string attributes (i.e., token)
 
         return g
 
@@ -287,23 +312,26 @@ if __name__ == '__main__':
     from ltl_samplers import getLTLSampler
 
     props = "abcdefghijklmnopqrst"
-    builder = DFABuilder(sorted(list(set(list(props)))), True)
+    builder = DFABuilder(sorted(list(set(list(props)))), False, True)
     try:
         sampler_id = sys.argv[1]
         sampler = getLTLSampler(sampler_id, props)
         draw_path = "sample_dfa.png"
-        formula = sampler.sample_new()
+        formula = sampler.sample()
+        print(builder.props)
         print("LTL Formula:", formula)
         graph = builder(formula, library="networkx")
         print("Output DFA image to", draw_path)
         draw(graph, formula, draw_path)
     except:
         while True:
-            for sampler_id in ["Until_1_3_1_2", "Eventually_1_5_1_4", "Until_1_2_1_1", "Adversarial"]:
+            for sampler_id in ["Until_1_2_1_2"]:
                 print(sampler_id)
                 sampler = getLTLSampler(sampler_id, props)
                 formula = sampler.sample_new()
                 print("LTL Formula:", formula)
                 graph = builder(formula, library="networkx")
+                draw_path = "sample_dfa.png"
+                draw(graph, formula, draw_path)
         
 

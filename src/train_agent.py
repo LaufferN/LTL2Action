@@ -118,6 +118,7 @@ parser.add_argument("--dumb-ac", action="store_true", default=False,help="Use a 
 parser.add_argument("--freeze-ltl", action="store_true", default=False,help="Freeze the gradient updates of the LTL module")
 parser.add_argument("--use-dfa", action="store_true", default=False,help="Use DFA encoding of the LTL formula instead of AST")
 parser.add_argument("--use-mean-guard-embed", action="store_true", default=False,help="Use mean embeddings for DFA guards")
+parser.add_argument("--use-onehot-guard-embed", action="store_true", default=False,help="Use onehot embeddings for DFA guards")
 
 args = parser.parse_args()
 
@@ -139,7 +140,7 @@ if args.freeze_ltl:
 if use_mem:
     gnn_name = gnn_name + "-recurrence:%d"%(args.recurrence)
 
-default_model_name = f"{gnn_name}_{args.ltl_sampler}_{args.env}_seed:{args.seed}_epochs:{args.epochs}_bs:{args.batch_size}_fpp:{args.frames_per_proc}_dsc:{args.discount}_lr:{args.lr}_ent:{args.entropy_coef}_clip:{args.clip_eps}_prog:{args.progression_mode}_use-dfa:{args.use_dfa}_use_mean_guard_embed:{args.use_mean_guard_embed}"
+default_model_name = f"{gnn_name}_{args.ltl_sampler}_{args.env}_seed:{args.seed}_epochs:{args.epochs}_bs:{args.batch_size}_fpp:{args.frames_per_proc}_dsc:{args.discount}_lr:{args.lr}_ent:{args.entropy_coef}_clip:{args.clip_eps}_prog:{args.progression_mode}_use-dfa:{args.use_dfa}_use_mean_guard_embed:{args.use_mean_guard_embed}_use_onehot_guard_embed:{args.use_onehot_guard_embed}"
 
 model_name = args.model or default_model_name
 storage_dir = "storage" if args.checkpoint_dir is None else args.checkpoint_dir
@@ -212,7 +213,7 @@ if pretrained_model_dir is not None:
 
 # Load observations preprocessor
 using_gnn = (args.gnn != "GRU" and args.gnn != "LSTM")
-obs_space, preprocess_obss = utils.get_obss_preprocessor(envs[0], using_gnn, progression_mode, args.use_dfa, args.use_mean_guard_embed)
+obs_space, preprocess_obss = utils.get_obss_preprocessor(envs[0], using_gnn, progression_mode, args.use_dfa, args.use_mean_guard_embed, args.use_onehot_guard_embed)
 if "vocab" in status and preprocess_obss.vocab is not None:
     preprocess_obss.vocab.load_vocab(status["vocab"])
 txt_logger.info("Observations preprocessor loaded.\n")
