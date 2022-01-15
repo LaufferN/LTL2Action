@@ -21,7 +21,7 @@ import pickle
 edge_types = ["self", "normal-to-temp", "temp-to-normal"]
 
 TIMEOUT_SECONDS = 600
-FEATURE_SIZE = 25
+FEATURE_SIZE = 22
 dfa_db_path = "utils/dfa_db"
 DGL5_COMPAT = False
 
@@ -64,16 +64,23 @@ class DFABuilder(object):
         return generic_formula, prop_mapping
 
     def _get_onehot_guard_embeddings(self, guard):
+        is_there_onehot = False
+        is_there_all_zero = False
         onehot_embedding = [0.0] * FEATURE_SIZE
         full_embeddings = self._get_guard_embeddings(guard)
         for embed in full_embeddings:
             # discard all non-onehot embeddings (a one-hot embedding must contain only a single 1)
             if embed.count(1.0) == 1:
                 # clean the embedding so that it's one-hot
+                is_there_onehot = True
                 var_idx = embed.index(1.0)
                 onehot_embedding[var_idx] = 1.0
-
-        return [onehot_embedding]
+            elif embed.count(0.0) == len(embed):
+                is_there_all_zero = True
+        if is_there_onehot or is_there_all_zero:
+            return [onehot_embedding]
+        else:
+            return []
 
     def _get_guard_embeddings(self, guard):
         embeddings = []
@@ -181,6 +188,8 @@ class DFABuilder(object):
                 continue # We define self loops below
             if self.use_onehot_guard_embed:
                 embeddings = self._get_onehot_guard_embeddings(guard)
+                if len(embeddings) == 0:
+                    continue
             else:
                 embeddings = self._get_guard_embeddings(guard)
             if self.use_mean_guard_embed:
@@ -193,6 +202,8 @@ class DFABuilder(object):
                 nxg.add_edge(new_node_name, e[1], type=2)
             else:
                 if len(embeddings) == 0:
+                    # Let's double check this part if we decide to use this encoding convention again.
+                    # With one hot embedding, line 191 and 192 guarantee that this part will not be executed.
                     embedding = [[0.0] * FEATURE_SIZE]
                     embedding[0][-3] = 1.0
                     new_node_name = new_node_name_base_str + str(new_node_name_counter)
@@ -311,7 +322,7 @@ if __name__ == '__main__':
     sys.path.append('..')
     from ltl_samplers import getLTLSampler
 
-    props = "abcdefghijklmnopqrst"
+    props = "abcdefghijkl"
     builder = DFABuilder(sorted(list(set(list(props)))), False, True)
     try:
         sampler_id = sys.argv[1]
@@ -324,14 +335,14 @@ if __name__ == '__main__':
         print("Output DFA image to", draw_path)
         draw(graph, formula, draw_path)
     except:
-        while True:
-            for sampler_id in ["Until_1_2_1_2"]:
-                print(sampler_id)
-                sampler = getLTLSampler(sampler_id, props)
-                formula = sampler.sample_new()
-                print("LTL Formula:", formula)
-                graph = builder(formula, library="networkx")
-                draw_path = "sample_dfa.png"
-                draw(graph, formula, draw_path)
+        for sampler_id in ["Until_1_1_1_1", "Until_1_1_2_2", "Until_2_2_1_1", "Until_2_2_2_2",
+                           "Eventually_1_1_1_1", "Eventually_1_1_2_2", "Eventually_2_2_1_1", "Eventually_2_2_2_2"]:
+            print(sampler_id)
+            sampler = getLTLSampler(sampler_id, props)
+            formula = sampler.sample_new()
+            print("LTL Formula:", formula)
+            graph = builder(formula, library="networkx")
+            draw_path = "sample_dfa_" + sampler_id + ".png"
+            draw(graph, formula, draw_path)
         
 
