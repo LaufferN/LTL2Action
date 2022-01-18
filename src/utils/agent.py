@@ -12,7 +12,7 @@ class Agent:
     - to analyze the feedback (i.e. reward and done state) of its action."""
 
     def __init__(self, env, obs_space, action_space, model_dir, ignoreLTL, progression_mode,
-                gnn, recurrence = 1, dumb_ac = False, device=None, argmax=False, num_envs=1):
+                gnn, recurrence = 1, dumb_ac = False, device=None, argmax=False, num_envs=1, use_dfa=False, use_mean_guard_embed=False):
         try:
             print(model_dir)
             status = utils.get_status(model_dir)
@@ -20,20 +20,24 @@ class Agent:
             status = {"num_frames": 0, "update": 0}
 
         using_gnn = (gnn != "GRU" and gnn != "LSTM")
-        obs_space, self.preprocess_obss = utils.get_obss_preprocessor(env, using_gnn, progression_mode)
+        obs_space, self.preprocess_obss = utils.get_obss_preprocessor(env, using_gnn, progression_mode, use_dfa, use_mean_guard_embed)
         if "vocab" in status and self.preprocess_obss.vocab is not None:
             self.preprocess_obss.vocab.load_vocab(status["vocab"])
 
 
         if recurrence > 1:
-            self.acmodel = RecurrentACModel(env, obs_space, action_space, ignoreLTL, gnn, dumb_ac, True)
+            self.acmodel = RecurrentACModel(env, obs_space, action_space, ignoreLTL, gnn, dumb_ac, True, use_dfa)
             self.memories = torch.zeros(num_envs, self.acmodel.memory_size, device=device)
         else:
-            self.acmodel = ACModel(env, obs_space, action_space, ignoreLTL, gnn, dumb_ac, True)
+            self.acmodel = ACModel(env, obs_space, action_space, ignoreLTL, gnn, dumb_ac, True, use_dfa)
 
         self.device = device
         self.argmax = argmax
         self.num_envs = num_envs
+
+        # status = utils.get_status(model_dir)
+        # assert("model_state" in status)
+        # self.acmodel.load_state_dict(status["model_state"])
 
         self.acmodel.load_state_dict(utils.get_model_state(model_dir))
         self.acmodel.to(self.device)

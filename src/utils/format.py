@@ -12,10 +12,12 @@ import gym
 import numpy as np
 import utils
 
+FEATURE_SIZE = 22
+
 from envs import *
 from ltl_wrappers import LTLEnv
 
-def get_obss_preprocessor(env, gnn, progression_mode, use_dfa, use_mean_guard_embed):
+def get_obss_preprocessor(env, gnn, progression_mode, use_dfa, use_mean_guard_embed, use_onehot_guard_embed):
     obs_space = env.observation_space
     vocab_space = env.get_propositions()
     vocab = None
@@ -32,13 +34,13 @@ def get_obss_preprocessor(env, gnn, progression_mode, use_dfa, use_mean_guard_em
                     })
 
             else:
-                obs_space = {"image": obs_space.spaces["features"].shape, "text": max(22, len(vocab_space) + 10)}
+                obs_space = {"image": obs_space.spaces["features"].shape, "text": max(FEATURE_SIZE, len(vocab_space) + 10)}
                 vocab_space = {"max_size": obs_space["text"], "tokens": vocab_space}
 
                 vocab = Vocabulary(vocab_space)
 
                 if use_dfa:
-                    tree_builder = utils.DFABuilder(vocab_space["tokens"], use_mean_guard_embed)
+                    tree_builder = utils.DFABuilder(vocab_space["tokens"], use_mean_guard_embed, use_onehot_guard_embed)
                 else:
                     tree_builder = utils.ASTBuilder(vocab_space["tokens"])
                 def preprocess_obss(obss, device=None):
@@ -57,13 +59,13 @@ def get_obss_preprocessor(env, gnn, progression_mode, use_dfa, use_mean_guard_em
                         "progress_info":  torch.stack([torch.tensor(obs["progress_info"], dtype=torch.float) for obs in obss], dim=0).to(device)
                     })
             else:
-                obs_space = {"text": max(22, len(vocab_space) + 10)}
+                obs_space = {"text": max(FEATURE_SIZE, len(vocab_space) + 10)}
                 vocab_space = {"max_size": obs_space["text"], "tokens": vocab_space}
 
                 vocab = Vocabulary(vocab_space)
 
                 if use_dfa:
-                    tree_builder = utils.DFABuilder(vocab_space["tokens"], use_mean_guard_embed)
+                    tree_builder = utils.DFABuilder(vocab_space["tokens"], use_mean_guard_embed, use_onehot_guard_embed)
                 else:
                     tree_builder = utils.ASTBuilder(vocab_space["tokens"])
 

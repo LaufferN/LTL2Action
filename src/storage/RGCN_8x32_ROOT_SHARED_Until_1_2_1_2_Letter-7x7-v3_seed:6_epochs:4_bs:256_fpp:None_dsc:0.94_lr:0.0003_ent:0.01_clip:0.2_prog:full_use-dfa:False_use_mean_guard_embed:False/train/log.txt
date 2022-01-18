@@ -1,0 +1,967 @@
+train_agent.py --algo ppo --env Letter-7x7-v3 --log-interval 5 --save-interval 20 --frames 1024000 --discount 0.94 --ltl-sampler Until_1_2_1_2 --epochs 4 --lr 0.0003 --seed 6
+
+Namespace(algo='ppo', batch_size=256, checkpoint_dir=None, clip_eps=0.2, discount=0.94, dumb_ac=False, entropy_coef=0.01, env='Letter-7x7-v3', epochs=4, eval=False, eval_env=None, eval_episodes=5, eval_procs=1, frames=1024000, frames_per_proc=None, freeze_ltl=False, gae_lambda=0.95, gnn='RGCN_8x32_ROOT_SHARED', ignoreLTL=False, int_reward=0.0, log_interval=5, lr=0.0003, ltl_sampler='Until_1_2_1_2', ltl_samplers_eval=None, max_grad_norm=0.5, model=None, noLTL=False, optim_alpha=0.99, optim_eps=1e-08, pretrained_gnn=False, procs=16, progression_mode='full', recurrence=1, save_interval=20, seed=6, use_dfa=False, use_mean_guard_embed=False, value_loss_coef=0.5)
+
+Device: cpu
+
+Using fixed maps.
+Environments loaded
+
+Training status loaded.
+
+Observations preprocessor loaded.
+
+Model loaded.
+
+ACModel(
+  (env_model): LetterEnvModel(
+    (image_conv): Sequential(
+      (0): Conv2d(13, 16, kernel_size=(2, 2), stride=(1, 1))
+      (1): ReLU()
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(1, 1))
+      (3): ReLU()
+      (4): Conv2d(32, 64, kernel_size=(2, 2), stride=(1, 1))
+      (5): ReLU()
+    )
+  )
+  (gnn): RGCNRootShared(
+    (linear_in): Linear(in_features=22, out_features=32, bias=True)
+    (conv): RelGraphConv(
+      (dropout): Dropout(p=0.0, inplace=False)
+    )
+    (g_embed): Linear(in_features=32, out_features=32, bias=True)
+  )
+  (actor): PolicyNetwork(
+    (enc_): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=1056, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (2): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+    )
+    (discrete_): Sequential(
+      (0): Linear(in_features=64, out_features=4, bias=True)
+    )
+  )
+  (critic): Sequential(
+    (0): Linear(in_features=1056, out_features=64, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=64, out_features=64, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=64, out_features=1, bias=True)
+  )
+)
+
+Optimizer loaded.
+
+U 5 | F 010240 | FPS 0216 | D 46 | rR:μσmM -0.47 0.86 -1.00 1.00 | ARPS: -0.097 | ADR: -0.285 | F:μσmM 17.1 16.8 1.0 76.0 | H 1.369 | V -0.203 | pL -0.005 | vL 0.130 | ∇ 0.204
+U 10 | F 020480 | FPS 0215 | D 92 | rR:μσmM -0.46 0.87 -1.00 1.00 | ARPS: -0.090 | ADR: -0.248 | F:μσmM 19.5 18.9 1.0 76.0 | H 1.383 | V -0.163 | pL 0.029 | vL 0.138 | ∇ 0.126
+U 15 | F 030720 | FPS 0229 | D 137 | rR:μσmM -0.38 0.90 -1.00 1.00 | ARPS: -0.049 | ADR: -0.163 | F:μσmM 24.8 21.1 1.0 76.0 | H 1.383 | V -0.151 | pL -0.006 | vL 0.136 | ∇ 0.069
+U 20 | F 040960 | FPS 0231 | D 183 | rR:μσmM -0.56 0.81 -1.00 1.00 | ARPS: -0.101 | ADR: -0.295 | F:μσmM 24.0 21.4 1.0 76.0 | H 1.379 | V -0.154 | pL 0.061 | vL 0.130 | ∇ 0.070
+Status saved
+U 25 | F 051200 | FPS 0214 | D 231 | rR:μσmM -0.38 0.88 -1.00 1.00 | ARPS: -0.053 | ADR: -0.213 | F:μσmM 21.5 20.8 1.0 76.0 | H 1.346 | V -0.143 | pL 0.016 | vL 0.144 | ∇ 0.110
+U 30 | F 061440 | FPS 0212 | D 279 | rR:μσmM -0.45 0.86 -1.00 1.00 | ARPS: -0.134 | ADR: -0.267 | F:μσmM 23.4 20.8 1.0 76.0 | H 1.287 | V -0.114 | pL -0.006 | vL 0.121 | ∇ 0.149
+U 35 | F 071680 | FPS 0209 | D 326 | rR:μσmM -0.20 0.90 -1.00 1.00 | ARPS: -0.059 | ADR: -0.184 | F:μσmM 31.0 25.2 2.0 76.0 | H 1.255 | V -0.059 | pL -0.079 | vL 0.094 | ∇ 0.154
+U 40 | F 081920 | FPS 0237 | D 374 | rR:μσmM -0.08 0.86 -1.00 1.00 | ARPS: -0.009 | ADR: -0.045 | F:μσmM 37.8 27.6 2.0 76.0 | H 1.178 | V -0.033 | pL -0.015 | vL 0.076 | ∇ 0.186
+Status saved
+U 45 | F 092160 | FPS 0228 | D 420 | rR:μσmM -0.06 0.90 -1.00 1.00 | ARPS: -0.001 | ADR: -0.029 | F:μσmM 35.1 27.9 2.0 76.0 | H 1.140 | V -0.032 | pL 0.001 | vL 0.068 | ∇ 0.194
+U 50 | F 102400 | FPS 0202 | D 466 | rR:μσmM -0.15 0.92 -1.00 1.00 | ARPS: -0.032 | ADR: -0.115 | F:μσmM 31.8 24.3 2.0 76.0 | H 1.106 | V -0.003 | pL 0.019 | vL 0.082 | ∇ 0.213
+U 55 | F 112640 | FPS 0214 | D 513 | rR:μσmM -0.02 0.90 -1.00 1.00 | ARPS: -0.020 | ADR: -0.041 | F:μσmM 35.1 26.1 1.0 76.0 | H 1.025 | V 0.025 | pL -0.007 | vL 0.072 | ∇ 0.258
+U 60 | F 122880 | FPS 0225 | D 561 | rR:μσmM 0.16 0.85 -1.00 1.00 | ARPS: 0.001 | ADR: 0.052 | F:μσmM 36.6 27.6 2.0 76.0 | H 0.972 | V 0.058 | pL -0.020 | vL 0.074 | ∇ 0.291
+Status saved
+U 65 | F 133120 | FPS 0222 | D 609 | rR:μσmM 0.07 0.84 -1.00 1.00 | ARPS: 0.021 | ADR: 0.082 | F:μσmM 38.0 27.9 2.0 76.0 | H 0.982 | V 0.019 | pL 0.009 | vL 0.063 | ∇ 0.180
+U 70 | F 143360 | FPS 0166 | D 661 | rR:μσmM 0.36 0.76 -1.00 1.00 | ARPS: 0.058 | ADR: 0.168 | F:μσmM 41.3 28.1 1.0 76.0 | H 0.942 | V 0.041 | pL -0.029 | vL 0.043 | ∇ 0.137
+U 75 | F 153600 | FPS 0214 | D 712 | rR:μσmM 0.19 0.82 -1.00 1.00 | ARPS: 0.021 | ADR: 0.087 | F:μσmM 35.6 29.6 2.0 76.0 | H 0.931 | V 0.107 | pL 0.061 | vL 0.056 | ∇ 0.256
+U 80 | F 163840 | FPS 0207 | D 763 | rR:μσmM 0.30 0.88 -1.00 1.00 | ARPS: 0.047 | ADR: 0.109 | F:μσmM 34.5 25.3 1.0 76.0 | H 0.904 | V 0.088 | pL -0.034 | vL 0.062 | ∇ 0.200
+Status saved
+U 85 | F 174080 | FPS 0212 | D 814 | rR:μσmM 0.37 0.78 -1.00 1.00 | ARPS: 0.061 | ADR: 0.198 | F:μσmM 35.5 28.1 1.0 76.0 | H 0.880 | V 0.114 | pL 0.008 | vL 0.052 | ∇ 0.233
+U 90 | F 184320 | FPS 0198 | D 867 | rR:μσmM 0.55 0.73 -1.00 1.00 | ARPS: 0.084 | ADR: 0.236 | F:μσmM 29.9 26.2 1.0 76.0 | H 0.869 | V 0.187 | pL -0.006 | vL 0.055 | ∇ 0.233
+U 95 | F 194560 | FPS 0180 | D 920 | rR:μσmM 0.44 0.80 -1.00 1.00 | ARPS: 0.065 | ADR: 0.191 | F:μσmM 29.4 26.3 1.0 76.0 | H 0.836 | V 0.146 | pL -0.007 | vL 0.058 | ∇ 0.292
+U 100 | F 204800 | FPS 0188 | D 975 | rR:μσmM 0.39 0.85 -1.00 1.00 | ARPS: 0.072 | ADR: 0.223 | F:μσmM 28.8 24.6 1.0 76.0 | H 0.854 | V 0.101 | pL -0.018 | vL 0.059 | ∇ 0.215
+Status saved
+U 105 | F 215040 | FPS 0200 | D 1028 | rR:μσmM 0.45 0.82 -1.00 1.00 | ARPS: 0.084 | ADR: 0.290 | F:μσmM 25.2 24.8 1.0 76.0 | H 0.794 | V 0.149 | pL 0.013 | vL 0.053 | ∇ 0.283
+U 110 | F 225280 | FPS 0189 | D 1080 | rR:μσmM 0.48 0.81 -1.00 1.00 | ARPS: 0.069 | ADR: 0.230 | F:μσmM 23.3 24.2 1.0 76.0 | H 0.824 | V 0.213 | pL 0.011 | vL 0.072 | ∇ 0.326
+U 115 | F 235520 | FPS 0186 | D 1135 | rR:μσmM 0.52 0.80 -1.00 1.00 | ARPS: 0.110 | ADR: 0.292 | F:μσmM 22.4 23.2 1.0 76.0 | H 0.834 | V 0.188 | pL -0.039 | vL 0.060 | ∇ 0.331
+U 120 | F 245760 | FPS 0179 | D 1189 | rR:μσmM 0.51 0.80 -1.00 1.00 | ARPS: 0.090 | ADR: 0.278 | F:μσmM 22.2 23.7 1.0 76.0 | H 0.866 | V 0.183 | pL -0.010 | vL 0.058 | ∇ 0.318
+Status saved
+U 125 | F 256000 | FPS 0199 | D 1242 | rR:μσmM 0.45 0.86 -1.00 1.00 | ARPS: 0.055 | ADR: 0.216 | F:μσmM 19.3 20.4 1.0 76.0 | H 0.778 | V 0.246 | pL 0.036 | vL 0.076 | ∇ 0.331
+U 130 | F 266240 | FPS 0186 | D 1296 | rR:μσmM 0.46 0.86 -1.00 1.00 | ARPS: 0.076 | ADR: 0.235 | F:μσmM 21.8 20.5 1.0 76.0 | H 0.841 | V 0.231 | pL 0.043 | vL 0.089 | ∇ 0.313
+U 135 | F 276480 | FPS 0205 | D 1348 | rR:μσmM 0.48 0.87 -1.00 1.00 | ARPS: 0.107 | ADR: 0.284 | F:μσmM 15.5 16.9 1.0 76.0 | H 0.705 | V 0.263 | pL 0.036 | vL 0.106 | ∇ 0.568
+U 140 | F 286720 | FPS 0190 | D 1402 | rR:μσmM 0.69 0.70 -1.00 1.00 | ARPS: 0.096 | ADR: 0.349 | F:μσmM 19.6 19.1 1.0 76.0 | H 0.723 | V 0.293 | pL -0.023 | vL 0.069 | ∇ 0.400
+Status saved
+U 145 | F 296960 | FPS 0193 | D 1463 | rR:μσmM 0.59 0.77 -1.00 1.00 | ARPS: 0.098 | ADR: 0.343 | F:μσmM 17.1 19.8 1.0 76.0 | H 0.693 | V 0.264 | pL -0.017 | vL 0.081 | ∇ 0.364
+U 150 | F 307200 | FPS 0183 | D 1519 | rR:μσmM 0.55 0.78 -1.00 1.00 | ARPS: 0.083 | ADR: 0.310 | F:μσmM 18.9 21.6 1.0 76.0 | H 0.783 | V 0.225 | pL -0.002 | vL 0.061 | ∇ 0.288
+U 155 | F 317440 | FPS 0184 | D 1574 | rR:μσmM 0.65 0.74 -1.00 1.00 | ARPS: 0.127 | ADR: 0.395 | F:μσmM 15.2 16.6 1.0 76.0 | H 0.630 | V 0.341 | pL 0.025 | vL 0.077 | ∇ 0.443
+U 160 | F 327680 | FPS 0180 | D 1631 | rR:μσmM 0.62 0.75 -1.00 1.00 | ARPS: 0.102 | ADR: 0.339 | F:μσmM 17.8 19.0 1.0 76.0 | H 0.664 | V 0.295 | pL 0.003 | vL 0.067 | ∇ 0.373
+Status saved
+U 165 | F 337920 | FPS 0184 | D 1688 | rR:μσmM 0.66 0.73 -1.00 1.00 | ARPS: 0.126 | ADR: 0.410 | F:μσmM 15.7 17.4 1.0 76.0 | H 0.631 | V 0.323 | pL -0.027 | vL 0.065 | ∇ 0.507
+U 170 | F 348160 | FPS 0179 | D 1745 | rR:μσmM 0.68 0.71 -1.00 1.00 | ARPS: 0.146 | ADR: 0.428 | F:μσmM 14.3 17.1 1.0 76.0 | H 0.590 | V 0.344 | pL 0.045 | vL 0.073 | ∇ 0.467
+U 175 | F 358400 | FPS 0181 | D 1802 | rR:μσmM 0.63 0.76 -1.00 1.00 | ARPS: 0.102 | ADR: 0.357 | F:μσmM 14.8 15.4 1.0 76.0 | H 0.682 | V 0.362 | pL 0.032 | vL 0.074 | ∇ 0.521
+U 180 | F 368640 | FPS 0186 | D 1859 | rR:μσmM 0.68 0.71 -1.00 1.00 | ARPS: 0.125 | ADR: 0.411 | F:μσmM 13.6 15.8 1.0 76.0 | H 0.600 | V 0.402 | pL 0.027 | vL 0.089 | ∇ 0.588
+Status saved
+U 185 | F 378880 | FPS 0188 | D 1913 | rR:μσmM 0.76 0.60 -1.00 1.00 | ARPS: 0.154 | ADR: 0.490 | F:μσmM 14.5 18.1 1.0 76.0 | H 0.627 | V 0.376 | pL 0.016 | vL 0.055 | ∇ 0.307
+U 190 | F 389120 | FPS 0187 | D 1970 | rR:μσmM 0.71 0.67 -1.00 1.00 | ARPS: 0.143 | ADR: 0.444 | F:μσmM 13.3 17.9 1.0 76.0 | H 0.642 | V 0.369 | pL -0.003 | vL 0.067 | ∇ 0.291
+U 195 | F 399360 | FPS 0183 | D 2027 | rR:μσmM 0.64 0.76 -1.00 1.00 | ARPS: 0.099 | ADR: 0.372 | F:μσmM 12.5 14.1 1.0 76.0 | H 0.646 | V 0.401 | pL 0.061 | vL 0.097 | ∇ 0.428
+U 200 | F 409600 | FPS 0191 | D 2083 | rR:μσmM 0.82 0.57 -1.00 1.00 | ARPS: 0.153 | ADR: 0.515 | F:μσmM 11.9 11.2 1.0 76.0 | H 0.540 | V 0.490 | pL 0.009 | vL 0.061 | ∇ 0.472
+Status saved
+U 205 | F 419840 | FPS 0184 | D 2139 | rR:μσmM 0.67 0.71 -1.00 1.00 | ARPS: 0.132 | ADR: 0.410 | F:μσmM 14.1 17.7 1.0 76.0 | H 0.581 | V 0.381 | pL 0.015 | vL 0.064 | ∇ 0.341
+U 210 | F 430080 | FPS 0185 | D 2197 | rR:μσmM 0.74 0.66 -1.00 1.00 | ARPS: 0.144 | ADR: 0.458 | F:μσmM 13.0 15.6 1.0 76.0 | H 0.611 | V 0.414 | pL 0.026 | vL 0.065 | ∇ 0.282
+U 215 | F 440320 | FPS 0194 | D 2252 | rR:μσmM 0.78 0.60 -1.00 1.00 | ARPS: 0.181 | ADR: 0.515 | F:μσmM 11.8 14.7 1.0 76.0 | H 0.578 | V 0.450 | pL -0.017 | vL 0.065 | ∇ 0.430
+U 220 | F 450560 | FPS 0177 | D 2310 | rR:μσmM 0.82 0.54 -1.00 1.00 | ARPS: 0.163 | ADR: 0.523 | F:μσmM 12.4 15.1 1.0 76.0 | H 0.562 | V 0.454 | pL 0.004 | vL 0.052 | ∇ 0.278
+Status saved
+U 225 | F 460800 | FPS 0180 | D 2368 | rR:μσmM 0.74 0.67 -1.00 1.00 | ARPS: 0.155 | ADR: 0.473 | F:μσmM 12.6 13.9 1.0 76.0 | H 0.628 | V 0.379 | pL 0.008 | vL 0.069 | ∇ 0.327
+U 230 | F 471040 | FPS 0186 | D 2425 | rR:μσmM 0.73 0.68 -1.00 1.00 | ARPS: 0.121 | ADR: 0.415 | F:μσmM 12.6 13.7 1.0 76.0 | H 0.601 | V 0.461 | pL -0.017 | vL 0.066 | ∇ 0.352
+U 235 | F 481280 | FPS 0184 | D 2484 | rR:μσmM 0.80 0.58 -1.00 1.00 | ARPS: 0.188 | ADR: 0.533 | F:μσmM 12.2 14.8 1.0 76.0 | H 0.590 | V 0.452 | pL 0.004 | vL 0.068 | ∇ 0.386
+U 240 | F 491520 | FPS 0182 | D 2541 | rR:μσmM 0.80 0.58 -1.00 1.00 | ARPS: 0.119 | ADR: 0.445 | F:μσmM 13.3 14.5 1.0 76.0 | H 0.542 | V 0.488 | pL -0.032 | vL 0.058 | ∇ 0.371
+Status saved
+U 245 | F 501760 | FPS 0179 | D 2599 | rR:μσmM 0.78 0.61 -1.00 1.00 | ARPS: 0.134 | ADR: 0.481 | F:μσmM 11.8 11.9 1.0 76.0 | H 0.480 | V 0.500 | pL 0.001 | vL 0.071 | ∇ 0.360
+U 250 | F 512000 | FPS 0180 | D 2656 | rR:μσmM 0.81 0.57 -1.00 1.00 | ARPS: 0.160 | ADR: 0.512 | F:μσmM 12.2 14.0 1.0 76.0 | H 0.529 | V 0.498 | pL 0.033 | vL 0.080 | ∇ 0.513
+U 255 | F 522240 | FPS 0176 | D 2714 | rR:μσmM 0.75 0.66 -1.00 1.00 | ARPS: 0.122 | ADR: 0.458 | F:μσmM 11.0 10.0 1.0 73.0 | H 0.518 | V 0.491 | pL 0.013 | vL 0.082 | ∇ 0.442
+U 260 | F 532480 | FPS 0177 | D 2772 | rR:μσmM 0.81 0.57 -1.00 1.00 | ARPS: 0.145 | ADR: 0.502 | F:μσmM 11.3 12.8 1.0 76.0 | H 0.504 | V 0.508 | pL 0.004 | vL 0.053 | ∇ 0.354
+Status saved
+U 265 | F 542720 | FPS 0174 | D 2829 | rR:μσmM 0.81 0.57 -1.00 1.00 | ARPS: 0.148 | ADR: 0.522 | F:μσmM 11.1 12.9 1.0 76.0 | H 0.502 | V 0.521 | pL 0.021 | vL 0.058 | ∇ 0.415
+U 270 | F 552960 | FPS 0178 | D 2888 | rR:μσmM 0.85 0.51 -1.00 1.00 | ARPS: 0.178 | ADR: 0.556 | F:μσmM 10.4 11.9 1.0 76.0 | H 0.476 | V 0.537 | pL -0.011 | vL 0.059 | ∇ 0.399
+U 275 | F 563200 | FPS 0191 | D 2944 | rR:μσmM 0.86 0.49 -1.00 1.00 | ARPS: 0.166 | ADR: 0.549 | F:μσmM 10.8 12.3 1.0 76.0 | H 0.498 | V 0.561 | pL 0.028 | vL 0.043 | ∇ 0.288
+U 280 | F 573440 | FPS 0181 | D 3001 | rR:μσmM 0.82 0.57 -1.00 1.00 | ARPS: 0.146 | ADR: 0.503 | F:μσmM 11.6 11.7 1.0 76.0 | H 0.544 | V 0.534 | pL 0.041 | vL 0.063 | ∇ 0.357
+Status saved
+U 285 | F 583680 | FPS 0177 | D 3058 | rR:μσmM 0.76 0.63 -1.00 1.00 | ARPS: 0.137 | ADR: 0.475 | F:μσmM 11.1 12.6 1.0 76.0 | H 0.508 | V 0.527 | pL 0.054 | vL 0.072 | ∇ 0.348
+U 290 | F 593920 | FPS 0180 | D 3117 | rR:μσmM 0.80 0.59 -1.00 1.00 | ARPS: 0.119 | ADR: 0.484 | F:μσmM 10.1 9.2 1.0 76.0 | H 0.450 | V 0.596 | pL 0.001 | vL 0.064 | ∇ 0.392
+U 295 | F 604160 | FPS 0181 | D 3174 | rR:μσmM 0.84 0.53 -1.00 1.00 | ARPS: 0.186 | ADR: 0.576 | F:μσmM 9.6 11.0 1.0 76.0 | H 0.446 | V 0.556 | pL 0.026 | vL 0.080 | ∇ 0.419
+U 300 | F 614400 | FPS 0176 | D 3233 | rR:μσmM 0.86 0.49 -1.00 1.00 | ARPS: 0.164 | ADR: 0.561 | F:μσmM 9.5 9.7 1.0 76.0 | H 0.435 | V 0.610 | pL 0.002 | vL 0.047 | ∇ 0.211
+Status saved
+U 305 | F 624640 | FPS 0177 | D 3291 | rR:μσmM 0.88 0.46 -1.00 1.00 | ARPS: 0.162 | ADR: 0.577 | F:μσmM 9.9 9.6 1.0 76.0 | H 0.457 | V 0.586 | pL 0.033 | vL 0.052 | ∇ 0.282
+U 310 | F 634880 | FPS 0184 | D 3348 | rR:μσmM 0.88 0.48 -1.00 1.00 | ARPS: 0.178 | ADR: 0.592 | F:μσmM 8.7 7.4 1.0 76.0 | H 0.412 | V 0.627 | pL 0.006 | vL 0.056 | ∇ 0.308
+U 315 | F 645120 | FPS 0186 | D 3403 | rR:μσmM 0.91 0.41 -1.00 1.00 | ARPS: 0.178 | ADR: 0.593 | F:μσmM 9.4 9.6 1.0 76.0 | H 0.431 | V 0.609 | pL -0.011 | vL 0.041 | ∇ 0.237
+U 320 | F 655360 | FPS 0182 | D 3461 | rR:μσmM 0.88 0.46 -1.00 1.00 | ARPS: 0.169 | ADR: 0.592 | F:μσmM 9.2 10.0 1.0 76.0 | H 0.470 | V 0.613 | pL 0.039 | vL 0.057 | ∇ 0.391
+Status saved
+U 325 | F 665600 | FPS 0180 | D 3518 | rR:μσmM 0.83 0.56 -1.00 1.00 | ARPS: 0.161 | ADR: 0.549 | F:μσmM 9.2 8.9 1.0 76.0 | H 0.462 | V 0.565 | pL 0.035 | vL 0.065 | ∇ 0.354
+U 330 | F 675840 | FPS 0182 | D 3576 | rR:μσmM 0.91 0.41 -1.00 1.00 | ARPS: 0.165 | ADR: 0.576 | F:μσmM 10.7 12.1 1.0 76.0 | H 0.405 | V 0.614 | pL 0.019 | vL 0.040 | ∇ 0.303
+U 335 | F 686080 | FPS 0179 | D 3634 | rR:μσmM 0.88 0.46 -1.00 1.00 | ARPS: 0.186 | ADR: 0.582 | F:μσmM 9.5 9.6 1.0 76.0 | H 0.410 | V 0.609 | pL 0.008 | vL 0.054 | ∇ 0.248
+U 340 | F 696320 | FPS 0183 | D 3692 | rR:μσmM 0.88 0.47 -1.00 1.00 | ARPS: 0.173 | ADR: 0.598 | F:μσmM 8.6 8.7 1.0 76.0 | H 0.401 | V 0.619 | pL -0.002 | vL 0.049 | ∇ 0.295
+Status saved
+U 345 | F 706560 | FPS 0179 | D 3749 | rR:μσmM 0.84 0.54 -1.00 1.00 | ARPS: 0.172 | ADR: 0.566 | F:μσmM 8.8 9.5 1.0 76.0 | H 0.405 | V 0.611 | pL 0.035 | vL 0.062 | ∇ 0.310
+U 350 | F 716800 | FPS 0188 | D 3805 | rR:μσmM 0.90 0.44 -1.00 1.00 | ARPS: 0.195 | ADR: 0.619 | F:μσmM 8.1 5.9 1.0 31.0 | H 0.357 | V 0.662 | pL 0.017 | vL 0.056 | ∇ 0.257
+U 355 | F 727040 | FPS 0173 | D 3862 | rR:μσmM 0.90 0.43 -1.00 1.00 | ARPS: 0.179 | ADR: 0.598 | F:μσmM 9.1 10.7 1.0 76.0 | H 0.412 | V 0.649 | pL 0.010 | vL 0.037 | ∇ 0.223
+U 360 | F 737280 | FPS 0178 | D 3921 | rR:μσmM 0.92 0.40 -1.00 1.00 | ARPS: 0.198 | ADR: 0.628 | F:μσmM 8.1 7.1 1.0 49.0 | H 0.401 | V 0.664 | pL 0.024 | vL 0.053 | ∇ 0.225
+Status saved
+U 365 | F 747520 | FPS 0177 | D 3978 | rR:μσmM 0.87 0.50 -1.00 1.00 | ARPS: 0.187 | ADR: 0.594 | F:μσmM 8.1 6.9 1.0 55.0 | H 0.408 | V 0.662 | pL 0.004 | vL 0.059 | ∇ 0.244
+U 370 | F 757760 | FPS 0182 | D 4034 | rR:μσmM 0.86 0.51 -1.00 1.00 | ARPS: 0.162 | ADR: 0.569 | F:μσmM 8.8 8.2 1.0 70.0 | H 0.372 | V 0.636 | pL 0.053 | vL 0.064 | ∇ 0.316
+U 375 | F 768000 | FPS 0181 | D 4092 | rR:μσmM 0.91 0.42 -1.00 1.00 | ARPS: 0.192 | ADR: 0.619 | F:μσmM 7.7 5.7 1.0 38.0 | H 0.348 | V 0.713 | pL 0.003 | vL 0.045 | ∇ 0.461
+U 380 | F 778240 | FPS 0180 | D 4148 | rR:μσmM 0.85 0.52 -1.00 1.00 | ARPS: 0.186 | ADR: 0.588 | F:μσmM 8.2 8.5 1.0 76.0 | H 0.418 | V 0.625 | pL 0.039 | vL 0.051 | ∇ 0.296
+Status saved
+U 385 | F 788480 | FPS 0178 | D 4206 | rR:μσmM 0.86 0.52 -1.00 1.00 | ARPS: 0.190 | ADR: 0.582 | F:μσmM 8.0 6.2 1.0 46.0 | H 0.433 | V 0.661 | pL 0.025 | vL 0.061 | ∇ 0.352
+U 390 | F 798720 | FPS 0178 | D 4266 | rR:μσmM 0.81 0.58 -1.00 1.00 | ARPS: 0.162 | ADR: 0.547 | F:μσmM 8.6 8.2 1.0 76.0 | H 0.467 | V 0.609 | pL 0.027 | vL 0.076 | ∇ 0.313
+U 395 | F 808960 | FPS 0180 | D 4323 | rR:μσmM 0.91 0.42 -1.00 1.00 | ARPS: 0.190 | ADR: 0.619 | F:μσmM 8.4 7.5 1.0 66.0 | H 0.449 | V 0.653 | pL -0.007 | vL 0.037 | ∇ 0.269
+U 400 | F 819200 | FPS 0182 | D 4381 | rR:μσmM 0.82 0.58 -1.00 1.00 | ARPS: 0.177 | ADR: 0.589 | F:μσmM 7.7 7.6 1.0 76.0 | H 0.463 | V 0.628 | pL 0.064 | vL 0.076 | ∇ 0.369
+Status saved
+U 405 | F 829440 | FPS 0179 | D 4438 | rR:μσmM 0.85 0.52 -1.00 1.00 | ARPS: 0.154 | ADR: 0.563 | F:μσmM 8.5 7.2 1.0 76.0 | H 0.423 | V 0.625 | pL 0.009 | vL 0.059 | ∇ 0.338
+U 410 | F 839680 | FPS 0181 | D 4495 | rR:μσmM 0.89 0.45 -1.00 1.00 | ARPS: 0.157 | ADR: 0.595 | F:μσmM 8.9 9.8 1.0 76.0 | H 0.439 | V 0.645 | pL -0.002 | vL 0.045 | ∇ 0.244
+U 415 | F 849920 | FPS 0153 | D 4555 | rR:μσmM 0.87 0.50 -1.00 1.00 | ARPS: 0.182 | ADR: 0.581 | F:μσmM 8.4 7.7 1.0 76.0 | H 0.429 | V 0.656 | pL 0.017 | vL 0.053 | ∇ 0.318
+U 420 | F 860160 | FPS 0182 | D 4612 | rR:μσmM 0.85 0.52 -1.00 1.00 | ARPS: 0.177 | ADR: 0.585 | F:μσmM 8.7 9.9 1.0 76.0 | H 0.482 | V 0.583 | pL 0.003 | vL 0.059 | ∇ 0.406
+Status saved
+U 425 | F 870400 | FPS 0179 | D 4670 | rR:μσmM 0.90 0.44 -1.00 1.00 | ARPS: 0.197 | ADR: 0.631 | F:μσmM 7.6 6.1 1.0 47.0 | H 0.423 | V 0.667 | pL 0.040 | vL 0.058 | ∇ 0.295
+U 430 | F 880640 | FPS 0178 | D 4727 | rR:μσmM 0.90 0.43 -1.00 1.00 | ARPS: 0.183 | ADR: 0.621 | F:μσmM 8.2 7.9 1.0 76.0 | H 0.434 | V 0.682 | pL 0.020 | vL 0.041 | ∇ 0.283
+U 435 | F 890880 | FPS 0183 | D 4784 | rR:μσmM 0.88 0.48 -1.00 1.00 | ARPS: 0.167 | ADR: 0.582 | F:μσmM 8.6 8.1 1.0 76.0 | H 0.431 | V 0.642 | pL 0.016 | vL 0.055 | ∇ 0.318
+U 440 | F 901120 | FPS 0169 | D 4843 | rR:μσmM 0.83 0.56 -1.00 1.00 | ARPS: 0.164 | ADR: 0.559 | F:μσmM 8.5 7.9 1.0 72.0 | H 0.402 | V 0.639 | pL 0.003 | vL 0.068 | ∇ 0.395
+Status saved
+U 445 | F 911360 | FPS 0178 | D 4903 | rR:μσmM 0.88 0.48 -1.00 1.00 | ARPS: 0.195 | ADR: 0.615 | F:μσmM 7.7 6.6 1.0 76.0 | H 0.370 | V 0.680 | pL 0.035 | vL 0.062 | ∇ 0.323
+U 450 | F 921600 | FPS 0182 | D 4961 | rR:μσmM 0.92 0.38 -1.00 1.00 | ARPS: 0.187 | ADR: 0.627 | F:μσmM 8.5 8.3 1.0 76.0 | H 0.447 | V 0.663 | pL 0.003 | vL 0.041 | ∇ 0.268
+U 455 | F 931840 | FPS 0179 | D 5019 | rR:μσmM 0.92 0.38 -1.00 1.00 | ARPS: 0.181 | ADR: 0.634 | F:μσmM 7.8 5.2 1.0 28.0 | H 0.370 | V 0.706 | pL 0.002 | vL 0.048 | ∇ 0.358
+U 460 | F 942080 | FPS 0176 | D 5082 | rR:μσmM 0.87 0.49 -1.00 1.00 | ARPS: 0.213 | ADR: 0.621 | F:μσmM 7.6 8.3 1.0 76.0 | H 0.392 | V 0.672 | pL 0.060 | vL 0.066 | ∇ 0.306
+Status saved
+U 465 | F 952320 | FPS 0176 | D 5142 | rR:μσmM 0.83 0.55 -1.00 1.00 | ARPS: 0.168 | ADR: 0.578 | F:μσmM 7.1 4.9 1.0 32.0 | H 0.355 | V 0.694 | pL 0.020 | vL 0.064 | ∇ 0.347
+U 470 | F 962560 | FPS 0178 | D 5202 | rR:μσmM 0.90 0.44 -1.00 1.00 | ARPS: 0.196 | ADR: 0.629 | F:μσmM 7.2 5.8 1.0 63.0 | H 0.352 | V 0.719 | pL -0.017 | vL 0.055 | ∇ 0.253
+U 475 | F 972800 | FPS 0174 | D 5261 | rR:μσmM 0.94 0.34 -1.00 1.00 | ARPS: 0.195 | ADR: 0.671 | F:μσmM 7.4 7.5 1.0 76.0 | H 0.362 | V 0.709 | pL -0.012 | vL 0.030 | ∇ 0.246
+U 480 | F 983040 | FPS 0178 | D 5319 | rR:μσmM 0.96 0.29 -1.00 1.00 | ARPS: 0.201 | ADR: 0.669 | F:μσmM 7.7 7.3 1.0 63.0 | H 0.356 | V 0.729 | pL -0.027 | vL 0.027 | ∇ 0.205
+Status saved
+U 485 | F 993280 | FPS 0182 | D 5376 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.210 | ADR: 0.682 | F:μσmM 6.9 4.7 1.0 34.0 | H 0.316 | V 0.750 | pL -0.002 | vL 0.034 | ∇ 0.167
+U 490 | F 1003520 | FPS 0176 | D 5434 | rR:μσmM 0.88 0.48 -1.00 1.00 | ARPS: 0.186 | ADR: 0.608 | F:μσmM 7.5 6.3 1.0 76.0 | H 0.334 | V 0.669 | pL 0.028 | vL 0.064 | ∇ 0.297
+U 495 | F 1013760 | FPS 0149 | D 5494 | rR:μσmM 0.95 0.30 -1.00 1.00 | ARPS: 0.213 | ADR: 0.682 | F:μσmM 7.0 4.5 1.0 28.0 | H 0.305 | V 0.743 | pL -0.037 | vL 0.030 | ∇ 0.189
+U 500 | F 1024000 | FPS 0181 | D 5552 | rR:μσmM 0.94 0.33 -1.00 1.00 | ARPS: 0.191 | ADR: 0.656 | F:μσmM 7.3 5.2 1.0 33.0 | H 0.311 | V 0.752 | pL -0.011 | vL 0.024 | ∇ 0.176
+Status saved
+train_agent.py --algo ppo --env Letter-7x7-v3 --log-interval 5 --save-interval 20 --frames 1024000 --discount 0.94 --ltl-sampler Until_1_2_1_2 --epochs 4 --lr 0.0003 --seed 6
+
+Namespace(algo='ppo', batch_size=256, checkpoint_dir=None, clip_eps=0.2, discount=0.94, dumb_ac=False, entropy_coef=0.01, env='Letter-7x7-v3', epochs=4, eval=False, eval_env=None, eval_episodes=5, eval_procs=1, frames=1024000, frames_per_proc=None, freeze_ltl=False, gae_lambda=0.95, gnn='RGCN_8x32_ROOT_SHARED', ignoreLTL=False, int_reward=0.0, log_interval=5, lr=0.0003, ltl_sampler='Until_1_2_1_2', ltl_samplers_eval=None, max_grad_norm=0.5, model=None, noLTL=False, optim_alpha=0.99, optim_eps=1e-08, pretrained_gnn=False, procs=16, progression_mode='full', recurrence=1, save_interval=20, seed=6, use_dfa=False, use_mean_guard_embed=False, value_loss_coef=0.5)
+
+Device: cpu
+
+Using fixed maps.
+Environments loaded
+
+Training status loaded.
+
+Observations preprocessor loaded.
+
+Loading model from existing run.
+
+Model loaded.
+
+ACModel(
+  (env_model): LetterEnvModel(
+    (image_conv): Sequential(
+      (0): Conv2d(13, 16, kernel_size=(2, 2), stride=(1, 1))
+      (1): ReLU()
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(1, 1))
+      (3): ReLU()
+      (4): Conv2d(32, 64, kernel_size=(2, 2), stride=(1, 1))
+      (5): ReLU()
+    )
+  )
+  (gnn): RGCNRootShared(
+    (linear_in): Linear(in_features=22, out_features=32, bias=True)
+    (conv): RelGraphConv(
+      (dropout): Dropout(p=0.0, inplace=False)
+    )
+    (g_embed): Linear(in_features=32, out_features=32, bias=True)
+  )
+  (actor): PolicyNetwork(
+    (enc_): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=1056, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (2): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+    )
+    (discrete_): Sequential(
+      (0): Linear(in_features=64, out_features=4, bias=True)
+    )
+  )
+  (critic): Sequential(
+    (0): Linear(in_features=1056, out_features=64, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=64, out_features=64, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=64, out_features=1, bias=True)
+  )
+)
+
+Loading optimizer from existing run.
+
+Optimizer loaded.
+
+train_agent.py --algo ppo --env Letter-7x7-v3 --log-interval 5 --save-interval 20 --frames 1024000 --discount 0.94 --ltl-sampler Until_1_2_1_2 --epochs 4 --lr 0.0003 --seed 6
+
+Namespace(algo='ppo', batch_size=256, checkpoint_dir=None, clip_eps=0.2, discount=0.94, dumb_ac=False, entropy_coef=0.01, env='Letter-7x7-v3', epochs=4, eval=False, eval_env=None, eval_episodes=5, eval_procs=1, frames=1024000, frames_per_proc=None, freeze_ltl=False, gae_lambda=0.95, gnn='RGCN_8x32_ROOT_SHARED', ignoreLTL=False, int_reward=0.0, log_interval=5, lr=0.0003, ltl_sampler='Until_1_2_1_2', ltl_samplers_eval=None, max_grad_norm=0.5, model=None, noLTL=False, optim_alpha=0.99, optim_eps=1e-08, pretrained_gnn=False, procs=16, progression_mode='full', recurrence=1, save_interval=20, seed=6, use_dfa=False, use_mean_guard_embed=False, value_loss_coef=0.5)
+
+Device: cpu
+
+Using fixed maps.
+Environments loaded
+
+Training status loaded.
+
+Observations preprocessor loaded.
+
+Loading model from existing run.
+
+Model loaded.
+
+ACModel(
+  (env_model): LetterEnvModel(
+    (image_conv): Sequential(
+      (0): Conv2d(13, 16, kernel_size=(2, 2), stride=(1, 1))
+      (1): ReLU()
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(1, 1))
+      (3): ReLU()
+      (4): Conv2d(32, 64, kernel_size=(2, 2), stride=(1, 1))
+      (5): ReLU()
+    )
+  )
+  (gnn): RGCNRootShared(
+    (linear_in): Linear(in_features=22, out_features=32, bias=True)
+    (conv): RelGraphConv(
+      (dropout): Dropout(p=0.0, inplace=False)
+    )
+    (g_embed): Linear(in_features=32, out_features=32, bias=True)
+  )
+  (actor): PolicyNetwork(
+    (enc_): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=1056, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (2): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+    )
+    (discrete_): Sequential(
+      (0): Linear(in_features=64, out_features=4, bias=True)
+    )
+  )
+  (critic): Sequential(
+    (0): Linear(in_features=1056, out_features=64, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=64, out_features=64, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=64, out_features=1, bias=True)
+  )
+)
+
+Loading optimizer from existing run.
+
+Optimizer loaded.
+
+train_agent.py --algo ppo --env Letter-7x7-v3 --log-interval 5 --save-interval 20 --frames 2010000 --discount 0.94 --ltl-sampler Until_1_2_1_2 --epochs 4 --lr 0.0003 --seed 6
+
+Namespace(algo='ppo', batch_size=256, checkpoint_dir=None, clip_eps=0.2, discount=0.94, dumb_ac=False, entropy_coef=0.01, env='Letter-7x7-v3', epochs=4, eval=False, eval_env=None, eval_episodes=5, eval_procs=1, frames=2010000, frames_per_proc=None, freeze_ltl=False, gae_lambda=0.95, gnn='RGCN_8x32_ROOT_SHARED', ignoreLTL=False, int_reward=0.0, log_interval=5, lr=0.0003, ltl_sampler='Until_1_2_1_2', ltl_samplers_eval=None, max_grad_norm=0.5, model=None, noLTL=False, optim_alpha=0.99, optim_eps=1e-08, pretrained_gnn=False, procs=16, progression_mode='full', recurrence=1, save_interval=20, seed=6, use_dfa=False, use_mean_guard_embed=False, value_loss_coef=0.5)
+
+Device: cpu
+
+Using fixed maps.
+Environments loaded
+
+Training status loaded.
+
+Observations preprocessor loaded.
+
+Loading model from existing run.
+
+Model loaded.
+
+ACModel(
+  (env_model): LetterEnvModel(
+    (image_conv): Sequential(
+      (0): Conv2d(13, 16, kernel_size=(2, 2), stride=(1, 1))
+      (1): ReLU()
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(1, 1))
+      (3): ReLU()
+      (4): Conv2d(32, 64, kernel_size=(2, 2), stride=(1, 1))
+      (5): ReLU()
+    )
+  )
+  (gnn): RGCNRootShared(
+    (linear_in): Linear(in_features=22, out_features=32, bias=True)
+    (conv): RelGraphConv(
+      (dropout): Dropout(p=0.0, inplace=False)
+    )
+    (g_embed): Linear(in_features=32, out_features=32, bias=True)
+  )
+  (actor): PolicyNetwork(
+    (enc_): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=1056, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (2): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+    )
+    (discrete_): Sequential(
+      (0): Linear(in_features=64, out_features=4, bias=True)
+    )
+  )
+  (critic): Sequential(
+    (0): Linear(in_features=1056, out_features=64, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=64, out_features=64, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=64, out_features=1, bias=True)
+  )
+)
+
+Loading optimizer from existing run.
+
+Optimizer loaded.
+
+U 505 | F 1034240 | FPS 0151 | D 64 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.214 | ADR: 0.666 | F:μσmM 7.9 8.2 1.0 76.0 | H 0.359 | V 0.705 | pL 0.004 | vL 0.027 | ∇ 0.152
+U 510 | F 1044480 | FPS 0182 | D 125 | rR:μσmM 0.90 0.43 -1.00 1.00 | ARPS: 0.203 | ADR: 0.645 | F:μσmM 7.2 5.7 1.0 52.0 | H 0.355 | V 0.716 | pL -0.000 | vL 0.055 | ∇ 0.236
+U 515 | F 1054720 | FPS 0146 | D 185 | rR:μσmM 0.90 0.44 -1.00 1.00 | ARPS: 0.196 | ADR: 0.639 | F:μσmM 7.1 7.2 1.0 72.0 | H 0.355 | V 0.703 | pL -0.016 | vL 0.054 | ∇ 0.224
+U 520 | F 1064960 | FPS 0181 | D 242 | rR:μσmM 0.91 0.41 -1.00 1.00 | ARPS: 0.196 | ADR: 0.650 | F:μσmM 7.0 4.8 1.0 37.0 | H 0.348 | V 0.732 | pL 0.021 | vL 0.045 | ∇ 0.222
+Status saved
+U 525 | F 1075200 | FPS 0159 | D 300 | rR:μσmM 0.95 0.33 -1.00 1.00 | ARPS: 0.208 | ADR: 0.673 | F:μσmM 6.9 4.2 1.0 21.0 | H 0.336 | V 0.746 | pL -0.017 | vL 0.030 | ∇ 0.203
+U 530 | F 1085440 | FPS 0180 | D 357 | rR:μσmM 0.96 0.29 -1.00 1.00 | ARPS: 0.213 | ADR: 0.679 | F:μσmM 7.3 5.0 1.0 30.0 | H 0.342 | V 0.732 | pL 0.004 | vL 0.029 | ∇ 0.206
+U 535 | F 1095680 | FPS 0160 | D 416 | rR:μσmM 0.93 0.38 -1.00 1.00 | ARPS: 0.193 | ADR: 0.646 | F:μσmM 7.5 5.5 1.0 39.0 | H 0.337 | V 0.728 | pL 0.002 | vL 0.039 | ∇ 0.227
+U 540 | F 1105920 | FPS 0193 | D 471 | rR:μσmM 0.89 0.46 -1.00 1.00 | ARPS: 0.203 | ADR: 0.633 | F:μσmM 6.9 5.1 1.0 43.0 | H 0.331 | V 0.705 | pL 0.031 | vL 0.052 | ∇ 0.394
+Status saved
+U 545 | F 1116160 | FPS 0182 | D 527 | rR:μσmM 0.94 0.35 -1.00 1.00 | ARPS: 0.210 | ADR: 0.673 | F:μσmM 7.0 5.6 1.0 76.0 | H 0.320 | V 0.740 | pL -0.015 | vL 0.040 | ∇ 0.275
+U 550 | F 1126400 | FPS 0188 | D 589 | rR:μσmM 0.93 0.37 -1.00 1.00 | ARPS: 0.202 | ADR: 0.662 | F:μσmM 7.4 7.4 1.0 76.0 | H 0.354 | V 0.707 | pL 0.022 | vL 0.035 | ∇ 0.288
+U 555 | F 1136640 | FPS 0163 | D 648 | rR:μσmM 0.94 0.34 -1.00 1.00 | ARPS: 0.198 | ADR: 0.668 | F:μσmM 7.4 7.1 1.0 76.0 | H 0.338 | V 0.734 | pL 0.013 | vL 0.030 | ∇ 0.201
+U 560 | F 1146880 | FPS 0181 | D 709 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.184 | ADR: 0.643 | F:μσmM 7.9 6.3 1.0 66.0 | H 0.328 | V 0.732 | pL 0.006 | vL 0.024 | ∇ 0.296
+Status saved
+U 565 | F 1157120 | FPS 0184 | D 765 | rR:μσmM 0.97 0.23 -1.00 1.00 | ARPS: 0.215 | ADR: 0.697 | F:μσmM 6.9 4.7 1.0 31.0 | H 0.333 | V 0.738 | pL -0.003 | vL 0.025 | ∇ 0.156
+U 570 | F 1167360 | FPS 0183 | D 823 | rR:μσmM 0.89 0.43 -1.00 1.00 | ARPS: 0.191 | ADR: 0.643 | F:μσmM 7.6 8.2 1.0 76.0 | H 0.379 | V 0.675 | pL 0.020 | vL 0.050 | ∇ 0.297
+U 575 | F 1177600 | FPS 0165 | D 881 | rR:μσmM 0.92 0.39 -1.00 1.00 | ARPS: 0.201 | ADR: 0.650 | F:μσmM 7.3 6.6 1.0 76.0 | H 0.326 | V 0.684 | pL -0.005 | vL 0.041 | ∇ 0.186
+U 580 | F 1187840 | FPS 0166 | D 942 | rR:μσmM 0.94 0.35 -1.00 1.00 | ARPS: 0.230 | ADR: 0.684 | F:μσmM 6.7 5.0 1.0 52.0 | H 0.303 | V 0.742 | pL 0.006 | vL 0.047 | ∇ 0.194
+Status saved
+U 585 | F 1198080 | FPS 0188 | D 1004 | rR:μσmM 0.95 0.30 -1.00 1.00 | ARPS: 0.236 | ADR: 0.689 | F:μσmM 6.9 5.6 1.0 62.0 | H 0.324 | V 0.742 | pL 0.003 | vL 0.034 | ∇ 0.150
+U 590 | F 1208320 | FPS 0169 | D 1064 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.207 | ADR: 0.685 | F:μσmM 6.9 5.6 1.0 76.0 | H 0.304 | V 0.757 | pL -0.010 | vL 0.030 | ∇ 0.153
+U 595 | F 1218560 | FPS 0166 | D 1123 | rR:μσmM 0.87 0.49 -1.00 1.00 | ARPS: 0.187 | ADR: 0.615 | F:μσmM 7.1 6.2 1.0 76.0 | H 0.339 | V 0.695 | pL 0.030 | vL 0.057 | ∇ 0.228
+U 600 | F 1228800 | FPS 0164 | D 1184 | rR:μσmM 0.97 0.24 -1.00 1.00 | ARPS: 0.207 | ADR: 0.695 | F:μσmM 7.0 4.7 1.0 36.0 | H 0.317 | V 0.754 | pL -0.020 | vL 0.022 | ∇ 0.177
+Status saved
+U 605 | F 1239040 | FPS 0190 | D 1241 | rR:μσmM 0.92 0.40 -1.00 1.00 | ARPS: 0.201 | ADR: 0.660 | F:μσmM 6.7 5.3 1.0 67.0 | H 0.340 | V 0.758 | pL 0.015 | vL 0.042 | ∇ 0.202
+U 610 | F 1249280 | FPS 0174 | D 1301 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.199 | ADR: 0.670 | F:μσmM 7.9 7.0 1.0 63.0 | H 0.319 | V 0.694 | pL -0.006 | vL 0.035 | ∇ 0.185
+U 615 | F 1259520 | FPS 0183 | D 1360 | rR:μσmM 0.90 0.43 -1.00 1.00 | ARPS: 0.194 | ADR: 0.649 | F:μσmM 7.1 6.3 1.0 75.0 | H 0.323 | V 0.687 | pL 0.009 | vL 0.056 | ∇ 0.314
+U 620 | F 1269760 | FPS 0178 | D 1419 | rR:μσmM 0.92 0.40 -1.00 1.00 | ARPS: 0.204 | ADR: 0.660 | F:μσmM 7.1 6.0 1.0 76.0 | H 0.336 | V 0.730 | pL 0.011 | vL 0.055 | ∇ 0.212
+Status saved
+U 625 | F 1280000 | FPS 0187 | D 1481 | rR:μσmM 0.90 0.43 -1.00 1.00 | ARPS: 0.183 | ADR: 0.624 | F:μσmM 7.6 6.5 1.0 63.0 | H 0.315 | V 0.708 | pL -0.005 | vL 0.043 | ∇ 0.287
+U 630 | F 1290240 | FPS 0193 | D 1537 | rR:μσmM 0.93 0.37 -1.00 1.00 | ARPS: 0.216 | ADR: 0.674 | F:μσmM 6.4 3.8 1.0 19.0 | H 0.289 | V 0.758 | pL 0.014 | vL 0.037 | ∇ 0.133
+U 635 | F 1300480 | FPS 0185 | D 1593 | rR:μσmM 0.98 0.18 -1.00 1.00 | ARPS: 0.208 | ADR: 0.697 | F:μσmM 7.5 6.9 1.0 76.0 | H 0.318 | V 0.735 | pL -0.013 | vL 0.016 | ∇ 0.155
+U 640 | F 1310720 | FPS 0181 | D 1653 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.199 | ADR: 0.669 | F:μσmM 7.1 4.3 1.0 26.0 | H 0.277 | V 0.750 | pL -0.003 | vL 0.032 | ∇ 0.229
+Status saved
+U 645 | F 1320960 | FPS 0176 | D 1710 | rR:μσmM 0.97 0.24 -1.00 1.00 | ARPS: 0.207 | ADR: 0.693 | F:μσmM 7.0 5.8 1.0 76.0 | H 0.312 | V 0.748 | pL -0.021 | vL 0.016 | ∇ 0.159
+U 650 | F 1331200 | FPS 0185 | D 1768 | rR:μσmM 0.90 0.43 -1.00 1.00 | ARPS: 0.199 | ADR: 0.654 | F:μσmM 6.8 5.8 1.0 76.0 | H 0.301 | V 0.737 | pL 0.049 | vL 0.052 | ∇ 0.190
+U 655 | F 1341440 | FPS 0183 | D 1827 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.194 | ADR: 0.664 | F:μσmM 7.8 8.0 1.0 76.0 | H 0.337 | V 0.715 | pL 0.028 | vL 0.031 | ∇ 0.168
+U 660 | F 1351680 | FPS 0176 | D 1885 | rR:μσmM 0.94 0.33 -1.00 1.00 | ARPS: 0.197 | ADR: 0.667 | F:μσmM 7.1 4.6 1.0 34.0 | H 0.331 | V 0.746 | pL -0.007 | vL 0.035 | ∇ 0.147
+Status saved
+U 665 | F 1361920 | FPS 0178 | D 1941 | rR:μσmM 0.91 0.40 -1.00 1.00 | ARPS: 0.192 | ADR: 0.649 | F:μσmM 7.2 6.0 1.0 76.0 | H 0.304 | V 0.715 | pL 0.005 | vL 0.046 | ∇ 0.218
+U 670 | F 1372160 | FPS 0167 | D 2001 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.213 | ADR: 0.675 | F:μσmM 7.2 6.4 1.0 76.0 | H 0.274 | V 0.749 | pL 0.002 | vL 0.030 | ∇ 0.138
+U 675 | F 1382400 | FPS 0158 | D 2066 | rR:μσmM 0.92 0.39 -1.00 1.00 | ARPS: 0.190 | ADR: 0.648 | F:μσmM 7.1 4.6 1.0 33.0 | H 0.292 | V 0.736 | pL -0.015 | vL 0.038 | ∇ 0.260
+U 680 | F 1392640 | FPS 0162 | D 2126 | rR:μσmM 0.97 0.25 -1.00 1.00 | ARPS: 0.204 | ADR: 0.672 | F:μσmM 7.7 6.3 1.0 76.0 | H 0.332 | V 0.731 | pL 0.028 | vL 0.023 | ∇ 0.174
+Status saved
+U 685 | F 1402880 | FPS 0171 | D 2185 | rR:μσmM 0.94 0.33 -1.00 1.00 | ARPS: 0.198 | ADR: 0.656 | F:μσmM 7.6 6.8 1.0 76.0 | H 0.308 | V 0.744 | pL 0.004 | vL 0.041 | ∇ 0.156
+U 690 | F 1413120 | FPS 0181 | D 2246 | rR:μσmM 0.93 0.36 -1.00 1.00 | ARPS: 0.207 | ADR: 0.672 | F:μσmM 6.6 4.5 1.0 27.0 | H 0.307 | V 0.760 | pL 0.004 | vL 0.028 | ∇ 0.143
+U 695 | F 1423360 | FPS 0189 | D 2304 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.214 | ADR: 0.687 | F:μσmM 7.0 5.9 1.0 61.0 | H 0.323 | V 0.751 | pL -0.017 | vL 0.024 | ∇ 0.150
+U 700 | F 1433600 | FPS 0172 | D 2367 | rR:μσmM 0.92 0.38 -1.00 1.00 | ARPS: 0.206 | ADR: 0.652 | F:μσmM 7.3 5.4 1.0 43.0 | H 0.324 | V 0.724 | pL 0.007 | vL 0.044 | ∇ 0.204
+Status saved
+U 705 | F 1443840 | FPS 0175 | D 2426 | rR:μσmM 0.97 0.24 -1.00 1.00 | ARPS: 0.210 | ADR: 0.687 | F:μσmM 7.4 6.1 1.0 68.0 | H 0.337 | V 0.726 | pL 0.017 | vL 0.026 | ∇ 0.174
+U 710 | F 1454080 | FPS 0164 | D 2488 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.206 | ADR: 0.685 | F:μσmM 6.8 4.1 1.0 27.0 | H 0.287 | V 0.770 | pL 0.010 | vL 0.027 | ∇ 0.150
+U 715 | F 1464320 | FPS 0164 | D 2550 | rR:μσmM 0.91 0.41 -1.00 1.00 | ARPS: 0.198 | ADR: 0.646 | F:μσmM 7.3 4.5 1.0 31.0 | H 0.350 | V 0.713 | pL 0.007 | vL 0.049 | ∇ 0.227
+U 720 | F 1474560 | FPS 0188 | D 2608 | rR:μσmM 0.94 0.33 -1.00 1.00 | ARPS: 0.209 | ADR: 0.661 | F:μσmM 7.3 5.6 1.0 49.0 | H 0.314 | V 0.729 | pL -0.000 | vL 0.035 | ∇ 0.136
+Status saved
+U 725 | F 1484800 | FPS 0168 | D 2671 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.196 | ADR: 0.659 | F:μσmM 7.3 4.8 1.0 42.0 | H 0.335 | V 0.719 | pL 0.020 | vL 0.032 | ∇ 0.126
+U 730 | F 1495040 | FPS 0161 | D 2732 | rR:μσmM 0.90 0.44 -1.00 1.00 | ARPS: 0.175 | ADR: 0.629 | F:μσmM 7.2 4.6 1.0 35.0 | H 0.309 | V 0.737 | pL 0.043 | vL 0.056 | ∇ 0.200
+U 735 | F 1505280 | FPS 0162 | D 2794 | rR:μσmM 0.94 0.35 -1.00 1.00 | ARPS: 0.197 | ADR: 0.664 | F:μσmM 7.6 7.4 1.0 76.0 | H 0.333 | V 0.692 | pL 0.027 | vL 0.043 | ∇ 0.184
+U 740 | F 1515520 | FPS 0180 | D 2853 | rR:μσmM 0.97 0.25 -1.00 1.00 | ARPS: 0.203 | ADR: 0.679 | F:μσmM 7.4 5.9 1.0 76.0 | H 0.308 | V 0.741 | pL 0.007 | vL 0.020 | ∇ 0.123
+Status saved
+U 745 | F 1525760 | FPS 0189 | D 2911 | rR:μσmM 0.93 0.37 -1.00 1.00 | ARPS: 0.195 | ADR: 0.657 | F:μσmM 7.2 5.9 1.0 76.0 | H 0.319 | V 0.747 | pL -0.001 | vL 0.041 | ∇ 0.139
+U 750 | F 1536000 | FPS 0181 | D 2969 | rR:μσmM 0.95 0.30 -1.00 1.00 | ARPS: 0.202 | ADR: 0.673 | F:μσmM 7.5 6.3 1.0 76.0 | H 0.328 | V 0.730 | pL 0.016 | vL 0.032 | ∇ 0.143
+U 755 | F 1546240 | FPS 0169 | D 3032 | rR:μσmM 0.97 0.26 -1.00 1.00 | ARPS: 0.212 | ADR: 0.692 | F:μσmM 7.0 5.1 1.0 49.0 | H 0.308 | V 0.751 | pL -0.020 | vL 0.020 | ∇ 0.160
+U 760 | F 1556480 | FPS 0151 | D 3100 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.216 | ADR: 0.686 | F:μσmM 6.9 4.3 1.0 25.0 | H 0.324 | V 0.759 | pL -0.025 | vL 0.028 | ∇ 0.144
+Status saved
+U 765 | F 1566720 | FPS 0170 | D 3158 | rR:μσmM 0.92 0.39 -1.00 1.00 | ARPS: 0.185 | ADR: 0.646 | F:μσmM 7.4 5.0 1.0 39.0 | H 0.375 | V 0.704 | pL 0.005 | vL 0.038 | ∇ 0.220
+U 770 | F 1576960 | FPS 0172 | D 3215 | rR:μσmM 0.93 0.35 -1.00 1.00 | ARPS: 0.212 | ADR: 0.666 | F:μσmM 7.3 6.6 1.0 76.0 | H 0.349 | V 0.738 | pL 0.007 | vL 0.032 | ∇ 0.204
+U 775 | F 1587200 | FPS 0168 | D 3277 | rR:μσmM 0.95 0.30 -1.00 1.00 | ARPS: 0.199 | ADR: 0.673 | F:μσmM 7.3 6.2 1.0 76.0 | H 0.346 | V 0.728 | pL -0.000 | vL 0.032 | ∇ 0.211
+U 780 | F 1597440 | FPS 0176 | D 3339 | rR:μσmM 0.93 0.37 -1.00 1.00 | ARPS: 0.208 | ADR: 0.665 | F:μσmM 6.8 4.8 1.0 37.0 | H 0.330 | V 0.754 | pL 0.008 | vL 0.036 | ∇ 0.136
+Status saved
+U 785 | F 1607680 | FPS 0162 | D 3402 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.217 | ADR: 0.681 | F:μσmM 6.9 4.6 1.0 38.0 | H 0.342 | V 0.754 | pL 0.006 | vL 0.033 | ∇ 0.128
+U 790 | F 1617920 | FPS 0180 | D 3461 | rR:μσmM 0.95 0.30 -1.00 1.00 | ARPS: 0.206 | ADR: 0.687 | F:μσmM 6.6 4.3 1.0 33.0 | H 0.289 | V 0.771 | pL -0.015 | vL 0.028 | ∇ 0.130
+U 795 | F 1628160 | FPS 0172 | D 3520 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.200 | ADR: 0.677 | F:μσmM 7.2 6.4 1.0 76.0 | H 0.330 | V 0.743 | pL 0.001 | vL 0.026 | ∇ 0.148
+U 800 | F 1638400 | FPS 0182 | D 3580 | rR:μσmM 0.92 0.40 -1.00 1.00 | ARPS: 0.196 | ADR: 0.652 | F:μσmM 6.9 4.3 1.0 29.0 | H 0.344 | V 0.742 | pL 0.008 | vL 0.045 | ∇ 0.190
+Status saved
+U 805 | F 1648640 | FPS 0166 | D 3641 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.205 | ADR: 0.684 | F:μσmM 7.0 4.8 1.0 53.0 | H 0.319 | V 0.762 | pL -0.003 | vL 0.023 | ∇ 0.158
+U 810 | F 1658880 | FPS 0174 | D 3701 | rR:μσmM 0.93 0.38 -1.00 1.00 | ARPS: 0.203 | ADR: 0.668 | F:μσmM 6.6 3.9 1.0 32.0 | H 0.330 | V 0.746 | pL -0.008 | vL 0.038 | ∇ 0.210
+U 815 | F 1669120 | FPS 0165 | D 3761 | rR:μσmM 0.94 0.33 -1.00 1.00 | ARPS: 0.196 | ADR: 0.664 | F:μσmM 7.1 5.3 1.0 65.0 | H 0.323 | V 0.743 | pL 0.003 | vL 0.026 | ∇ 0.164
+U 820 | F 1679360 | FPS 0163 | D 3823 | rR:μσmM 0.91 0.42 -1.00 1.00 | ARPS: 0.198 | ADR: 0.646 | F:μσmM 7.0 5.7 1.0 63.0 | H 0.352 | V 0.737 | pL 0.023 | vL 0.051 | ∇ 0.187
+Status saved
+U 825 | F 1689600 | FPS 0164 | D 3889 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.222 | ADR: 0.693 | F:μσmM 6.7 5.2 1.0 59.0 | H 0.322 | V 0.750 | pL -0.004 | vL 0.038 | ∇ 0.140
+U 830 | F 1699840 | FPS 0155 | D 3951 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.226 | ADR: 0.682 | F:μσmM 7.1 5.2 1.0 45.0 | H 0.312 | V 0.727 | pL -0.001 | vL 0.042 | ∇ 0.193
+U 835 | F 1710080 | FPS 0163 | D 4013 | rR:μσmM 0.98 0.21 -1.00 1.00 | ARPS: 0.232 | ADR: 0.710 | F:μσmM 7.0 6.8 1.0 76.0 | H 0.313 | V 0.753 | pL 0.001 | vL 0.023 | ∇ 0.130
+U 840 | F 1720320 | FPS 0152 | D 4074 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.218 | ADR: 0.692 | F:μσmM 6.8 4.3 1.0 25.0 | H 0.303 | V 0.763 | pL -0.005 | vL 0.029 | ∇ 0.116
+Status saved
+U 845 | F 1730560 | FPS 0143 | D 4136 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.196 | ADR: 0.677 | F:μσmM 6.9 4.8 1.0 51.0 | H 0.299 | V 0.761 | pL -0.001 | vL 0.022 | ∇ 0.124
+train_agent.py --algo ppo --env Letter-7x7-v3 --log-interval 5 --save-interval 20 --frames 2010000 --discount 0.94 --ltl-sampler Until_1_2_1_2 --epochs 4 --lr 0.0003 --seed 6
+
+Namespace(algo='ppo', batch_size=256, checkpoint_dir=None, clip_eps=0.2, discount=0.94, dumb_ac=False, entropy_coef=0.01, env='Letter-7x7-v3', epochs=4, eval=False, eval_env=None, eval_episodes=5, eval_procs=1, frames=2010000, frames_per_proc=None, freeze_ltl=False, gae_lambda=0.95, gnn='RGCN_8x32_ROOT_SHARED', ignoreLTL=False, int_reward=0.0, log_interval=5, lr=0.0003, ltl_sampler='Until_1_2_1_2', ltl_samplers_eval=None, max_grad_norm=0.5, model=None, noLTL=False, optim_alpha=0.99, optim_eps=1e-08, pretrained_gnn=False, procs=16, progression_mode='full', recurrence=1, save_interval=20, seed=6, use_dfa=False, use_mean_guard_embed=False, value_loss_coef=0.5)
+
+Device: cpu
+
+Using fixed maps.
+Environments loaded
+
+Training status loaded.
+
+Observations preprocessor loaded.
+
+Loading model from existing run.
+
+Model loaded.
+
+ACModel(
+  (env_model): LetterEnvModel(
+    (image_conv): Sequential(
+      (0): Conv2d(13, 16, kernel_size=(2, 2), stride=(1, 1))
+      (1): ReLU()
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(1, 1))
+      (3): ReLU()
+      (4): Conv2d(32, 64, kernel_size=(2, 2), stride=(1, 1))
+      (5): ReLU()
+    )
+  )
+  (gnn): RGCNRootShared(
+    (linear_in): Linear(in_features=22, out_features=32, bias=True)
+    (conv): RelGraphConv(
+      (dropout): Dropout(p=0.0, inplace=False)
+    )
+    (g_embed): Linear(in_features=32, out_features=32, bias=True)
+  )
+  (actor): PolicyNetwork(
+    (enc_): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=1056, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (2): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+    )
+    (discrete_): Sequential(
+      (0): Linear(in_features=64, out_features=4, bias=True)
+    )
+  )
+  (critic): Sequential(
+    (0): Linear(in_features=1056, out_features=64, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=64, out_features=64, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=64, out_features=1, bias=True)
+  )
+)
+
+Loading optimizer from existing run.
+
+Optimizer loaded.
+
+U 845 | F 1730560 | FPS 0174 | D 57 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.207 | ADR: 0.670 | F:μσmM 7.1 4.5 1.0 28.0 | H 0.297 | V 0.769 | pL -0.004 | vL 0.022 | ∇ 0.120
+U 850 | F 1740800 | FPS 0186 | D 115 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.216 | ADR: 0.687 | F:μσmM 6.6 4.1 1.0 34.0 | H 0.310 | V 0.759 | pL -0.008 | vL 0.029 | ∇ 0.183
+U 855 | F 1751040 | FPS 0165 | D 172 | rR:μσmM 0.93 0.36 -1.00 1.00 | ARPS: 0.201 | ADR: 0.668 | F:μσmM 7.4 8.1 1.0 76.0 | H 0.351 | V 0.702 | pL 0.013 | vL 0.033 | ∇ 0.177
+U 860 | F 1761280 | FPS 0190 | D 228 | rR:μσmM 0.95 0.29 -1.00 1.00 | ARPS: 0.198 | ADR: 0.674 | F:μσmM 7.7 8.2 1.0 76.0 | H 0.340 | V 0.709 | pL 0.030 | vL 0.025 | ∇ 0.254
+Status saved
+U 865 | F 1771520 | FPS 0169 | D 283 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.202 | ADR: 0.685 | F:μσmM 6.7 4.8 1.0 37.0 | H 0.280 | V 0.763 | pL 0.013 | vL 0.031 | ∇ 0.143
+U 870 | F 1781760 | FPS 0181 | D 340 | rR:μσmM 0.96 0.29 -1.00 1.00 | ARPS: 0.206 | ADR: 0.678 | F:μσmM 7.2 5.7 1.0 49.0 | H 0.300 | V 0.735 | pL 0.009 | vL 0.020 | ∇ 0.153
+U 875 | F 1792000 | FPS 0191 | D 394 | rR:μσmM 0.97 0.25 -1.00 1.00 | ARPS: 0.216 | ADR: 0.698 | F:μσmM 6.7 4.3 1.0 27.0 | H 0.292 | V 0.774 | pL 0.003 | vL 0.021 | ∇ 0.119
+U 880 | F 1802240 | FPS 0191 | D 449 | rR:μσmM 0.97 0.25 -1.00 1.00 | ARPS: 0.220 | ADR: 0.706 | F:μσmM 6.5 4.2 1.0 29.0 | H 0.310 | V 0.784 | pL -0.007 | vL 0.016 | ∇ 0.119
+Status saved
+U 885 | F 1812480 | FPS 0190 | D 506 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.205 | ADR: 0.678 | F:μσmM 6.9 4.0 1.0 23.0 | H 0.275 | V 0.764 | pL 0.014 | vL 0.034 | ∇ 0.135
+U 890 | F 1822720 | FPS 0182 | D 562 | rR:μσmM 0.94 0.35 -1.00 1.00 | ARPS: 0.184 | ADR: 0.658 | F:μσmM 7.5 6.6 1.0 76.0 | H 0.325 | V 0.710 | pL 0.009 | vL 0.034 | ∇ 0.176
+U 895 | F 1832960 | FPS 0180 | D 618 | rR:μσmM 0.97 0.23 -1.00 1.00 | ARPS: 0.219 | ADR: 0.701 | F:μσmM 6.7 4.1 1.0 27.0 | H 0.285 | V 0.775 | pL -0.013 | vL 0.014 | ∇ 0.108
+U 900 | F 1843200 | FPS 0188 | D 675 | rR:μσmM 0.94 0.34 -1.00 1.00 | ARPS: 0.218 | ADR: 0.682 | F:μσmM 6.8 5.6 1.0 54.0 | H 0.292 | V 0.744 | pL 0.001 | vL 0.048 | ∇ 0.170
+Status saved
+U 905 | F 1853440 | FPS 0191 | D 730 | rR:μσmM 0.96 0.29 -1.00 1.00 | ARPS: 0.234 | ADR: 0.709 | F:μσmM 6.2 4.1 1.0 34.0 | H 0.280 | V 0.781 | pL 0.007 | vL 0.025 | ∇ 0.116
+U 910 | F 1863680 | FPS 0178 | D 785 | rR:μσmM 0.96 0.27 -1.00 1.00 | ARPS: 0.200 | ADR: 0.676 | F:μσmM 7.4 5.5 1.0 49.0 | H 0.312 | V 0.748 | pL 0.024 | vL 0.026 | ∇ 0.141
+U 915 | F 1873920 | FPS 0183 | D 843 | rR:μσmM 0.95 0.30 -1.00 1.00 | ARPS: 0.215 | ADR: 0.687 | F:μσmM 7.0 5.6 1.0 73.0 | H 0.291 | V 0.765 | pL 0.006 | vL 0.027 | ∇ 0.137
+U 920 | F 1884160 | FPS 0158 | D 903 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.217 | ADR: 0.688 | F:μσmM 7.0 6.3 1.0 76.0 | H 0.308 | V 0.747 | pL 0.013 | vL 0.036 | ∇ 0.221
+Status saved
+U 925 | F 1894400 | FPS 0177 | D 961 | rR:μσmM 0.98 0.20 -1.00 1.00 | ARPS: 0.211 | ADR: 0.709 | F:μσmM 6.6 3.8 1.0 28.0 | H 0.304 | V 0.773 | pL -0.013 | vL 0.012 | ∇ 0.136
+U 930 | F 1904640 | FPS 0180 | D 1018 | rR:μσmM 0.96 0.30 -1.00 1.00 | ARPS: 0.224 | ADR: 0.694 | F:μσmM 6.5 4.2 1.0 23.0 | H 0.286 | V 0.769 | pL -0.003 | vL 0.026 | ∇ 0.133
+U 935 | F 1914880 | FPS 0182 | D 1075 | rR:μσmM 0.93 0.37 -1.00 1.00 | ARPS: 0.205 | ADR: 0.673 | F:μσmM 6.5 4.0 1.0 26.0 | H 0.319 | V 0.770 | pL 0.012 | vL 0.038 | ∇ 0.153
+U 940 | F 1925120 | FPS 0168 | D 1135 | rR:μσmM 0.94 0.34 -1.00 1.00 | ARPS: 0.187 | ADR: 0.650 | F:μσmM 7.6 6.1 1.0 76.0 | H 0.351 | V 0.714 | pL 0.004 | vL 0.033 | ∇ 0.155
+Status saved
+U 945 | F 1935360 | FPS 0178 | D 1193 | rR:μσmM 0.97 0.22 -1.00 1.00 | ARPS: 0.213 | ADR: 0.696 | F:μσmM 7.4 7.3 1.0 76.0 | H 0.320 | V 0.756 | pL -0.007 | vL 0.019 | ∇ 0.155
+U 950 | F 1945600 | FPS 0177 | D 1248 | rR:μσmM 0.93 0.36 -1.00 1.00 | ARPS: 0.207 | ADR: 0.668 | F:μσmM 7.5 7.0 1.0 76.0 | H 0.350 | V 0.706 | pL 0.023 | vL 0.040 | ∇ 0.162
+U 955 | F 1955840 | FPS 0161 | D 1306 | rR:μσmM 0.97 0.22 -1.00 1.00 | ARPS: 0.218 | ADR: 0.691 | F:μσmM 7.6 7.8 1.0 76.0 | H 0.325 | V 0.712 | pL 0.022 | vL 0.021 | ∇ 0.158
+U 960 | F 1966080 | FPS 0160 | D 1365 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.204 | ADR: 0.674 | F:μσmM 7.2 5.3 1.0 63.0 | H 0.307 | V 0.746 | pL -0.003 | vL 0.039 | ∇ 0.245
+Status saved
+U 965 | F 1976320 | FPS 0177 | D 1423 | rR:μσmM 0.95 0.33 -1.00 1.00 | ARPS: 0.206 | ADR: 0.674 | F:μσmM 7.0 4.8 1.0 40.0 | H 0.318 | V 0.754 | pL 0.002 | vL 0.035 | ∇ 0.139
+U 970 | F 1986560 | FPS 0187 | D 1481 | rR:μσmM 0.92 0.39 -1.00 1.00 | ARPS: 0.214 | ADR: 0.679 | F:μσmM 6.3 3.8 1.0 26.0 | H 0.303 | V 0.740 | pL 0.011 | vL 0.052 | ∇ 0.173
+U 975 | F 1996800 | FPS 0187 | D 1536 | rR:μσmM 0.97 0.22 -1.00 1.00 | ARPS: 0.220 | ADR: 0.708 | F:μσmM 6.6 4.2 1.0 28.0 | H 0.276 | V 0.777 | pL -0.015 | vL 0.021 | ∇ 0.113
+U 980 | F 2007040 | FPS 0162 | D 1594 | rR:μσmM 0.94 0.33 -1.00 1.00 | ARPS: 0.197 | ADR: 0.673 | F:μσmM 7.3 4.9 1.0 34.0 | H 0.274 | V 0.735 | pL 0.031 | vL 0.041 | ∇ 0.202
+Status saved
+train_agent.py --algo ppo --env Letter-7x7-v3 --log-interval 5 --save-interval 20 --frames 2010000 --discount 0.94 --ltl-sampler Until_1_2_1_2 --epochs 4 --lr 0.0003 --seed 6
+
+Namespace(algo='ppo', batch_size=256, checkpoint_dir=None, clip_eps=0.2, discount=0.94, dumb_ac=False, entropy_coef=0.01, env='Letter-7x7-v3', epochs=4, eval=False, eval_env=None, eval_episodes=5, eval_procs=1, frames=2010000, frames_per_proc=None, freeze_ltl=False, gae_lambda=0.95, gnn='RGCN_8x32_ROOT_SHARED', ignoreLTL=False, int_reward=0.0, log_interval=5, lr=0.0003, ltl_sampler='Until_1_2_1_2', ltl_samplers_eval=None, max_grad_norm=0.5, model=None, noLTL=False, optim_alpha=0.99, optim_eps=1e-08, pretrained_gnn=False, procs=16, progression_mode='full', recurrence=1, save_interval=20, seed=6, use_dfa=False, use_mean_guard_embed=False, value_loss_coef=0.5)
+
+Device: cpu
+
+Using fixed maps.
+Environments loaded
+
+Training status loaded.
+
+Observations preprocessor loaded.
+
+Loading model from existing run.
+
+Model loaded.
+
+ACModel(
+  (env_model): LetterEnvModel(
+    (image_conv): Sequential(
+      (0): Conv2d(13, 16, kernel_size=(2, 2), stride=(1, 1))
+      (1): ReLU()
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(1, 1))
+      (3): ReLU()
+      (4): Conv2d(32, 64, kernel_size=(2, 2), stride=(1, 1))
+      (5): ReLU()
+    )
+  )
+  (gnn): RGCNRootShared(
+    (linear_in): Linear(in_features=22, out_features=32, bias=True)
+    (conv): RelGraphConv(
+      (dropout): Dropout(p=0.0, inplace=False)
+    )
+    (g_embed): Linear(in_features=32, out_features=32, bias=True)
+  )
+  (actor): PolicyNetwork(
+    (enc_): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=1056, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (2): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+    )
+    (discrete_): Sequential(
+      (0): Linear(in_features=64, out_features=4, bias=True)
+    )
+  )
+  (critic): Sequential(
+    (0): Linear(in_features=1056, out_features=64, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=64, out_features=64, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=64, out_features=1, bias=True)
+  )
+)
+
+Loading optimizer from existing run.
+
+Optimizer loaded.
+
+train_agent.py --algo ppo --env Letter-7x7-v3 --log-interval 5 --save-interval 20 --frames 2010000 --discount 0.94 --ltl-sampler Until_1_2_1_2 --epochs 4 --lr 0.0003 --seed 6
+
+Namespace(algo='ppo', batch_size=256, checkpoint_dir=None, clip_eps=0.2, discount=0.94, dumb_ac=False, entropy_coef=0.01, env='Letter-7x7-v3', epochs=4, eval=False, eval_env=None, eval_episodes=5, eval_procs=1, frames=2010000, frames_per_proc=None, freeze_ltl=False, gae_lambda=0.95, gnn='RGCN_8x32_ROOT_SHARED', ignoreLTL=False, int_reward=0.0, log_interval=5, lr=0.0003, ltl_sampler='Until_1_2_1_2', ltl_samplers_eval=None, max_grad_norm=0.5, model=None, noLTL=False, optim_alpha=0.99, optim_eps=1e-08, pretrained_gnn=False, procs=16, progression_mode='full', recurrence=1, save_interval=20, seed=6, use_dfa=False, use_mean_guard_embed=False, value_loss_coef=0.5)
+
+Device: cpu
+
+Using fixed maps.
+Environments loaded
+
+Training status loaded.
+
+Observations preprocessor loaded.
+
+Loading model from existing run.
+
+Model loaded.
+
+ACModel(
+  (env_model): LetterEnvModel(
+    (image_conv): Sequential(
+      (0): Conv2d(13, 16, kernel_size=(2, 2), stride=(1, 1))
+      (1): ReLU()
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(1, 1))
+      (3): ReLU()
+      (4): Conv2d(32, 64, kernel_size=(2, 2), stride=(1, 1))
+      (5): ReLU()
+    )
+  )
+  (gnn): RGCNRootShared(
+    (linear_in): Linear(in_features=22, out_features=32, bias=True)
+    (conv): RelGraphConv(
+      (dropout): Dropout(p=0.0, inplace=False)
+    )
+    (g_embed): Linear(in_features=32, out_features=32, bias=True)
+  )
+  (actor): PolicyNetwork(
+    (enc_): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=1056, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (2): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+    )
+    (discrete_): Sequential(
+      (0): Linear(in_features=64, out_features=4, bias=True)
+    )
+  )
+  (critic): Sequential(
+    (0): Linear(in_features=1056, out_features=64, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=64, out_features=64, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=64, out_features=1, bias=True)
+  )
+)
+
+Loading optimizer from existing run.
+
+Optimizer loaded.
+
+train_agent.py --algo ppo --env Letter-7x7-v3 --log-interval 5 --save-interval 20 --frames 3001000 --discount 0.94 --ltl-sampler Until_1_2_1_2 --epochs 4 --lr 0.0003 --seed 6
+
+Namespace(algo='ppo', batch_size=256, checkpoint_dir=None, clip_eps=0.2, discount=0.94, dumb_ac=False, entropy_coef=0.01, env='Letter-7x7-v3', epochs=4, eval=False, eval_env=None, eval_episodes=5, eval_procs=1, frames=3001000, frames_per_proc=None, freeze_ltl=False, gae_lambda=0.95, gnn='RGCN_8x32_ROOT_SHARED', ignoreLTL=False, int_reward=0.0, log_interval=5, lr=0.0003, ltl_sampler='Until_1_2_1_2', ltl_samplers_eval=None, max_grad_norm=0.5, model=None, noLTL=False, optim_alpha=0.99, optim_eps=1e-08, pretrained_gnn=False, procs=16, progression_mode='full', recurrence=1, save_interval=20, seed=6, use_dfa=False, use_mean_guard_embed=False, value_loss_coef=0.5)
+
+Device: cpu
+
+Using fixed maps.
+Environments loaded
+
+Training status loaded.
+
+Observations preprocessor loaded.
+
+Loading model from existing run.
+
+Model loaded.
+
+ACModel(
+  (env_model): LetterEnvModel(
+    (image_conv): Sequential(
+      (0): Conv2d(13, 16, kernel_size=(2, 2), stride=(1, 1))
+      (1): ReLU()
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(1, 1))
+      (3): ReLU()
+      (4): Conv2d(32, 64, kernel_size=(2, 2), stride=(1, 1))
+      (5): ReLU()
+    )
+  )
+  (gnn): RGCNRootShared(
+    (linear_in): Linear(in_features=22, out_features=32, bias=True)
+    (conv): RelGraphConv(
+      (dropout): Dropout(p=0.0, inplace=False)
+    )
+    (g_embed): Linear(in_features=32, out_features=32, bias=True)
+  )
+  (actor): PolicyNetwork(
+    (enc_): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=1056, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (2): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+    )
+    (discrete_): Sequential(
+      (0): Linear(in_features=64, out_features=4, bias=True)
+    )
+  )
+  (critic): Sequential(
+    (0): Linear(in_features=1056, out_features=64, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=64, out_features=64, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=64, out_features=1, bias=True)
+  )
+)
+
+Loading optimizer from existing run.
+
+Optimizer loaded.
+
+U 985 | F 2017280 | FPS 0190 | D 58 | rR:μσmM 0.94 0.34 -1.00 1.00 | ARPS: 0.218 | ADR: 0.693 | F:μσmM 6.4 5.5 1.0 76.0 | H 0.278 | V 0.756 | pL 0.007 | vL 0.029 | ∇ 0.165
+U 990 | F 2027520 | FPS 0185 | D 114 | rR:μσmM 0.97 0.23 -1.00 1.00 | ARPS: 0.211 | ADR: 0.701 | F:μσmM 6.7 4.0 1.0 30.0 | H 0.249 | V 0.780 | pL -0.005 | vL 0.018 | ∇ 0.100
+U 995 | F 2037760 | FPS 0187 | D 169 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.203 | ADR: 0.684 | F:μσmM 6.7 4.3 1.0 31.0 | H 0.295 | V 0.761 | pL 0.010 | vL 0.033 | ∇ 0.155
+U 1000 | F 2048000 | FPS 0198 | D 223 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.214 | ADR: 0.690 | F:μσmM 6.8 4.2 1.0 31.0 | H 0.279 | V 0.769 | pL 0.005 | vL 0.030 | ∇ 0.113
+Status saved
+U 1005 | F 2058240 | FPS 0193 | D 276 | rR:μσmM 0.97 0.25 -1.00 1.00 | ARPS: 0.216 | ADR: 0.698 | F:μσmM 6.7 5.0 1.0 68.0 | H 0.270 | V 0.792 | pL -0.009 | vL 0.017 | ∇ 0.108
+U 1010 | F 2068480 | FPS 0197 | D 331 | rR:μσmM 0.94 0.33 -1.00 1.00 | ARPS: 0.207 | ADR: 0.682 | F:μσmM 7.2 7.0 1.0 76.0 | H 0.315 | V 0.724 | pL 0.033 | vL 0.037 | ∇ 0.276
+U 1015 | F 2078720 | FPS 0198 | D 384 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.233 | ADR: 0.703 | F:μσmM 6.6 4.9 1.0 50.0 | H 0.275 | V 0.756 | pL 0.019 | vL 0.029 | ∇ 0.151
+U 1020 | F 2088960 | FPS 0188 | D 436 | rR:μσmM 0.95 0.30 -1.00 1.00 | ARPS: 0.200 | ADR: 0.672 | F:μσmM 7.4 6.1 1.0 76.0 | H 0.292 | V 0.741 | pL 0.009 | vL 0.031 | ∇ 0.259
+Status saved
+U 1025 | F 2099200 | FPS 0198 | D 489 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.205 | ADR: 0.678 | F:μσmM 7.3 5.6 1.0 72.0 | H 0.294 | V 0.751 | pL 0.011 | vL 0.037 | ∇ 0.181
+U 1030 | F 2109440 | FPS 0199 | D 541 | rR:μσmM 0.96 0.30 -1.00 1.00 | ARPS: 0.201 | ADR: 0.695 | F:μσmM 6.4 3.6 1.0 21.0 | H 0.270 | V 0.779 | pL -0.008 | vL 0.025 | ∇ 0.111
+U 1035 | F 2119680 | FPS 0202 | D 593 | rR:μσmM 0.93 0.37 -1.00 1.00 | ARPS: 0.205 | ADR: 0.670 | F:μσmM 6.9 5.9 1.0 76.0 | H 0.318 | V 0.753 | pL 0.037 | vL 0.040 | ∇ 0.142
+U 1040 | F 2129920 | FPS 0200 | D 644 | rR:μσmM 0.92 0.40 -1.00 1.00 | ARPS: 0.206 | ADR: 0.661 | F:μσmM 6.6 4.0 1.0 25.0 | H 0.290 | V 0.759 | pL 0.019 | vL 0.045 | ∇ 0.166
+Status saved
+U 1045 | F 2140160 | FPS 0204 | D 696 | rR:μσmM 0.96 0.26 -1.00 1.00 | ARPS: 0.220 | ADR: 0.703 | F:μσmM 6.8 6.5 1.0 76.0 | H 0.273 | V 0.761 | pL 0.011 | vL 0.023 | ∇ 0.117
+U 1050 | F 2150400 | FPS 0199 | D 747 | rR:μσmM 0.95 0.30 -1.00 1.00 | ARPS: 0.225 | ADR: 0.699 | F:μσmM 6.6 5.6 1.0 61.0 | H 0.302 | V 0.748 | pL 0.033 | vL 0.033 | ∇ 0.129
+U 1055 | F 2160640 | FPS 0202 | D 799 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.230 | ADR: 0.701 | F:μσmM 6.7 5.3 1.0 59.0 | H 0.290 | V 0.769 | pL 0.024 | vL 0.031 | ∇ 0.144
+U 1060 | F 2170880 | FPS 0203 | D 850 | rR:μσmM 0.99 0.16 -1.00 1.00 | ARPS: 0.219 | ADR: 0.710 | F:μσmM 6.8 4.4 1.0 30.0 | H 0.282 | V 0.783 | pL 0.005 | vL 0.015 | ∇ 0.095
+Status saved
+U 1065 | F 2181120 | FPS 0199 | D 901 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.183 | ADR: 0.682 | F:μσmM 6.8 3.8 1.0 25.0 | H 0.279 | V 0.771 | pL -0.003 | vL 0.024 | ∇ 0.115
+U 1070 | F 2191360 | FPS 0172 | D 954 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.216 | ADR: 0.694 | F:μσmM 6.7 4.3 1.0 25.0 | H 0.265 | V 0.772 | pL 0.009 | vL 0.022 | ∇ 0.155
+U 1075 | F 2201600 | FPS 0202 | D 1006 | rR:μσmM 0.98 0.20 -1.00 1.00 | ARPS: 0.204 | ADR: 0.701 | F:μσmM 6.8 4.5 1.0 38.0 | H 0.289 | V 0.778 | pL -0.006 | vL 0.013 | ∇ 0.080
+U 1080 | F 2211840 | FPS 0196 | D 1057 | rR:μσmM 0.96 0.26 -1.00 1.00 | ARPS: 0.212 | ADR: 0.689 | F:μσmM 7.1 5.9 1.0 76.0 | H 0.284 | V 0.764 | pL 0.011 | vL 0.022 | ∇ 0.100
+Status saved
+U 1085 | F 2222080 | FPS 0194 | D 1109 | rR:μσmM 0.94 0.34 -1.00 1.00 | ARPS: 0.197 | ADR: 0.662 | F:μσmM 7.4 5.4 1.0 40.0 | H 0.308 | V 0.727 | pL 0.013 | vL 0.037 | ∇ 0.143
+U 1090 | F 2232320 | FPS 0192 | D 1162 | rR:μσmM 0.96 0.29 -1.00 1.00 | ARPS: 0.212 | ADR: 0.681 | F:μσmM 7.2 6.1 1.0 76.0 | H 0.299 | V 0.736 | pL -0.008 | vL 0.019 | ∇ 0.127
+U 1095 | F 2242560 | FPS 0202 | D 1213 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.211 | ADR: 0.698 | F:μσmM 6.7 5.8 1.0 76.0 | H 0.305 | V 0.765 | pL 0.007 | vL 0.028 | ∇ 0.117
+U 1100 | F 2252800 | FPS 0198 | D 1266 | rR:μσmM 0.97 0.26 -1.00 1.00 | ARPS: 0.214 | ADR: 0.702 | F:μσmM 6.7 5.1 1.0 65.0 | H 0.289 | V 0.770 | pL 0.006 | vL 0.022 | ∇ 0.135
+Status saved
+U 1105 | F 2263040 | FPS 0202 | D 1318 | rR:μσmM 0.97 0.26 -1.00 1.00 | ARPS: 0.207 | ADR: 0.690 | F:μσmM 7.0 4.7 1.0 33.0 | H 0.306 | V 0.770 | pL 0.013 | vL 0.021 | ∇ 0.095
+U 1110 | F 2273280 | FPS 0198 | D 1369 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.218 | ADR: 0.689 | F:μσmM 7.0 6.2 1.0 76.0 | H 0.310 | V 0.750 | pL 0.031 | vL 0.037 | ∇ 0.153
+U 1115 | F 2283520 | FPS 0200 | D 1420 | rR:μσmM 0.93 0.36 -1.00 1.00 | ARPS: 0.200 | ADR: 0.666 | F:μσmM 7.0 6.5 1.0 68.0 | H 0.331 | V 0.734 | pL 0.008 | vL 0.040 | ∇ 0.130
+U 1120 | F 2293760 | FPS 0198 | D 1472 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.201 | ADR: 0.679 | F:μσmM 6.8 5.1 1.0 68.0 | H 0.278 | V 0.758 | pL 0.014 | vL 0.033 | ∇ 0.143
+Status saved
+U 1125 | F 2304000 | FPS 0163 | D 1526 | rR:μσmM 0.97 0.23 -1.00 1.00 | ARPS: 0.211 | ADR: 0.704 | F:μσmM 6.7 4.6 1.0 51.0 | H 0.276 | V 0.762 | pL -0.001 | vL 0.020 | ∇ 0.123
+U 1130 | F 2314240 | FPS 0198 | D 1578 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.212 | ADR: 0.687 | F:μσmM 6.7 5.3 1.0 74.0 | H 0.259 | V 0.777 | pL 0.008 | vL 0.030 | ∇ 0.139
+U 1135 | F 2324480 | FPS 0205 | D 1628 | rR:μσmM 0.99 0.16 -1.00 1.00 | ARPS: 0.233 | ADR: 0.723 | F:μσmM 6.6 4.4 1.0 45.0 | H 0.280 | V 0.788 | pL 0.003 | vL 0.016 | ∇ 0.080
+U 1140 | F 2334720 | FPS 0198 | D 1680 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.206 | ADR: 0.677 | F:μσmM 6.8 4.2 1.0 30.0 | H 0.289 | V 0.766 | pL 0.008 | vL 0.030 | ∇ 0.138
+Status saved
+U 1145 | F 2344960 | FPS 0191 | D 1731 | rR:μσmM 0.98 0.20 -1.00 1.00 | ARPS: 0.215 | ADR: 0.710 | F:μσmM 6.6 3.8 1.0 20.0 | H 0.267 | V 0.792 | pL -0.016 | vL 0.012 | ∇ 0.079
+U 1150 | F 2355200 | FPS 0199 | D 1783 | rR:μσmM 0.97 0.25 -1.00 1.00 | ARPS: 0.217 | ADR: 0.700 | F:μσmM 6.6 3.8 1.0 22.0 | H 0.282 | V 0.789 | pL 0.006 | vL 0.023 | ∇ 0.104
+U 1155 | F 2365440 | FPS 0204 | D 1837 | rR:μσmM 0.97 0.23 -1.00 1.00 | ARPS: 0.205 | ADR: 0.700 | F:μσmM 6.7 4.2 1.0 42.0 | H 0.294 | V 0.793 | pL -0.020 | vL 0.013 | ∇ 0.095
+U 1160 | F 2375680 | FPS 0200 | D 1888 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.208 | ADR: 0.697 | F:μσmM 6.7 5.1 1.0 51.0 | H 0.304 | V 0.773 | pL 0.003 | vL 0.023 | ∇ 0.129
+Status saved
+U 1165 | F 2385920 | FPS 0203 | D 1939 | rR:μσmM 0.96 0.27 -1.00 1.00 | ARPS: 0.217 | ADR: 0.710 | F:μσmM 6.3 3.5 1.0 26.0 | H 0.304 | V 0.786 | pL 0.001 | vL 0.022 | ∇ 0.102
+U 1170 | F 2396160 | FPS 0201 | D 1991 | rR:μσmM 0.97 0.25 -1.00 1.00 | ARPS: 0.227 | ADR: 0.717 | F:μσmM 6.3 4.0 1.0 29.0 | H 0.286 | V 0.785 | pL 0.004 | vL 0.025 | ∇ 0.122
+U 1175 | F 2406400 | FPS 0196 | D 2042 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.203 | ADR: 0.682 | F:μσmM 6.8 4.1 1.0 26.0 | H 0.325 | V 0.759 | pL -0.001 | vL 0.025 | ∇ 0.193
+U 1180 | F 2416640 | FPS 0167 | D 2095 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.217 | ADR: 0.705 | F:μσmM 6.6 5.9 1.0 73.0 | H 0.299 | V 0.778 | pL 0.016 | vL 0.025 | ∇ 0.135
+Status saved
+U 1185 | F 2426880 | FPS 0205 | D 2147 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.210 | ADR: 0.693 | F:μσmM 6.7 4.1 1.0 26.0 | H 0.295 | V 0.789 | pL 0.005 | vL 0.024 | ∇ 0.103
+U 1190 | F 2437120 | FPS 0185 | D 2199 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.199 | ADR: 0.661 | F:μσmM 7.6 5.3 1.0 54.0 | H 0.328 | V 0.741 | pL 0.011 | vL 0.036 | ∇ 0.111
+U 1195 | F 2447360 | FPS 0201 | D 2251 | rR:μσmM 0.97 0.22 -1.00 1.00 | ARPS: 0.223 | ADR: 0.710 | F:μσmM 6.6 4.2 1.0 39.0 | H 0.288 | V 0.782 | pL -0.014 | vL 0.018 | ∇ 0.104
+U 1200 | F 2457600 | FPS 0195 | D 2303 | rR:μσmM 0.98 0.20 -1.00 1.00 | ARPS: 0.223 | ADR: 0.709 | F:μσmM 6.8 4.3 1.0 25.0 | H 0.329 | V 0.756 | pL -0.020 | vL 0.019 | ∇ 0.110
+Status saved
+U 1205 | F 2467840 | FPS 0195 | D 2355 | rR:μσmM 0.99 0.17 -1.00 1.00 | ARPS: 0.211 | ADR: 0.700 | F:μσmM 7.1 5.0 1.0 59.0 | H 0.294 | V 0.777 | pL -0.003 | vL 0.010 | ∇ 0.079
+U 1210 | F 2478080 | FPS 0196 | D 2409 | rR:μσmM 0.94 0.33 -1.00 1.00 | ARPS: 0.196 | ADR: 0.658 | F:μσmM 7.3 4.5 1.0 27.0 | H 0.318 | V 0.741 | pL -0.009 | vL 0.034 | ∇ 0.173
+U 1215 | F 2488320 | FPS 0202 | D 2461 | rR:μσmM 0.98 0.21 -1.00 1.00 | ARPS: 0.215 | ADR: 0.703 | F:μσmM 7.1 6.4 1.0 76.0 | H 0.326 | V 0.782 | pL 0.015 | vL 0.015 | ∇ 0.130
+U 1220 | F 2498560 | FPS 0196 | D 2512 | rR:μσmM 0.97 0.26 -1.00 1.00 | ARPS: 0.204 | ADR: 0.702 | F:μσmM 6.9 5.7 1.0 76.0 | H 0.295 | V 0.764 | pL 0.022 | vL 0.028 | ∇ 0.151
+Status saved
+U 1225 | F 2508800 | FPS 0196 | D 2565 | rR:μσmM 0.96 0.29 -1.00 1.00 | ARPS: 0.193 | ADR: 0.681 | F:μσmM 7.0 4.5 1.0 49.0 | H 0.291 | V 0.767 | pL 0.001 | vL 0.033 | ∇ 0.202
+U 1230 | F 2519040 | FPS 0197 | D 2617 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.203 | ADR: 0.684 | F:μσmM 6.7 4.0 1.0 30.0 | H 0.294 | V 0.777 | pL 0.000 | vL 0.027 | ∇ 0.118
+U 1235 | F 2529280 | FPS 0198 | D 2669 | rR:μσmM 0.96 0.29 -1.00 1.00 | ARPS: 0.221 | ADR: 0.699 | F:μσmM 6.4 4.3 1.0 34.0 | H 0.296 | V 0.774 | pL -0.017 | vL 0.025 | ∇ 0.126
+U 1240 | F 2539520 | FPS 0197 | D 2723 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.213 | ADR: 0.696 | F:μσmM 7.0 7.3 1.0 76.0 | H 0.340 | V 0.728 | pL 0.016 | vL 0.034 | ∇ 0.123
+Status saved
+U 1245 | F 2549760 | FPS 0205 | D 2774 | rR:μσmM 0.94 0.34 -1.00 1.00 | ARPS: 0.207 | ADR: 0.681 | F:μσmM 6.6 4.2 1.0 33.0 | H 0.306 | V 0.767 | pL 0.019 | vL 0.037 | ∇ 0.137
+U 1250 | F 2560000 | FPS 0197 | D 2827 | rR:μσmM 0.95 0.30 -1.00 1.00 | ARPS: 0.201 | ADR: 0.685 | F:μσmM 6.8 4.3 1.0 42.0 | H 0.302 | V 0.757 | pL 0.002 | vL 0.038 | ∇ 0.117
+U 1255 | F 2570240 | FPS 0203 | D 2879 | rR:μσmM 0.96 0.27 -1.00 1.00 | ARPS: 0.216 | ADR: 0.702 | F:μσmM 6.4 3.6 1.0 23.0 | H 0.280 | V 0.790 | pL -0.003 | vL 0.023 | ∇ 0.114
+U 1260 | F 2580480 | FPS 0197 | D 2931 | rR:μσmM 0.97 0.25 -1.00 1.00 | ARPS: 0.231 | ADR: 0.708 | F:μσmM 6.5 4.4 1.0 38.0 | H 0.315 | V 0.773 | pL -0.001 | vL 0.027 | ∇ 0.110
+Status saved
+U 1265 | F 2590720 | FPS 0193 | D 2986 | rR:μσmM 0.96 0.27 -1.00 1.00 | ARPS: 0.217 | ADR: 0.701 | F:μσmM 6.5 4.4 1.0 37.0 | H 0.321 | V 0.777 | pL -0.003 | vL 0.018 | ∇ 0.091
+U 1270 | F 2600960 | FPS 0203 | D 3039 | rR:μσmM 0.96 0.29 -1.00 1.00 | ARPS: 0.209 | ADR: 0.694 | F:μσmM 6.5 3.8 1.0 24.0 | H 0.300 | V 0.776 | pL -0.005 | vL 0.024 | ∇ 0.114
+U 1275 | F 2611200 | FPS 0196 | D 3091 | rR:μσmM 0.98 0.18 -1.00 1.00 | ARPS: 0.221 | ADR: 0.711 | F:μσmM 7.1 7.0 1.0 76.0 | H 0.334 | V 0.769 | pL 0.011 | vL 0.014 | ∇ 0.150
+U 1280 | F 2621440 | FPS 0191 | D 3143 | rR:μσmM 0.94 0.32 -1.00 1.00 | ARPS: 0.220 | ADR: 0.685 | F:μσmM 7.1 7.1 1.0 76.0 | H 0.326 | V 0.700 | pL 0.040 | vL 0.037 | ∇ 0.339
+Status saved
+U 1285 | F 2631680 | FPS 0193 | D 3196 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.190 | ADR: 0.678 | F:μσmM 7.0 3.8 1.0 21.0 | H 0.291 | V 0.774 | pL -0.007 | vL 0.024 | ∇ 0.113
+U 1290 | F 2641920 | FPS 0197 | D 3248 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.212 | ADR: 0.690 | F:μσmM 6.7 4.0 1.0 26.0 | H 0.287 | V 0.777 | pL 0.012 | vL 0.023 | ∇ 0.091
+U 1295 | F 2652160 | FPS 0192 | D 3303 | rR:μσmM 0.97 0.25 -1.00 1.00 | ARPS: 0.208 | ADR: 0.704 | F:μσmM 6.4 3.7 1.0 21.0 | H 0.288 | V 0.785 | pL 0.001 | vL 0.017 | ∇ 0.087
+U 1300 | F 2662400 | FPS 0199 | D 3354 | rR:μσmM 0.97 0.23 -1.00 1.00 | ARPS: 0.222 | ADR: 0.716 | F:μσmM 6.4 3.7 1.0 22.0 | H 0.301 | V 0.763 | pL -0.000 | vL 0.020 | ∇ 0.102
+Status saved
+U 1305 | F 2672640 | FPS 0195 | D 3407 | rR:μσmM 0.94 0.34 -1.00 1.00 | ARPS: 0.201 | ADR: 0.676 | F:μσmM 6.8 5.6 1.0 76.0 | H 0.310 | V 0.765 | pL 0.014 | vL 0.033 | ∇ 0.109
+U 1310 | F 2682880 | FPS 0192 | D 3459 | rR:μσmM 0.96 0.27 -1.00 1.00 | ARPS: 0.211 | ADR: 0.688 | F:μσmM 7.1 6.3 1.0 76.0 | H 0.313 | V 0.754 | pL 0.011 | vL 0.025 | ∇ 0.114
+U 1315 | F 2693120 | FPS 0204 | D 3510 | rR:μσmM 0.97 0.25 -1.00 1.00 | ARPS: 0.218 | ADR: 0.703 | F:μσmM 6.7 5.7 1.0 71.0 | H 0.294 | V 0.775 | pL 0.006 | vL 0.019 | ∇ 0.136
+U 1320 | F 2703360 | FPS 0188 | D 3565 | rR:μσmM 0.99 0.17 -1.00 1.00 | ARPS: 0.205 | ADR: 0.702 | F:μσmM 7.2 5.2 1.0 51.0 | H 0.296 | V 0.767 | pL 0.008 | vL 0.013 | ∇ 0.089
+Status saved
+U 1325 | F 2713600 | FPS 0199 | D 3617 | rR:μσmM 0.98 0.20 -1.00 1.00 | ARPS: 0.223 | ADR: 0.709 | F:μσmM 6.8 4.2 1.0 28.0 | H 0.296 | V 0.768 | pL -0.003 | vL 0.021 | ∇ 0.115
+U 1330 | F 2723840 | FPS 0195 | D 3669 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.208 | ADR: 0.679 | F:μσmM 6.9 5.4 1.0 69.0 | H 0.315 | V 0.778 | pL 0.016 | vL 0.025 | ∇ 0.100
+U 1335 | F 2734080 | FPS 0192 | D 3721 | rR:μσmM 0.99 0.16 -1.00 1.00 | ARPS: 0.224 | ADR: 0.717 | F:μσmM 6.6 4.1 1.0 25.0 | H 0.297 | V 0.779 | pL -0.019 | vL 0.010 | ∇ 0.077
+U 1340 | F 2744320 | FPS 0198 | D 3773 | rR:μσmM 0.96 0.27 -1.00 1.00 | ARPS: 0.217 | ADR: 0.700 | F:μσmM 6.5 3.9 1.0 30.0 | H 0.316 | V 0.780 | pL -0.009 | vL 0.025 | ∇ 0.125
+Status saved
+U 1345 | F 2754560 | FPS 0198 | D 3825 | rR:μσmM 0.94 0.33 -1.00 1.00 | ARPS: 0.204 | ADR: 0.687 | F:μσmM 6.9 6.5 1.0 76.0 | H 0.327 | V 0.718 | pL 0.018 | vL 0.038 | ∇ 0.117
+U 1350 | F 2764800 | FPS 0190 | D 3881 | rR:μσmM 0.96 0.26 -1.00 1.00 | ARPS: 0.211 | ADR: 0.694 | F:μσmM 7.0 5.9 1.0 76.0 | H 0.320 | V 0.765 | pL -0.017 | vL 0.023 | ∇ 0.110
+U 1355 | F 2775040 | FPS 0193 | D 3932 | rR:μσmM 0.91 0.42 -1.00 1.00 | ARPS: 0.181 | ADR: 0.626 | F:μσmM 7.6 5.5 1.0 45.0 | H 0.355 | V 0.707 | pL 0.028 | vL 0.045 | ∇ 0.155
+U 1360 | F 2785280 | FPS 0200 | D 3984 | rR:μσmM 0.94 0.33 -1.00 1.00 | ARPS: 0.209 | ADR: 0.675 | F:μσmM 7.0 5.6 1.0 76.0 | H 0.327 | V 0.752 | pL 0.008 | vL 0.034 | ∇ 0.127
+Status saved
+U 1365 | F 2795520 | FPS 0194 | D 4036 | rR:μσmM 0.98 0.20 -1.00 1.00 | ARPS: 0.215 | ADR: 0.695 | F:μσmM 7.1 4.9 1.0 38.0 | H 0.322 | V 0.761 | pL -0.013 | vL 0.013 | ∇ 0.102
+U 1370 | F 2805760 | FPS 0193 | D 4088 | rR:μσmM 0.97 0.25 -1.00 1.00 | ARPS: 0.217 | ADR: 0.700 | F:μσmM 6.8 4.6 1.0 39.0 | H 0.333 | V 0.765 | pL 0.006 | vL 0.025 | ∇ 0.144
+U 1375 | F 2816000 | FPS 0159 | D 4143 | rR:μσmM 0.98 0.20 -1.00 1.00 | ARPS: 0.212 | ADR: 0.706 | F:μσmM 6.7 3.9 1.0 22.0 | H 0.313 | V 0.775 | pL -0.016 | vL 0.015 | ∇ 0.095
+U 1380 | F 2826240 | FPS 0195 | D 4195 | rR:μσmM 0.94 0.35 -1.00 1.00 | ARPS: 0.221 | ADR: 0.685 | F:μσmM 6.6 5.4 1.0 71.0 | H 0.322 | V 0.758 | pL 0.020 | vL 0.044 | ∇ 0.149
+Status saved
+U 1385 | F 2836480 | FPS 0188 | D 4248 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.195 | ADR: 0.677 | F:μσmM 7.0 5.6 1.0 76.0 | H 0.326 | V 0.747 | pL 0.007 | vL 0.024 | ∇ 0.128
+U 1390 | F 2846720 | FPS 0204 | D 4300 | rR:μσmM 0.97 0.24 -1.00 1.00 | ARPS: 0.242 | ADR: 0.721 | F:μσmM 6.2 4.0 1.0 27.0 | H 0.296 | V 0.796 | pL -0.012 | vL 0.017 | ∇ 0.110
+U 1395 | F 2856960 | FPS 0199 | D 4352 | rR:μσmM 0.97 0.23 -1.00 1.00 | ARPS: 0.214 | ADR: 0.701 | F:μσmM 6.9 5.5 1.0 76.0 | H 0.289 | V 0.786 | pL -0.004 | vL 0.015 | ∇ 0.081
+U 1400 | F 2867200 | FPS 0195 | D 4404 | rR:μσmM 0.94 0.35 -1.00 1.00 | ARPS: 0.204 | ADR: 0.658 | F:μσmM 7.1 4.5 1.0 28.0 | H 0.297 | V 0.750 | pL 0.011 | vL 0.038 | ∇ 0.149
+Status saved
+U 1405 | F 2877440 | FPS 0201 | D 4459 | rR:μσmM 0.98 0.20 -1.00 1.00 | ARPS: 0.211 | ADR: 0.695 | F:μσmM 7.0 4.3 1.0 38.0 | H 0.321 | V 0.768 | pL 0.003 | vL 0.013 | ∇ 0.107
+U 1410 | F 2887680 | FPS 0199 | D 4511 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.207 | ADR: 0.685 | F:μσmM 7.1 5.5 1.0 54.0 | H 0.338 | V 0.763 | pL 0.006 | vL 0.024 | ∇ 0.142
+U 1415 | F 2897920 | FPS 0196 | D 4563 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.213 | ADR: 0.692 | F:μσmM 6.4 3.9 1.0 22.0 | H 0.298 | V 0.769 | pL 0.004 | vL 0.031 | ∇ 0.110
+U 1420 | F 2908160 | FPS 0201 | D 4615 | rR:μσmM 0.97 0.25 -1.00 1.00 | ARPS: 0.215 | ADR: 0.709 | F:μσmM 6.4 3.8 1.0 29.0 | H 0.298 | V 0.771 | pL -0.001 | vL 0.020 | ∇ 0.101
+Status saved
+U 1425 | F 2918400 | FPS 0200 | D 4667 | rR:μσmM 0.96 0.29 -1.00 1.00 | ARPS: 0.227 | ADR: 0.709 | F:μσmM 6.3 4.2 1.0 45.0 | H 0.288 | V 0.787 | pL -0.006 | vL 0.029 | ∇ 0.104
+U 1430 | F 2928640 | FPS 0156 | D 4722 | rR:μσmM 0.95 0.30 -1.00 1.00 | ARPS: 0.195 | ADR: 0.684 | F:μσmM 6.6 3.5 1.0 18.0 | H 0.302 | V 0.785 | pL -0.003 | vL 0.025 | ∇ 0.116
+U 1435 | F 2938880 | FPS 0205 | D 4774 | rR:μσmM 0.94 0.34 -1.00 1.00 | ARPS: 0.212 | ADR: 0.688 | F:μσmM 6.4 4.6 1.0 38.0 | H 0.331 | V 0.776 | pL 0.007 | vL 0.036 | ∇ 0.181
+U 1440 | F 2949120 | FPS 0208 | D 4826 | rR:μσmM 0.97 0.22 -1.00 1.00 | ARPS: 0.229 | ADR: 0.714 | F:μσmM 6.4 3.7 1.0 23.0 | H 0.303 | V 0.785 | pL 0.007 | vL 0.017 | ∇ 0.098
+Status saved
+U 1445 | F 2959360 | FPS 0196 | D 4878 | rR:μσmM 0.95 0.30 -1.00 1.00 | ARPS: 0.212 | ADR: 0.683 | F:μσmM 6.8 4.2 1.0 31.0 | H 0.309 | V 0.763 | pL -0.004 | vL 0.025 | ∇ 0.120
+U 1450 | F 2969600 | FPS 0198 | D 4929 | rR:μσmM 0.94 0.34 -1.00 1.00 | ARPS: 0.190 | ADR: 0.673 | F:μσmM 6.8 4.1 1.0 33.0 | H 0.320 | V 0.762 | pL 0.013 | vL 0.034 | ∇ 0.110
+U 1455 | F 2979840 | FPS 0193 | D 4982 | rR:μσmM 0.96 0.28 -1.00 1.00 | ARPS: 0.207 | ADR: 0.689 | F:μσmM 6.7 3.8 1.0 30.0 | H 0.301 | V 0.778 | pL -0.004 | vL 0.025 | ∇ 0.112
+U 1460 | F 2990080 | FPS 0195 | D 5038 | rR:μσmM 0.95 0.32 -1.00 1.00 | ARPS: 0.223 | ADR: 0.695 | F:μσmM 6.6 4.5 1.0 40.0 | H 0.332 | V 0.763 | pL 0.017 | vL 0.040 | ∇ 0.119
+Status saved
+U 1465 | F 3000320 | FPS 0195 | D 5090 | rR:μσmM 0.97 0.25 -1.00 1.00 | ARPS: 0.225 | ADR: 0.711 | F:μσmM 6.5 4.2 1.0 34.0 | H 0.308 | V 0.769 | pL -0.013 | vL 0.025 | ∇ 0.129
+train_agent.py --algo ppo --env Letter-7x7-v3 --log-interval 5 --save-interval 20 --frames 3001000 --discount 0.94 --ltl-sampler Until_1_2_1_2 --epochs 4 --lr 0.0003 --seed 6
+
+Namespace(algo='ppo', batch_size=256, checkpoint_dir=None, clip_eps=0.2, discount=0.94, dumb_ac=False, entropy_coef=0.01, env='Letter-7x7-v3', epochs=4, eval=False, eval_env=None, eval_episodes=5, eval_procs=1, frames=3001000, frames_per_proc=None, freeze_ltl=False, gae_lambda=0.95, gnn='RGCN_8x32_ROOT_SHARED', ignoreLTL=False, int_reward=0.0, log_interval=5, lr=0.0003, ltl_sampler='Until_1_2_1_2', ltl_samplers_eval=None, max_grad_norm=0.5, model=None, noLTL=False, optim_alpha=0.99, optim_eps=1e-08, pretrained_gnn=False, procs=16, progression_mode='full', recurrence=1, save_interval=20, seed=6, use_dfa=False, use_mean_guard_embed=False, value_loss_coef=0.5)
+
+Device: cpu
+
+Using fixed maps.
+Environments loaded
+
+Training status loaded.
+
+Observations preprocessor loaded.
+
+Loading model from existing run.
+
+Model loaded.
+
+ACModel(
+  (env_model): LetterEnvModel(
+    (image_conv): Sequential(
+      (0): Conv2d(13, 16, kernel_size=(2, 2), stride=(1, 1))
+      (1): ReLU()
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(1, 1))
+      (3): ReLU()
+      (4): Conv2d(32, 64, kernel_size=(2, 2), stride=(1, 1))
+      (5): ReLU()
+    )
+  )
+  (gnn): RGCNRootShared(
+    (linear_in): Linear(in_features=22, out_features=32, bias=True)
+    (conv): RelGraphConv(
+      (dropout): Dropout(p=0.0, inplace=False)
+    )
+    (g_embed): Linear(in_features=32, out_features=32, bias=True)
+  )
+  (actor): PolicyNetwork(
+    (enc_): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=1056, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+      (2): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU()
+      )
+    )
+    (discrete_): Sequential(
+      (0): Linear(in_features=64, out_features=4, bias=True)
+    )
+  )
+  (critic): Sequential(
+    (0): Linear(in_features=1056, out_features=64, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=64, out_features=64, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=64, out_features=1, bias=True)
+  )
+)
+
+Loading optimizer from existing run.
+
+Optimizer loaded.
+
+U 1465 | F 3000320 | FPS 0181 | D 58 | rR:μσmM 0.95 0.31 -1.00 1.00 | ARPS: 0.209 | ADR: 0.674 | F:μσmM 7.3 6.0 1.0 56.0 | H 0.344 | V 0.740 | pL 0.033 | vL 0.033 | ∇ 0.155
