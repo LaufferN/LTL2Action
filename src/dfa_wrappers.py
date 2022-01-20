@@ -19,6 +19,7 @@ Notes about DFAEnv:
 import numpy as np
 import gym
 from gym import spaces
+from copy import deepcopy
 import dfa_progression, random
 from dfa_samplers import getDFASampler, draw
 
@@ -67,7 +68,7 @@ class DFAEnv(gym.Wrapper):
 
         # Defining a DFA goal
         self.dfa_goal     = self.sample_dfa_goal()
-        self.dfa_original = self.dfa_goal
+        self.dfa_original = deepcopy(self.dfa_goal)
 
         # Adding the DFA goal to the observation
         if self.progression_mode == "partial":
@@ -78,26 +79,13 @@ class DFAEnv(gym.Wrapper):
 
 
     def step(self, action):
-        int_reward = 0
         # executing the action in the environment
         next_obs, original_reward, env_done, info = self.env.step(action)
 
         # progressing the DFA
         truth_assignment = self.get_events(self.obs, action, next_obs)
-        self.dfa_goal    = self.progression(self.dfa_goal, truth_assignment)
-        self.obs         = next_obs
-
-        # Computing the DFA reward and done signal
-        dfa_reward = 0.0
-        dfa_done   = False
-        if self.dfa_goal == 'True':
-            dfa_reward = 1.0
-            dfa_done   = True
-        elif self.dfa_goal == 'False':
-            dfa_reward = -1.0
-            dfa_done   = True
-        else:
-            dfa_reward = int_reward
+        dfa_reward, _, dfa_done = self.progression(self.dfa_goal, truth_assignment) # CHANGE THIS!!!!!
+        self.obs = next_obs
 
         # Computing the new observation and returning the outcome of this action
         if self.progression_mode == "full":
@@ -114,23 +102,15 @@ class DFAEnv(gym.Wrapper):
         return dfa_obs, reward, done, info
 
     def progression(self, dfa, truth_assignment):
-        if (dfa, truth_assignment) not in self.known_progressions:
-            result_dfa = dfa_progression.progress_and_clean(dfa, truth_assignment)
-            self.known_progressions[(dfa, truth_assignment)] = result_dfa
-        return self.known_progressions[(dfa, truth_assignment)]
+        return dfa_progression.progress_and_clean(dfa, truth_assignment)
 
     # # X is a vector where index i is 1 if prop i progresses the formula, -1 if it falsifies it, 0 otherwise.
     def progress_info(self, dfa):
         propositions = self.env.get_propositions()
-        X = np.zeros(len(self.propositions))
-
+        progression_info = np.zeros(len(self.propositions))
         for i in range(len(propositions)):
-            progress_i = self.progression(dfa, propositions[i])
-            if progress_i == 'False':
-                X[i] = -1.
-            elif progress_i != dfa:
-                X[i] = 1.
-        return X
+            _, progression_info[i], _ = self.progression(dfa, propositions[i])
+        return progression_info
 
     def get_events(self, obs, act, next_obs):
         # This function must return the events that currently hold on the environment
@@ -164,6 +144,11 @@ class NoDFAWrapper(gym.Wrapper):
     def get_propositions(self):
         return list([])
 
+def draw(G, path):
+    from networkx.drawing.nx_agraph import to_agraph
+    A = to_agraph(G)
+    A.layout('dot')
+    A.draw(path)
 
 if __name__ == '__main__':
     import sys
@@ -175,6 +160,11 @@ if __name__ == '__main__':
     dfa = dfaEnv.dfa_goal
     #draw(dfa, "sample_dfa.png")
     import networkx as nx
+    print("-------------------")
+    print(dfaEnv.progression(dfa, "a"))
+    print(dfaEnv.progression(dfa, "j"))
+    print(dfaEnv.progression(dfa, "d"))
+    print(dfaEnv.progression(dfa, "f"))
     for e in dfa.nodes:
         print(e, dfa.nodes[e])
-        #print(nx.get_node_attributes(dfa, node))
+    draw(dfa, "sample_dfa.png")
