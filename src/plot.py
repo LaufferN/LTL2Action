@@ -65,13 +65,13 @@ def read_data_and_average(tf_dirs, tag="return_mean", MAX_HORIZON=1000000000):
     X_all = None
     Ys = []
 
+    print(tf_dirs)
+
     if lite:
         tf_dirs = tf_dirs[:1]
     for tf_dir in tf_dirs:
         X, Y = read_data(tf_dir, tag, MAX_HORIZON)
-
-        # if len(Y) < 150:
-        #     continue
+        print(X)
 
         Ys.append(Y)
         if X_all is None:
@@ -157,12 +157,11 @@ def plot_letter_env_comparison_experiments():
     fig, ax1 = plt.subplots(1, 1)
     plt.subplots_adjust(top = 0.92, bottom = 0.28, hspace = 0, wspace = 0.12, left=0.07, right = 0.96)
     fig.set_size_inches(10,5)
-    
 
     ax1.set_ylabel("Discounted return", fontsize = 16)
     ax1.tick_params(labelsize=12)
     ax1.set_title("Partially-Ordered Tasks", fontsize = 16)
-    # ax1.xaxis.set_major_formatter(FormatStrFormatter('%d'))
+    # ax1.xaxis.set_major_formatter(FormatStrFormatter('%d'))-Ordered 
 
     for data_line, label in zip(eventually_logs, labels):
         X, Y_avg, Y_lower, Y_upper = read_data_and_average(data_line, tag="average_discounted_return", MAX_HORIZON=horizon) #average_discounted_return, average_discounted_return, average_reward_per_step
@@ -296,6 +295,41 @@ def plot_letter_env_dfa_experiments():
         legend.get_lines()[i].set_linewidth(3)
 
     plt.savefig("figs/letter-env-combined.pdf",bbox_inches='tight', pad_inches=0)
+    # plt.show()
+    
+def plot_letter_env_until_comparison():
+
+    until_logs = [glob.glob("storage/RGCN_8x32_ROOT_SHARED_Until_1_2_1_2_Letter*/train/"),
+                       glob.glob("storage/baseline_exps/RGCN_8x32_ROOT_SHARED_Until_1_2_1_2_Letter*/train/")]
+
+    labels = ["DFA", "AST"]
+    horizon = 1000000000
+
+    fig, ax1 = plt.subplots(1, 1)
+    plt.subplots_adjust(top = 0.92, bottom = 0.28, hspace = 0, wspace = 0.12, left=0.07, right = 0.96)
+    fig.set_size_inches(10,5)
+    
+
+    ax1.set_ylabel("Discounted return", fontsize = 16)
+    ax1.tick_params(labelsize=12)
+    ax1.set_title("Avoidance Tasks with RGCN_8x32_ROOT_SHARED", fontsize = 16)
+    # ax1.xaxis.set_major_formatter(FormatStrFormatter('%d'))
+
+    for data_line, label in zip(until_logs, labels):
+        X, Y_avg, Y_lower, Y_upper = read_data_and_average(data_line, tag="average_discounted_return", MAX_HORIZON=horizon) #average_discounted_return, average_discounted_return, average_reward_per_step
+        X = [x / 1000000 for x in X]
+        ax1.plot(X, Y_avg, linewidth = 2, label=label)
+        ax1.fill_between(X, Y_lower, Y_upper, alpha=0.2)
+
+    fig.text(0.5, 0.2, 'Frames (millions)', ha='center', fontsize = 16)
+
+    handles, labels = ax1.get_legend_handles_labels()
+    legend = fig.legend(handles, labels, loc="lower center",bbox_to_anchor = (0.5, 0), markerscale=6, fontsize=16, ncol = 3)
+
+    for i in range(len(legend.get_lines())):
+        legend.get_lines()[i].set_linewidth(3)
+
+    plt.savefig("figs/letter-env-until-comparison.pdf")
     # plt.show()
 
 
