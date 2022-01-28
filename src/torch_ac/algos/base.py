@@ -6,6 +6,8 @@ from torch_ac.utils import DictList, ParallelEnv
 
 import numpy as np
 
+from copy import deepcopy
+
 class BaseAlgo(ABC):
     """The base class for RL algorithms."""
 
@@ -129,8 +131,8 @@ class BaseAlgo(ABC):
 
         for i in range(self.num_frames_per_proc):
             # Do one agent-environment interaction
-            #print(i)
 
+            prev_obs = deepcopy(self.obs) # We have to deepcopy this because networkx graphs are called by reference
             preprocessed_obs = self.preprocess_obss(self.obs, device=self.device)
             with torch.no_grad():
                 if self.acmodel.recurrent:
@@ -143,7 +145,7 @@ class BaseAlgo(ABC):
 
             # Update experiences values
 
-            self.obss[i] = self.obs
+            self.obss[i] = prev_obs
             self.obs = obs
             if self.acmodel.recurrent:
                 self.memories[i] = self.memory

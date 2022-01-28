@@ -8,6 +8,7 @@ from dgl.nn.pytorch.conv import RelGraphConv
 
 from gnns.graphs.GNN import GNN
 
+#from utils.ast_builder import edge_types
 from utils.dfa_builder import edge_types
 
 class RGCN(GNN):
@@ -76,7 +77,7 @@ class RGCNRootShared(GNN):
 
     def forward(self, g):
         g = np.array(g).reshape((1, -1)).tolist()[0]
-        g = dgl.batch(g)
+        g = dgl.batch(g, node_attrs=['feat', 'is_root'])
         h_0 = self.linear_in(g.ndata["feat"].float().squeeze())
         h = h_0
         etypes = g.edata["type"]

@@ -22,6 +22,7 @@ from gym import spaces
 from copy import deepcopy
 import dfa_progression, random
 from dfa_samplers import getDFASampler, draw
+import networkx as nx
 
 class DFAEnv(gym.Wrapper):
     def __init__(self, env, progression_mode="full", dfa_sampler=None, intrinsic=0.0):
@@ -84,7 +85,21 @@ class DFAEnv(gym.Wrapper):
 
         # progressing the DFA
         truth_assignment = self.get_events(self.obs, action, next_obs)
-        dfa_reward, _, dfa_done = self.progression(self.dfa_goal, truth_assignment) # CHANGE THIS!!!!!
+        #print("Before:")
+        #for n in self.dfa_goal.nodes:
+        #    print(n, self.dfa_goal.nodes[n])
+        #for e in self.dfa_goal.edges:
+        #    print(e, self.dfa_goal.edges[e])
+        #print("truth_assignment", truth_assignment)
+        #input()
+        dfa_reward, _, dfa_done = self.progression(self.dfa_goal, truth_assignment)
+        #print("After:")
+        #for n in self.dfa_goal.nodes:
+        #    print(n, self.dfa_goal.nodes[n])
+        #for e in self.dfa_goal.edges:
+        #    print(e, self.dfa_goal.edges[e])
+        #print("truth_assignment", truth_assignment)
+        #input()
         self.obs = next_obs
 
         # Computing the new observation and returning the outcome of this action
@@ -102,7 +117,8 @@ class DFAEnv(gym.Wrapper):
         return dfa_obs, reward, done, info
 
     def progression(self, dfa, truth_assignment):
-        return dfa_progression.progress_and_clean(dfa, truth_assignment)
+        propositions = self.env.get_propositions()
+        return dfa_progression.progress_and_clean(dfa, truth_assignment, propositions)
 
     # # X is a vector where index i is 1 if prop i progresses the formula, -1 if it falsifies it, 0 otherwise.
     def progress_info(self, dfa):
@@ -145,13 +161,11 @@ class NoDFAWrapper(gym.Wrapper):
         return list([])
 
 def draw(G, path):
-    from networkx.drawing.nx_agraph import to_agraph
-    A = to_agraph(G)
+    A = nx.drawing.nx_agraph.to_agraph(G)
     A.layout('dot')
     A.draw(path)
 
 if __name__ == '__main__':
-    import sys
     props = "abcdefghijkl"
     env = gym.make("Letter-7x7-v3")
     env.seed(1)
@@ -159,12 +173,18 @@ if __name__ == '__main__':
     dfaEnv.reset()
     dfa = dfaEnv.dfa_goal
     #draw(dfa, "sample_dfa.png")
-    import networkx as nx
     print("-------------------")
     print(dfaEnv.progression(dfa, "a"))
+    draw(dfa, "sample_dfa.png")
+    input()
     print(dfaEnv.progression(dfa, "j"))
+    draw(dfa, "sample_dfa.png")
+    input()
     print(dfaEnv.progression(dfa, "d"))
-    print(dfaEnv.progression(dfa, "f"))
+    draw(dfa, "sample_dfa.png")
+    input()
+    print(dfaEnv.progression(dfa, "c"))
+    draw(dfa, "sample_dfa.png")
+    input()
     for e in dfa.nodes:
         print(e, dfa.nodes[e])
-    draw(dfa, "sample_dfa.png")
