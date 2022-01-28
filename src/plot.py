@@ -79,10 +79,6 @@ def read_data_and_average(tf_dirs, tag="return_mean", MAX_HORIZON=1000000000):
         else:
             if len(X) < len(X_all):
                 X_all = X
-        print(tf_dir, len(Y))
-
-    for i in range(len(Ys)):
-        print(len(Ys[i]))
 
     N = min([len(Ys[i]) for i in range(len(Ys))])
     M = len(Ys)
@@ -186,17 +182,22 @@ def plot_letter_env_comparison_experiments():
 
 def plot_letter_env_until_comparison_experiments():
 
-    eventually_logs = [glob.glob("storage/RGCN_8x32_ROOT_SHARED_Until*dfa:False*/train/"), 
-                       glob.glob("storage/RGCN_8x32_ROOT_SHARED_Until*dfa:True*/train/"),
-                       glob.glob("storage/GCN_8x32_ROOT_SHARED_Until*dfa:True*/train/")]
+    eventually_logs = [glob.glob("storage_feature_bug/RGCN_8x32_ROOT_SHARED_Until*dfa:False*_use_mean_guard_embed:False/train/"), 
+            glob.glob("storage_feature_bug/RGCN_8x32_ROOT_SHARED_Until*dfa:True*_use_mean_guard_embed:False/train/"),
+                       glob.glob("storage_feature_bug/RGCN_8x32_ROOT_SHARED_Until*dfa:True*_use_onehot_guard_embed:True/train/"),
+                       glob.glob("storage_feature_bug/GCN_8x32_ROOT_SHARED_Until*dfa:True*_use_mean_guard_embed:False/train/"),
+                       glob.glob("storage_feature_bug/RGCN_8x32_ROOT_Until*dfa:True*_use_onehot_guard_embed:True/train/"),
+                       glob.glob("storage/RGCN_8x32_ROOT_SHARED_Until*dfa:True*_use_mean_guard_embed:False_use_onehot_guard_embed:False/train/"),
+                       glob.glob("onehot_storage/RGCN_8x32_ROOT_SHARED_Until*dfa:True*_use_mean_guard_embed:False_use_onehot_guard_embed:True/train/"),
+                       glob.glob("onehot_storage/RGCN_8x32_ROOT_Until*dfa:True*_use_mean_guard_embed:False_use_onehot_guard_embed:True/train/")]
 
-    labels = ["AST RGCN (Baseline)", "DFA RGCN", "DFA GCN"]
+    labels = ["AST RGCN (Baseline)", "DFA RGCN bugged", "DFA RGCN One-hot", "DFA GCN bugged", "DFA RGCN Non-shared One-hot", "DFA RGCN", "DFA RGCN Updated One-hot", "DFA RGCN Updated One-hot Non-shared"]
     # labels = ["Deterministic Finite Automata", "Abstract Syntax Tree (Baseline)"]
     horizon = 10000000000
 
     fig, ax1 = plt.subplots(1, 1)
     plt.subplots_adjust(top = 0.92, bottom = 0.28, hspace = 0, wspace = 0.12, left=0.07, right = 0.96)
-    fig.set_size_inches(10,5)
+    fig.set_size_inches(15,8)
     
 
     ax1.set_ylabel("Discounted return", fontsize = 16)
@@ -224,20 +225,25 @@ def plot_letter_env_until_comparison_experiments():
 
 def plot_letter_env_dfa_experiments():
 
-    eventually_logs = [glob.glob("storage/RGCN_8x32_ROOT_SHARED_Eventually*dfa:True*/train/"),
-                       glob.glob("storage/GCN_8x32_ROOT_SHARED_Eventually*dfa:True*/train/")]
-                       # glob.glob("storage/RGCN_8x32_ROOT_Eventually*dfa:True*/train/"),
-                       # glob.glob("storage/GCN_8x32_ROOT_Eventually*dfa:True*/train/")]
+    eventually_logs = [glob.glob("storage_feature_bug/RGCN_8x32_ROOT_SHARED_Eventually*dfa:True*use_mean_guard_embed:False/train/"),
+                       glob.glob("storage_feature_bug/GCN_8x32_ROOT_SHARED_Eventually*dfa:True*/train/"),
+                       glob.glob("storage_feature_bug/RGCN_8x32_ROOT_SHARED_Eventually*dfa:False*/train/"),
+                       glob.glob("storage/RGCN_8x32_ROOT_SHARED_Eventually*dfa:True*use_onehot_guard_embed:True/train/"),
+                       glob.glob("storage/RGCN_8x32_ROOT_Eventually*dfa:True*use_onehot_guard_embed:True/train/"),
+                       glob.glob("onehot_storage/RGCN_8x32_ROOT_SHARED_Eventually*dfa:True*use_onehot_guard_embed:True/train/"),
+                       glob.glob("onehot_storage/RGCN_8x32_ROOT_Eventually*dfa:True*use_onehot_guard_embed:True/train/")]
 
-    labels = ["RGCN", "GCN"]
-    # labels = ["RGCN Shared", "GCN Shared", "RGCN", "GCN"]
+    # labels = ["RGCN", "GCN"]
+    labels = ["RGCN DFA", "GCN DFA", "RGCN AST", "RGCN One-hot", "RGCN One-hot Non-shared", "RGCN One-hot Update", "RGCN One-hot Non-shared Updated"]
     horizon = 10000000000
 
-    fig, (ax1, ax2) = plt.subplots(1, 2)
+    fig, ax1 = plt.subplots(1, 1)
     plt.subplots_adjust(top = 0.92, bottom = 0.28, hspace = 0, wspace = 0.12, left=0.07, right = 0.96)
-    fig.set_size_inches(10,5)
+    fig.set_size_inches(20,10)
     
     ax1.grid()
+
+    ax1.set_xlim(0,2)
 
     ax1.set_ylabel("Discounted return", fontsize = 16)
     ax1.tick_params(labelsize=12)
@@ -259,22 +265,22 @@ def plot_letter_env_dfa_experiments():
         legend.get_lines()[i].set_linewidth(3)
 
     #########################################################################
-    eventually_logs = [glob.glob("storage/RGCN_8x32_ROOT_SHARED_Eventually*dfa:True*/train/"),
-                       glob.glob("storage/RGCN_8x32_ROOT_SHARED_Eventually*dfa:False*/train/")]
+    # eventually_logs = [glob.glob("storage/RGCN_8x32_ROOT_SHARED_Eventually*dfa:True*/train/"),
+    #                    glob.glob("storage/RGCN_8x32_ROOT_SHARED_Eventually*dfa:False*/train/")]
 
-    labels = ["Deterministic Finite Automata", "Abstract Syntax Tree"]
-    horizon = 10000000000
+    # labels = ["Deterministic Finite Automata", "Abstract Syntax Tree"]
+    # horizon = 10000000000
 
-    ax2.grid()
-    # ax2.set_ylabel("Discounted return", fontsize = 16)
-    ax2.tick_params(labelsize=12)
-    # ax1.xaxis.set_major_formatter(FormatStrFormatter('%d'))
+    # ax2.grid()
+    # # ax2.set_ylabel("Discounted return", fontsize = 16)
+    # ax2.tick_params(labelsize=12)
+    # # ax1.xaxis.set_major_formatter(FormatStrFormatter('%d'))
 
-    for data_line, label in zip(eventually_logs, labels):
-        X, Y_avg, Y_lower, Y_upper = read_data_and_average(data_line, tag="average_discounted_return", MAX_HORIZON=horizon) #average_discounted_return, average_discounted_return, average_reward_per_step
-        X = [x / 1000000 for x in X]
-        ax2.plot(X, Y_avg, linewidth = 2, label=label)
-        ax2.fill_between(X, Y_lower, Y_upper, alpha=0.2)
+    # for data_line, label in zip(eventually_logs, labels):
+    #     X, Y_avg, Y_lower, Y_upper = read_data_and_average(data_line, tag="average_discounted_return", MAX_HORIZON=horizon) #average_discounted_return, average_discounted_return, average_reward_per_step
+    #     X = [x / 1000000 for x in X]
+    #     ax2.plot(X, Y_avg, linewidth = 2, label=label)
+    #     ax2.fill_between(X, Y_lower, Y_upper, alpha=0.2)
 
     #########################################################################
 
@@ -282,8 +288,8 @@ def plot_letter_env_dfa_experiments():
     plt.suptitle("Partially-Ordered Tasks", fontsize = 16)
 
 
-    handles, labels = ax2.get_legend_handles_labels()
-    legend = ax2.legend(handles, labels, loc="lower right", markerscale=6, fontsize=16, ncol = 1)
+    handles, labels = ax1.get_legend_handles_labels()
+    legend = ax1.legend(handles, labels, loc="lower right", markerscale=6, fontsize=16, ncol = 1)
 
     for i in range(len(legend.get_lines())):
         legend.get_lines()[i].set_linewidth(3)
@@ -380,6 +386,7 @@ def plot_letter_env_experiments():
 
     for i in range(len(legend.get_lines())):
         legend.get_lines()[i].set_linewidth(3)
+
 
     plt.savefig("figs/letter-env.pdf")
     plt.show()
@@ -750,8 +757,8 @@ def plot_toy_experiments():
 
 
 #plot_letter_env_experiments()
-# plot_letter_env_dfa_experiments()
-plot_letter_env_until_comparison()
+plot_letter_env_dfa_experiments()
+# plot_letter_env_until_comparison_experiments()
 # plot_minigrid_env_dfa_experiments()
 # plot_pretraining_experiments()
 # plot_safety_experiments()
