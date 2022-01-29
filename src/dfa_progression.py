@@ -1,14 +1,5 @@
 import networkx as nx
-from dfa_samplers import draw
 from copy import deepcopy
-
-def print_nxg(nxg):
-    for i in nxg.nodes:
-        print("Node:", i)
-        print(nxg.nodes[i]["feat"].shape, type(nxg.nodes[i]["feat"]), nxg.nodes[i]["feat"], type(nxg.nodes[i]["feat"][0][0]))
-        print(nxg.nodes[i]["is_root"], type(nxg.nodes[i]["is_root"]))
-    for i in nxg.edges:
-        print(nxg.edges[i]["type"], type(nxg.edges[i]["type"]))
 
 def prune_unreachable_nodes(nxg, current_node):
     reachable_nodes = nx.single_source_shortest_path(nxg, current_node).keys()

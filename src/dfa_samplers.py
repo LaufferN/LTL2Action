@@ -56,12 +56,10 @@ class DFASampler():
                 generic_formula = generic_formula.replace(prop, positional_var)
         return generic_formula, prop_mapping
 
-
-
     def _get_guard_embeddings(self, guard):
         embeddings = []
         try:
-            guard = guard["label"].replace(" ", "").replace("(", "").replace(")", "").replace("\"", "")
+            guard = guard.replace(" ", "").replace("(", "").replace(")", "").replace("\"", "")
         except:
             return embeddings
         if (guard == "true"):
@@ -93,6 +91,7 @@ class DFASampler():
             embeddings.append(temp)
         return embeddings
 
+    @ring.lru(maxsize=100000)
     def _get_onehot_guard_embeddings(self, guard):
         is_there_onehot = False
         is_there_all_zero = False
@@ -199,11 +198,11 @@ class DFASampler():
         new_node_name_counter = 0
 
         for e in edges:
-            guard = nxg.edges[e]
+            guard = nxg.edges[e]["label"]
             nxg.remove_edge(*e)
             if e[0] == e[1]:
                 continue # We define self loops below
-            embeddings = self._get_onehot_guard_embeddings(guard)
+            embeddings = deepcopy(self._get_onehot_guard_embeddings(guard)) # We might receive a cached onehot embedding so we have to deepcopy
             if len(embeddings) == 0:
                 continue
             for i in range(len(embeddings)):

@@ -69,7 +69,7 @@ class DFAEnv(gym.Wrapper):
 
         # Defining a DFA goal
         self.dfa_goal     = self.sample_dfa_goal()
-        self.dfa_original = deepcopy(self.dfa_goal)
+        self.dfa_original = deepcopy(self.dfa_goal) # We will progress the dfa_goal so make a copy of the original dfa goal
 
         # Adding the DFA goal to the observation
         if self.progression_mode == "partial":
@@ -85,21 +85,7 @@ class DFAEnv(gym.Wrapper):
 
         # progressing the DFA
         truth_assignment = self.get_events(self.obs, action, next_obs)
-        #print("Before:")
-        #for n in self.dfa_goal.nodes:
-        #    print(n, self.dfa_goal.nodes[n])
-        #for e in self.dfa_goal.edges:
-        #    print(e, self.dfa_goal.edges[e])
-        #print("truth_assignment", truth_assignment)
-        #input()
         dfa_reward, _, dfa_done = self.progression(self.dfa_goal, truth_assignment)
-        #print("After:")
-        #for n in self.dfa_goal.nodes:
-        #    print(n, self.dfa_goal.nodes[n])
-        #for e in self.dfa_goal.edges:
-        #    print(e, self.dfa_goal.edges[e])
-        #print("truth_assignment", truth_assignment)
-        #input()
         self.obs = next_obs
 
         # Computing the new observation and returning the outcome of this action
