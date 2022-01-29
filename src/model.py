@@ -15,6 +15,8 @@ import torch.nn.functional as F
 from torch.distributions import Categorical, Normal
 import torch_ac
 
+import copy
+
 from gym.spaces import Box, Discrete
 
 from gnns.graphs.GCN import *
@@ -34,7 +36,7 @@ def init_params(m):
 
 
 class ACModel(nn.Module, torch_ac.ACModel):
-    def __init__(self, env, obs_space, action_space, ignoreLTL, gnn_type, dumb_ac, freeze_ltl, use_dfa):
+    def __init__(self, env, obs_space, action_space, ignoreLTL, gnn_type, dumb_ac, freeze_ltl, use_dfa, give_mdp_state_to_gnn):
         super().__init__()
 
         # Decide which components are enabled
@@ -42,7 +44,9 @@ class ACModel(nn.Module, torch_ac.ACModel):
         self.use_text = not ignoreLTL and (gnn_type == "GRU" or gnn_type == "LSTM") and "text" in obs_space
         self.use_ast = not ignoreLTL and ("GCN" in gnn_type) and "text" in obs_space and not use_dfa
         self.use_dfa = not ignoreLTL and ("GCN" in gnn_type) and "text" in obs_space and use_dfa
+        self.give_mdp_state_to_gnn = give_mdp_state_to_gnn
         self.gnn_type = gnn_type
+        self.state_small_size = 4
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.action_space = action_space
         self.dumb_ac = dumb_ac
@@ -85,6 +89,14 @@ class ACModel(nn.Module, torch_ac.ACModel):
             hidden_dim = 32
             self.text_embedding_size = 32
             self.gnn = GNNMaker(self.gnn_type, obs_space["text"], self.text_embedding_size).to(self.device)
+
+            self.mdp_state_info_bottleneck = nn.Sequential(
+                nn.Linear(self.env_model.size(), 64),
+                nn.Tanh(),
+                nn.Linear(64, 16),
+                nn.Tanh(),
+                nn.Linear(16, self.state_small_size)
+            ).to(self.device)
             print("GNN Number of parameters:", sum(p.numel() for p in self.gnn.parameters() if p.requires_grad))
 
 
@@ -135,9 +147,17 @@ class ACModel(nn.Module, torch_ac.ACModel):
             embed_gnn = self.gnn(obs.text)
             embedding = torch.cat((embedding, embed_gnn), dim=1) if embedding is not None else embed_gnn
 
-        # Adding GNN
+        # Adding DFA
         elif self.use_dfa:
-            embed_gnn = self.gnn(obs.text)
+            dfa_graph = copy.deepcopy(obs.text)
+            if self.give_mdp_state_to_gnn:
+                bottleneck_state = self.mdp_state_info_bottleneck(embedding) 
+                for b in range(len(obs.text)):
+                    g = obs.text[b][0]
+                    bottleneck_state_repeat = bottleneck_state[b].repeat((g.num_nodes(), 1, 1)).double()
+                    dfa_graph[b][0].ndata['feat'][:,:,-10:-6] = bottleneck_state_repeat
+
+            embed_gnn = self.gnn(dfa_graph)
             embedding = torch.cat((embedding, embed_gnn), dim=1) if embedding is not None else embed_gnn
 
         # Actor

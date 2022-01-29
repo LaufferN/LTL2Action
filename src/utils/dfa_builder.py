@@ -21,7 +21,7 @@ import pickle
 edge_types = ["self", "normal-to-temp", "temp-to-normal"]
 
 TIMEOUT_SECONDS = 600
-FEATURE_SIZE = 22
+FEATURE_SIZE = 26
 dfa_db_path = "utils/dfa_db"
 DGL5_COMPAT = False
 

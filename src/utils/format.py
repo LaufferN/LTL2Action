@@ -12,7 +12,7 @@ import gym
 import numpy as np
 import utils
 
-FEATURE_SIZE = 22
+FEATURE_SIZE = 26
 
 from envs import *
 from ltl_wrappers import LTLEnv

@@ -119,6 +119,7 @@ parser.add_argument("--freeze-ltl", action="store_true", default=False,help="Fre
 parser.add_argument("--use-dfa", action="store_true", default=False,help="Use DFA encoding of the LTL formula instead of AST")
 parser.add_argument("--use-mean-guard-embed", action="store_true", default=False,help="Use mean embeddings for DFA guards")
 parser.add_argument("--use-onehot-guard-embed", action="store_true", default=False,help="Use onehot embeddings for DFA guards")
+parser.add_argument("--give-mdp-state-to-gnn", action="store_true", default=False,help="Give the MDP state as and input to the GNN")
 
 args = parser.parse_args()
 
@@ -140,7 +141,7 @@ if args.freeze_ltl:
 if use_mem:
     gnn_name = gnn_name + "-recurrence:%d"%(args.recurrence)
 
-default_model_name = f"{gnn_name}_{args.ltl_sampler}_{args.env}_seed:{args.seed}_epochs:{args.epochs}_bs:{args.batch_size}_fpp:{args.frames_per_proc}_dsc:{args.discount}_lr:{args.lr}_ent:{args.entropy_coef}_clip:{args.clip_eps}_prog:{args.progression_mode}_use-dfa:{args.use_dfa}_use_mean_guard_embed:{args.use_mean_guard_embed}_use_onehot_guard_embed:{args.use_onehot_guard_embed}"
+default_model_name = f"{gnn_name}_{args.ltl_sampler}_{args.env}_seed:{args.seed}_epochs:{args.epochs}_bs:{args.batch_size}_fpp:{args.frames_per_proc}_dsc:{args.discount}_lr:{args.lr}_ent:{args.entropy_coef}_clip:{args.clip_eps}_prog:{args.progression_mode}_use-dfa:{args.use_dfa}_use_mean_guard_embed:{args.use_mean_guard_embed}_use_onehot_guard_embed:{args.use_onehot_guard_embed}_give_mdp_state_to_gnn:{args.give_mdp_state_to_gnn}"
 
 model_name = args.model or default_model_name
 storage_dir = "storage" if args.checkpoint_dir is None else args.checkpoint_dir
@@ -222,7 +223,7 @@ txt_logger.info("Observations preprocessor loaded.\n")
 if use_mem:
     acmodel = RecurrentACModel(envs[0].env, obs_space, envs[0].action_space, args.ignoreLTL, args.gnn, args.dumb_ac, args.freeze_ltl, args.use_dfa)
 else:
-    acmodel = ACModel(envs[0].env, obs_space, envs[0].action_space, args.ignoreLTL, args.gnn, args.dumb_ac, args.freeze_ltl, args.use_dfa)
+    acmodel = ACModel(envs[0].env, obs_space, envs[0].action_space, args.ignoreLTL, args.gnn, args.dumb_ac, args.freeze_ltl, args.use_dfa, args.give_mdp_state_to_gnn)
 if "model_state" in status:
     acmodel.load_state_dict(status["model_state"])
     txt_logger.info("Loading model from existing run.\n")
