@@ -129,10 +129,13 @@ class BaseAlgo(ABC):
             reward, policy loss, value loss, etc.
         """
 
+        progression_info = 1.0
         for i in range(self.num_frames_per_proc):
             # Do one agent-environment interaction
 
-            prev_obs = deepcopy(self.obs) # We have to deepcopy this because networkx graphs are called by reference
+            if progression_info != 0.0:
+                prev_obs = deepcopy(self.obs) # We have to deepcopy this because networkx graphs are called by reference
+
             preprocessed_obs = self.preprocess_obss(self.obs, device=self.device)
             with torch.no_grad():
                 if self.acmodel.recurrent:
@@ -141,7 +144,7 @@ class BaseAlgo(ABC):
                     dist, value = self.acmodel(preprocessed_obs)
             action = dist.sample()
 
-            obs, reward, done, _ = self.env.step(action.cpu().numpy())
+            obs, reward, done, progression_info = self.env.step(action.cpu().numpy())
 
             # Update experiences values
 

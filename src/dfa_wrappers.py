@@ -85,7 +85,7 @@ class DFAEnv(gym.Wrapper):
 
         # progressing the DFA
         truth_assignment = self.get_events(self.obs, action, next_obs)
-        dfa_reward, _, dfa_done = self.progression(self.dfa_goal, truth_assignment)
+        dfa_reward, progression_info, dfa_done = self.progression(self.dfa_goal, truth_assignment)
         self.obs = next_obs
 
         # Computing the new observation and returning the outcome of this action
@@ -100,7 +100,7 @@ class DFAEnv(gym.Wrapper):
 
         reward  = original_reward + dfa_reward
         done    = env_done or dfa_done
-        return dfa_obs, reward, done, info
+        return dfa_obs, reward, done, progression_info
 
     def progression(self, dfa, truth_assignment):
         propositions = self.env.get_propositions()
