@@ -152,8 +152,7 @@ class BaseAlgo(ABC):
                     dist, value = self.acmodel(preprocessed_obs)
             action = dist.sample()
 
-            cpu_action = action.cpu().numpy()
-            self.obs, reward, done, progression_info = self.env.step(cpu_action)
+            self.obs, reward, done, progression_info = self.env.step(action.cpu().numpy())
 
             # Update experiences values
 

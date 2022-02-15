@@ -98,6 +98,7 @@ class DFASampler():
         is_there_onehot = False
         is_there_all_zero = False
         onehot_embedding = [0.0] * FEATURE_SIZE
+        onehot_embedding[-3] = 1.0 # Since it will be a temp node
         full_embeddings = self._get_guard_embeddings(guard)
         for embed in full_embeddings:
             # discard all non-onehot embeddings (a one-hot embedding must contain only a single 1)
@@ -202,17 +203,14 @@ class DFASampler():
             nxg.remove_edge(*e)
             if e[0] == e[1]:
                 continue # We define self loops below
-            embeddings = deepcopy(self._get_onehot_guard_embeddings(guard)) # We might receive a cached onehot embedding so we have to deepcopy
-            if len(embeddings) == 0:
+            onehot_embedding = self._get_onehot_guard_embeddings(guard) # It is ok if we receive a cached embeddding since we do not modify it
+            if len(onehot_embedding) == 0:
                 continue
-            for i in range(len(embeddings)):
-                embedding = [embeddings[i]]
-                embedding[0][-3] = 1.0
-                new_node_name = new_node_name_base_str + str(new_node_name_counter)
-                new_node_name_counter += 1
-                nxg.add_node(new_node_name, feat=np.array(embedding))
-                nxg.add_edge(e[0], new_node_name, type=1)
-                nxg.add_edge(new_node_name, e[1], type=2)
+            new_node_name = new_node_name_base_str + str(new_node_name_counter)
+            new_node_name_counter += 1
+            nxg.add_node(new_node_name, feat=np.array(onehot_embedding))
+            nxg.add_edge(e[0], new_node_name, type=1)
+            nxg.add_edge(new_node_name, e[1], type=2)
 
         nx.set_node_attributes(nxg, [0.0], "is_root")
         nxg.nodes[current_node]["is_root"] = [1.0] # is_root means current state
