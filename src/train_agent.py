@@ -186,7 +186,7 @@ txt_logger.info(f"Device: {device}\n")
 envs = []
 progression_mode = args.progression_mode
 for i in range(args.procs):
-    envs.append(utils.make_env(args.env, progression_mode, args.ltl_sampler, args.seed, args.int_reward, args.noLTL))
+    envs.append(utils.make_env(args.env, progression_mode, args.ltl_sampler, args.seed, args.int_reward, args.noLTL, args.use_dfa))
 
 # Sync environments
 envs[0].reset()

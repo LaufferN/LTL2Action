@@ -11,18 +11,20 @@ import torch_ac
 import gym
 import numpy as np
 import utils
+import networkx as nx
 
 FEATURE_SIZE = 26
 
 from envs import *
 from ltl_wrappers import LTLEnv
+from dfa_wrappers import DFAEnv
 
 def get_obss_preprocessor(env, gnn, progression_mode, use_dfa, use_mean_guard_embed, use_onehot_guard_embed):
     obs_space = env.observation_space
     vocab_space = env.get_propositions()
     vocab = None
 
-    if isinstance(env, LTLEnv): #LTLEnv Wrapped env
+    if isinstance(env, LTLEnv): # LTLEnv Wrapped env
         env = env.unwrapped
         if isinstance(env, LetterEnv) or isinstance(env, MinigridEnv) or isinstance(env, ZonesEnv):
             if progression_mode == "partial":
@@ -78,6 +80,55 @@ def get_obss_preprocessor(env, gnn, progression_mode, use_dfa, use_mean_guard_em
 
         else:
             raise ValueError("Unknown observation space: " + str(obs_space))
+    elif isinstance(env, DFAEnv): # DFAEnv Wrapped env
+        env = env.unwrapped
+        if isinstance(env, LetterEnv) or isinstance(env, MinigridEnv) or isinstance(env, ZonesEnv):
+            if progression_mode == "partial":
+                obs_space = {"image": obs_space.spaces["features"].shape, "progress_info": len(vocab_space)}
+                def preprocess_obss(obss, device=None):
+                    return torch_ac.DictList({
+                        "image": preprocess_images([obs["features"] for obs in obss], device=device),
+                        "progress_info":  torch.stack([torch.tensor(obs["progress_info"], dtype=torch.float) for obs in obss], dim=0).to(device)
+                    })
+
+            else:
+                obs_space = {"image": obs_space.spaces["features"].shape, "text": max(FEATURE_SIZE, len(vocab_space) + 10)}
+                vocab_space = {"max_size": obs_space["text"], "tokens": vocab_space}
+
+                vocab = Vocabulary(vocab_space)
+
+                tree_builder = utils.DFABuilder(vocab_space["tokens"], use_mean_guard_embed, use_onehot_guard_embed)
+                def preprocess_obss(obss, device=None):
+                    return torch_ac.DictList({
+                        "image": preprocess_images([obs["features"] for obs in obss], device=device),
+                        "text":  preprocess_nxgs([obs["text"] for obs in obss], builder=tree_builder, device=device)
+                    })
+
+            preprocess_obss.vocab = vocab
+
+        elif isinstance(env, SimpleLTLEnv):
+            if progression_mode == "partial":
+                obs_space = {"progress_info": len(vocab_space)}
+                def preprocess_obss(obss, device=None):
+                    return torch_ac.DictList({
+                        "progress_info":  torch.stack([torch.tensor(obs["progress_info"], dtype=torch.float) for obs in obss], dim=0).to(device)
+                    })
+            else:
+                obs_space = {"text": max(FEATURE_SIZE, len(vocab_space) + 10)}
+                vocab_space = {"max_size": obs_space["text"], "tokens": vocab_space}
+
+                vocab = Vocabulary(vocab_space)
+
+                tree_builder = utils.DFABuilder(vocab_space["tokens"], use_mean_guard_embed, use_onehot_guard_embed)
+                def preprocess_obss(obss, device=None):
+                    return torch_ac.DictList({
+                        "text":  preprocess_nxgs([obs["text"] for obs in obss], builder=tree_builder, device=device)
+                    })
+
+            preprocess_obss.vocab = vocab
+
+        else:
+            raise ValueError("Unknown observation space: " + str(obs_space))
     # Check if obs_space is an image space
     elif isinstance(obs_space, gym.spaces.Box):
         obs_space = {"image": obs_space.shape}
@@ -103,6 +154,13 @@ def preprocess_texts(texts, vocab, vocab_space, gnn=False, device=None, **kwargs
         return preprocess4gnn(texts, kwargs["ast"], device)
 
     return preprocess4rnn(texts, vocab, device)
+
+
+def preprocess_nxgs(nxgs, builder, device=None):
+    """
+    This function receives DFA represented as NetworkX graphs and convert them into inputs for a GNN
+    """
+    return np.array([[builder(nxg, nx.weisfeiler_lehman_graph_hash(nxg, node_attr="feat")).to(device)] for nxg in nxgs])
 
 
 def preprocess4rnn(texts, vocab, device=None):
