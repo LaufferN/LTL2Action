@@ -134,16 +134,15 @@ class BaseAlgo(ABC):
 
         preprocessed_obs = DictList({'image':None, 'text':None})
         progression_info = np.ones(len(self.obs))
+        done = [False for _ in range(len(self.obs))]
         for i in range(self.num_frames_per_proc):
             # Do one agent-environment interaction
 
-            prev_obs = self.obs 
+            # We have to deepcopy this because networkx graphs are called by reference
+            prev_obs = deepcopy(self.obs)
             prev_preprocessed_obs = preprocessed_obs.text
 
-            # We have to deepcopy this because networkx graphs are called by reference
-            self.obs = [deepcopy(self.obs[i]) if progression_info[i] != 0.0 else self.obs[i] for i in range(len(self.obs))]
-
-            preprocessed_obs = self.preprocess_obss(self.obs, prev_preprocessed_obs, progression_info, device=self.device)
+            preprocessed_obs = self.preprocess_obss(self.obs, done, progression_info, prev_preprocessed_obs, device=self.device)
 
             with torch.no_grad():
                 if self.acmodel.recurrent:
@@ -152,8 +151,7 @@ class BaseAlgo(ABC):
                     dist, value = self.acmodel(preprocessed_obs)
             action = dist.sample()
 
-            cpu_action = action.cpu().numpy()
-            self.obs, reward, done, progression_info = self.env.step(cpu_action)
+            self.obs, reward, done, progression_info = self.env.step(action.cpu().numpy())
 
             # Update experiences values
 
@@ -194,7 +192,7 @@ class BaseAlgo(ABC):
 
         # Add advantage and return to experiences
 
-        preprocessed_obs = self.preprocess_obss(self.obs, device=self.device)
+        preprocessed_obs = self.preprocess_obss(self.obs, done, progression_info, prev_preprocessed_obs, device=self.device)
         with torch.no_grad():
             if self.acmodel.recurrent:
                 _, next_value, _ = self.acmodel(preprocessed_obs, self.memory * self.mask.unsqueeze(1))
@@ -238,7 +236,7 @@ class BaseAlgo(ABC):
 
         # Preprocess experiences
 
-        exps.obs = self.preprocess_obss(exps.obs, exp_preproc_obs, [0]*len(exp_preproc_obs), device=self.device)
+        exps.obs = self.preprocess_obss(exps.obs, [False]*len(exp_preproc_obs), [0]*len(exp_preproc_obs), exp_preproc_obs, device=self.device)
 
         # Log some values
 

@@ -13,7 +13,7 @@ import numpy as np
 import utils
 import networkx as nx
 
-FEATURE_SIZE = 26
+from utils.parameters import FEATURE_SIZE
 
 from envs import *
 from ltl_wrappers import LTLEnv
@@ -98,10 +98,10 @@ def get_obss_preprocessor(env, gnn, progression_mode, use_dfa, use_mean_guard_em
                 vocab = Vocabulary(vocab_space)
 
                 tree_builder = utils.DFABuilder(vocab_space["tokens"], use_mean_guard_embed, use_onehot_guard_embed)
-                def preprocess_obss(obss, prev_preprocessed_obs=None, progression_info=None, device=None):
+                def preprocess_obss(obss, done=None, progression_info=None, prev_preprocessed_obs=None, device=None):
                     return torch_ac.DictList({
                         "image": preprocess_images([obs["features"] for obs in obss], device=device),
-                        "text":  preprocess_nxgs([obs["text"] for obs in obss], builder=tree_builder, prev_preprocessed_obs=prev_preprocessed_obs, progression_info=progression_info, device=device)
+                        "text":  preprocess_nxgs([obs["text"] for obs in obss], builder=tree_builder, done=done, progression_info=progression_info, prev_preprocessed_obs=prev_preprocessed_obs, device=device)
                     })
 
             preprocess_obss.vocab = vocab
@@ -120,9 +120,9 @@ def get_obss_preprocessor(env, gnn, progression_mode, use_dfa, use_mean_guard_em
                 vocab = Vocabulary(vocab_space)
 
                 tree_builder = utils.DFABuilder(vocab_space["tokens"], use_mean_guard_embed, use_onehot_guard_embed)
-                def preprocess_obss(obss, device=None):
+                def preprocess_obss(obss, done=None, progression_info=None, prev_preprocessed_obs=None, device=None):
                     return torch_ac.DictList({
-                        "text":  preprocess_nxgs([obs["text"] for obs in obss], builder=tree_builder, device=device)
+                        "text":  preprocess_nxgs([obs["text"] for obs in obss], builder=tree_builder, done=done, progression_info=progression_info, prev_preprocessed_obs=prev_preprocessed_obs, device=device)
                     })
 
             preprocess_obss.vocab = vocab
@@ -156,20 +156,20 @@ def preprocess_texts(texts, vocab, vocab_space, gnn=False, device=None, **kwargs
     return preprocess4rnn(texts, vocab, device)
 
 
-def preprocess_nxgs(nxgs, builder, prev_preprocessed_obs=None, progression_info=None, device=None):
+def preprocess_nxgs(nxgs, builder, done=None, progression_info=None, prev_preprocessed_obs=None, device=None):
     """
     This function receives DFA represented as NetworkX graphs and convert them into inputs for a GNN
     """
-    if prev_preprocessed_obs is None and progression_info is None:
+    if done is None or progression_info is None or prev_preprocessed_obs is None:
         return np.array([[builder(nxg, nx.weisfeiler_lehman_graph_hash(nxg, node_attr="feat")).to(device)] for nxg in nxgs])
     else:
         new_dfas = []
         for i in range(len(progression_info)):
-            if progression_info[i] != 0.0:
-                # we progressed
+            if done[i] or progression_info[i] != 0.0:
+                # either the episode ended or we progressed
                 new_dfas.append([builder(nxgs[i], nx.weisfeiler_lehman_graph_hash(nxgs[i], node_attr="feat")).to(device)])
             else:
-                # we didn't progress
+                # the episode did not end and we didn't progress
                 new_dfas.append(prev_preprocessed_obs[i])
 
         return np.array(new_dfas)
