@@ -90,14 +90,16 @@ class ACModel(nn.Module, torch_ac.ACModel):
             self.text_embedding_size = 32
             self.gnn = GNNMaker(self.gnn_type, obs_space["text"], self.text_embedding_size).to(self.device)
 
-            self.mdp_state_info_bottleneck = nn.Sequential(
-                nn.Linear(self.env_model.size(), 64),
-                nn.Tanh(),
-                nn.Linear(64, 16),
-                nn.Tanh(),
-                nn.Linear(16, self.state_small_size)
-            ).to(self.device)
             print("GNN Number of parameters:", sum(p.numel() for p in self.gnn.parameters() if p.requires_grad))
+
+            if self.give_mdp_state_to_gnn:
+                self.mdp_state_info_bottleneck = nn.Sequential(
+                    nn.Linear(self.env_model.size(), 64),
+                    nn.Tanh(),
+                    nn.Linear(64, 16),
+                    nn.Tanh(),
+                    nn.Linear(16, self.state_small_size)
+                ).to(self.device)
 
 
        # Resize image embedding
@@ -149,15 +151,17 @@ class ACModel(nn.Module, torch_ac.ACModel):
 
         # Adding DFA
         elif self.use_dfa:
-            dfa_graph = copy.deepcopy(obs.text)
             if self.give_mdp_state_to_gnn:
+                dfa_graph = copy.deepcopy(obs.text)
                 bottleneck_state = self.mdp_state_info_bottleneck(embedding) 
                 for b in range(len(obs.text)):
                     g = obs.text[b][0]
                     bottleneck_state_repeat = bottleneck_state[b].repeat((g.num_nodes(), 1, 1)).double()
                     dfa_graph[b][0].ndata['feat'][:,:,-10:-6] = bottleneck_state_repeat
 
-            embed_gnn = self.gnn(dfa_graph)
+                    embed_gnn = self.gnn(dfa_graph)
+            else:
+                embed_gnn = self.gnn(obs.text)
             embedding = torch.cat((embedding, embed_gnn), dim=1) if embedding is not None else embed_gnn
 
         # Actor
