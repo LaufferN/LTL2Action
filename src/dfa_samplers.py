@@ -24,7 +24,7 @@ except ModuleNotFoundError:
 
 dfa_db_path = "utils/dfa_db"
 TIMEOUT_SECONDS = 600
-FEATURE_SIZE = 22
+FEATURE_SIZE = 26
 
 class TimeOutException(Exception):
     pass
@@ -35,6 +35,8 @@ def alarm_handler(signum, frame):
 class DFASampler():
     def __init__(self, propositions):
         self.propositions = propositions
+        with open(dfa_db_path, "rb") as f:
+            self.dfa_db = pickle.load(f)
 
     # To make the caching work.
     def __ring_key__(self):
@@ -121,11 +123,9 @@ class DFASampler():
     def _get_dfa_from_ltl(self, formula):
         formatted_formula = formatLTL(formula, self.propositions)
         generic_formula, prop_mapping = self._get_generic_formula(formatted_formula)
-        with open(dfa_db_path, "rb") as f:
-            dfa_db = pickle.load(f)
         dfa_from_db = None
         try:
-            dfa_from_db = dfa_db[generic_formula]
+            dfa_from_db = self.dfa_db[generic_formula]
             #print("Found", generic_formula, "in dfa_db!")
         except:
             parser = LTLfParser()
@@ -142,10 +142,10 @@ class DFASampler():
                 dfa_from_db = nx.drawing.nx_pydot.from_pydot(pydot_formula)
                 # Read it again just in case. Some other process might write something new.
                 with open(dfa_db_path, "rb") as f:
-                    dfa_db = pickle.load(f)
-                dfa_db[generic_formula] = dfa_from_db
+                    self.dfa_db = pickle.load(f)
+                self.dfa_db[generic_formula] = dfa_from_db
                 with open(dfa_db_path, "wb") as f:
-                    pickle.dump(dfa_db, f)
+                    pickle.dump(self.dfa_db, f)
             except TimeOutException:
                 print("DFA construction timed out!")
                 return None
@@ -214,8 +214,8 @@ class DFASampler():
                 nxg.add_edge(e[0], new_node_name, type=1)
                 nxg.add_edge(new_node_name, e[1], type=2)
 
-        nx.set_node_attributes(nxg, 0.0, "is_root")
-        nxg.nodes[current_node]["is_root"] = 1.0 # is_root means current state
+        nx.set_node_attributes(nxg, [0.0], "is_root")
+        nxg.nodes[current_node]["is_root"] = [1.0] # is_root means current state
 
         for node in nxg.nodes:
             nxg.add_edge(node, node, type=0)
@@ -225,9 +225,7 @@ class DFASampler():
     def is_in_dfa_db(self, formula):
         formatted_formula = formatLTL(formula, self.propositions)
         generic_formula, _ = self._get_generic_formula(formatted_formula)
-        with open(dfa_db_path, "rb") as f:
-            dfa_db = pickle.load(f)
-        if generic_formula in dfa_db:
+        if generic_formula in self.dfa_db:
             return True
         else:
             return False
@@ -250,7 +248,9 @@ class DFASampler():
         formula = self.sample_ltl_formula()
         while not self.is_in_dfa_db(formula):
             formula = self.sample_ltl_formula()
-        return deepcopy(self._get_dfa_from_ltl(formula)) # We might receive a cached dfa so we have to deepcopy
+        dfa_from_ltl = self._get_dfa_from_ltl(formula)
+        dfa_copy = deepcopy(dfa_from_ltl) # We might receive a cached dfa so we have to deepcopy
+        return dfa_copy
 
 # Samples from one of the other samplers at random. The other samplers are sampled by their default args.
 class SuperSampler(DFASampler):

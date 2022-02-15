@@ -6,6 +6,7 @@ import networkx as nx
 from sklearn.preprocessing import OneHotEncoder
 import time
 edge_types = {k:v for (v, k) in enumerate(["self", "arg", "arg1", "arg2"])}
+DGL5_COMPAT = False
 
 """
 A class that can take an LTL formula and generate the Abstract Syntax Tree (AST) of it. This
@@ -34,8 +35,8 @@ class ASTBuilder(object):
     def __call__(self, formula, library="dgl"):
         #start = time.time()
         nxg = self._to_graph(formula)
-        nx.set_node_attributes(nxg, 0., "is_root")
-        nxg.nodes[0]["is_root"] = 1.
+        nx.set_node_attributes(nxg, [0.], "is_root")
+        nxg.nodes[0]["is_root"] = [1.]
         if (library == "networkx"): return nxg
 
         """print(formula)
@@ -48,10 +49,11 @@ class ASTBuilder(object):
             print(nxg.edges[i]["type"], type(nxg.edges[i]["type"]))"""
 
         # convert the Networkx graph to dgl graph and pass the 'feat' attribute
-        g = dgl.DGLGraph()
-        g.from_networkx(nxg, node_attrs=["feat", "is_root"], edge_attrs=["type"]) # dgl does not support string attributes (i.e., token)
-        #end = time.time()
-        #print(end-start)
+        if DGL5_COMPAT:
+            g = dgl.from_networkx(nxg, node_attrs=["feat", "is_root"], edge_attrs=["type"]) # dgl does not support string attributes (i.e., token)
+        else:
+            g = dgl.DGLGraph()
+            g.from_networkx(nxg, node_attrs=["feat", "is_root"], edge_attrs=["type"]) # dgl does not support string attributes (i.e., token)
         return g
 
     def _one_hot(self, token):

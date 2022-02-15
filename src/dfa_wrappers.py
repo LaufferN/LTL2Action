@@ -15,7 +15,6 @@ Notes about DFAEnv:
     - Otherwise, the agent gets the same reward given by the original environment.
 """
 
-
 import numpy as np
 import gym
 from gym import spaces
@@ -68,6 +67,7 @@ class DFAEnv(gym.Wrapper):
         self.obs = self.env.reset()
 
         # Defining a DFA goal
+
         self.dfa_goal     = self.sample_dfa_goal()
         self.dfa_original = deepcopy(self.dfa_goal) # We will progress the dfa_goal so make a copy of the original dfa goal
 
@@ -81,11 +81,12 @@ class DFAEnv(gym.Wrapper):
 
     def step(self, action):
         # executing the action in the environment
-        next_obs, original_reward, env_done, info = self.env.step(action)
+
+        next_obs, original_reward, env_done, _ = self.env.step(action)
 
         # progressing the DFA
         truth_assignment = self.get_events(self.obs, action, next_obs)
-        dfa_reward, _, dfa_done = self.progression(self.dfa_goal, truth_assignment)
+        dfa_reward, progression_info, dfa_done = self.progression(self.dfa_goal, truth_assignment)
         self.obs = next_obs
 
         # Computing the new observation and returning the outcome of this action
@@ -100,7 +101,7 @@ class DFAEnv(gym.Wrapper):
 
         reward  = original_reward + dfa_reward
         done    = env_done or dfa_done
-        return dfa_obs, reward, done, info
+        return dfa_obs, reward, done, progression_info
 
     def progression(self, dfa, truth_assignment):
         propositions = self.env.get_propositions()

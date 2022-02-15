@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 import torch
 
+import time
+
 from torch_ac.format import default_preprocess_obss
 from torch_ac.utils import DictList, ParallelEnv
 
@@ -86,6 +88,7 @@ class BaseAlgo(ABC):
 
         self.obs = self.env.reset()
         self.obss = [None]*(shape[0])
+        self.preproc_obss = [None]*(shape[0])
         if self.acmodel.recurrent:
             self.memory = torch.zeros(shape[1], self.acmodel.memory_size, device=self.device)
             self.memories = torch.zeros(*shape, self.acmodel.memory_size, device=self.device)
@@ -129,11 +132,19 @@ class BaseAlgo(ABC):
             reward, policy loss, value loss, etc.
         """
 
+        preprocessed_obs = DictList({'image':None, 'text':None})
+        progression_info = np.ones(len(self.obs))
         for i in range(self.num_frames_per_proc):
             # Do one agent-environment interaction
 
-            prev_obs = deepcopy(self.obs) # We have to deepcopy this because networkx graphs are called by reference
-            preprocessed_obs = self.preprocess_obss(self.obs, device=self.device)
+            prev_obs = self.obs 
+            prev_preprocessed_obs = preprocessed_obs.text
+
+            # We have to deepcopy this because networkx graphs are called by reference
+            self.obs = [deepcopy(self.obs[i]) if progression_info[i] != 0.0 else self.obs[i] for i in range(len(self.obs))]
+
+            preprocessed_obs = self.preprocess_obss(self.obs, prev_preprocessed_obs, progression_info, device=self.device)
+
             with torch.no_grad():
                 if self.acmodel.recurrent:
                     dist, value, memory = self.acmodel(preprocessed_obs, self.memory * self.mask.unsqueeze(1))
@@ -141,12 +152,13 @@ class BaseAlgo(ABC):
                     dist, value = self.acmodel(preprocessed_obs)
             action = dist.sample()
 
-            obs, reward, done, _ = self.env.step(action.cpu().numpy())
+            cpu_action = action.cpu().numpy()
+            self.obs, reward, done, progression_info = self.env.step(cpu_action)
 
             # Update experiences values
 
             self.obss[i] = prev_obs
-            self.obs = obs
+            self.preproc_obss[i] = preprocessed_obs.text
             if self.acmodel.recurrent:
                 self.memories[i] = self.memory
                 self.memory = memory
@@ -208,6 +220,9 @@ class BaseAlgo(ABC):
         exps.obs = [self.obss[i][j]
                     for j in range(self.num_procs)
                     for i in range(self.num_frames_per_proc)]
+        exp_preproc_obs = [self.preproc_obss[i][j]
+                    for j in range(self.num_procs)
+                    for i in range(self.num_frames_per_proc)]
         if self.acmodel.recurrent:
             # T x P x D -> P x T x D -> (P * T) x D
             exps.memory = self.memories.transpose(0, 1).reshape(-1, *self.memories.shape[2:])
@@ -223,7 +238,7 @@ class BaseAlgo(ABC):
 
         # Preprocess experiences
 
-        exps.obs = self.preprocess_obss(exps.obs, device=self.device)
+        exps.obs = self.preprocess_obss(exps.obs, exp_preproc_obs, [0]*len(exp_preproc_obs), device=self.device)
 
         # Log some values
 
