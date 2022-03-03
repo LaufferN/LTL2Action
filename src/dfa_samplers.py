@@ -23,9 +23,7 @@ try:
 except ModuleNotFoundError:
     from format_ltl import formatLTL
 
-dfa_db_path = "utils/dfa_db"
-TIMEOUT_SECONDS = 600
-FEATURE_SIZE = 26
+from utils.parameters import dfa_db_path, TIMEOUT_SECONDS, FEATURE_SIZE
 
 class TimeOutException(Exception):
     pass
