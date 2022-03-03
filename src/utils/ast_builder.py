@@ -6,7 +6,7 @@ import networkx as nx
 from sklearn.preprocessing import OneHotEncoder
 import time
 edge_types = {k:v for (v, k) in enumerate(["self", "arg", "arg1", "arg2"])}
-DGL5_COMPAT = False
+DGL5_COMPAT = True
 
 """
 A class that can take an LTL formula and generate the Abstract Syntax Tree (AST) of it. This

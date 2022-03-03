@@ -2,7 +2,7 @@ import ring
 import dgl
 
 edge_types = ["self", "normal-to-temp", "temp-to-normal"]
-DGL5_COMPAT = False
+DGL5_COMPAT = True
 
 """
 A class that can take an LTL formula and generate a minimal DFA of it. This
@@ -22,7 +22,6 @@ class DFABuilder(object):
 
     @ring.lru(maxsize=100000)
     def __call__(self, nxg, nxg_hash, library="dgl"):
-        #print("In DFA Builder")
         """print(formula)
         print("Number of nodes:", len(nxg.nodes))
         print("Number of edges:", len(nxg.edges))

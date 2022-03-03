@@ -20,7 +20,9 @@ import gym
 from gym import spaces
 from copy import deepcopy
 import dfa_progression, random
-from dfa_samplers import getDFASampler, draw
+import dfa_samplers
+# from dfa_samplers import getDFASampler, draw
+from envs.safety.zones_env import zone
 import networkx as nx
 
 class DFAEnv(gym.Wrapper):
@@ -43,7 +45,7 @@ class DFAEnv(gym.Wrapper):
         super().__init__(env)
         self.progression_mode = progression_mode
         self.propositions = self.env.get_propositions()
-        self.sampler = getDFASampler(dfa_sampler, self.propositions)
+        self.sampler = dfa_samplers.getDFASampler(dfa_sampler, self.propositions)
 
         self.observation_space = spaces.Dict({'features': env.observation_space})
         self.known_progressions = {}
@@ -153,24 +155,24 @@ def draw(G, path):
     A.draw(path)
 
 if __name__ == '__main__':
-    props = "abcdefghijkl"
-    env = gym.make("Letter-7x7-v3")
+    env = gym.make("Zones-5-v0")
     env.seed(1)
     dfaEnv = DFAEnv(env, "full", "Default", 0)
     dfaEnv.reset()
+    print(dfaEnv.propositions)
     dfa = dfaEnv.dfa_goal
-    #draw(dfa, "sample_dfa.png")
+    draw(dfa, "sample_dfa.png")
     print("-------------------")
-    print(dfaEnv.progression(dfa, "a"))
+    print(dfaEnv.progression(dfa, "J"))
     draw(dfa, "sample_dfa.png")
     input()
-    print(dfaEnv.progression(dfa, "j"))
+    print(dfaEnv.progression(dfa, "W"))
     draw(dfa, "sample_dfa.png")
     input()
-    print(dfaEnv.progression(dfa, "d"))
+    print(dfaEnv.progression(dfa, "R"))
     draw(dfa, "sample_dfa.png")
     input()
-    print(dfaEnv.progression(dfa, "c"))
+    print(dfaEnv.progression(dfa, "Y"))
     draw(dfa, "sample_dfa.png")
     input()
     for e in dfa.nodes:
