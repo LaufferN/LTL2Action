@@ -73,8 +73,8 @@ def read_data_and_average(tf_dirs, tag="return_mean", MAX_HORIZON=1000000000):
 
         print(len(X))
 
-        # if len(X) < 196:
-        #     continue
+        if len(X) < 60:
+            continue
 
         Ys.append(Y)
         if X_all is None:
@@ -149,10 +149,14 @@ def plot_minigrid_env_dfa_experiments():
 
 def plot_letter_env_new_sampling_experiments():
 
-    eventually_logs = [ glob.glob("fresh_storage/RGCN_8x32_ROOT_Until*dfa:True*/train/")]
+    # logs = [ glob.glob("fresh_storage/RGCN_8x32_ROOT_Until_1_3_1_2*dfa:True*/train/")]
+    # labels = ["DFA RGCN"]
 
-    labels = ["DFA RGCN"]
-    # labels = ["Deterministic Finite Automata", "Abstract Syntax Tree (Baseline)"]
+    logs = [glob.glob("fresh_storage/RGCN_8x32_ROOT_Until_1_2_1_1*dfa:True*/train/"),
+            glob.glob("fresh_storage/RGCN_8x32_ROOT_SHARED_Until_1_2_1_1*dfa:True*/train/"),
+            glob.glob("../../original_ltl2action/LTL2Action/src/storage/RGCN_8x32_ROOT_SHARED_Until_1_2_1_1*/train/") ]
+
+    labels = ["DFA Root", "DFA Shared", "DFA Old", "AST Shared"]
     horizon = 10000000000
 
     fig, ax1 = plt.subplots(1, 1)
@@ -164,7 +168,7 @@ def plot_letter_env_new_sampling_experiments():
     ax1.set_title("Avoidance Tasks", fontsize = 16)
     # ax1.xaxis.set_major_formatter(FormatStrFormatter('%d'))-Ordered 
 
-    for data_line, label in zip(eventually_logs, labels):
+    for data_line, label in zip(logs, labels):
         X, Y_avg, Y_lower, Y_upper = read_data_and_average(data_line, tag="average_discounted_return", MAX_HORIZON=horizon) #average_discounted_return, average_discounted_return, average_reward_per_step
         X = [x / 1000000 for x in X]
         ax1.plot(X, Y_avg, linewidth = 2, label=label)
@@ -179,7 +183,7 @@ def plot_letter_env_new_sampling_experiments():
     for i in range(len(legend.get_lines())):
         legend.get_lines()[i].set_linewidth(3)
 
-    plt.savefig("figs/letter-env-until_1_3_1_2.pdf",bbox_inches='tight', pad_inches=0)
+    plt.savefig("figs/zone-until_1_2_1_1.pdf",bbox_inches='tight', pad_inches=0)
 
 
 def plot_letter_env_comparison_experiments():
@@ -259,22 +263,15 @@ def plot_zone_env_until_comparison_experiments():
 
 def plot_letter_env_until_comparison_experiments():
 
-    # eventually_logs = [glob.glob("storage_feature_bug/RGCN_8x32_ROOT_SHARED_Until*dfa:False*_use_mean_guard_embed:False/train/"), 
-    #         glob.glob("storage_feature_bug/RGCN_8x32_ROOT_SHARED_Until*dfa:True*_use_mean_guard_embed:False/train/"),
-    #                    glob.glob("storage_feature_bug/RGCN_8x32_ROOT_SHARED_Until*dfa:True*_use_onehot_guard_embed:True/train/"),
-    #                    glob.glob("storage_feature_bug/GCN_8x32_ROOT_SHARED_Until*dfa:True*_use_mean_guard_embed:False/train/"),
-    #                    glob.glob("storage_feature_bug/RGCN_8x32_ROOT_Until*dfa:True*_use_onehot_guard_embed:True/train/"),
-    #                    glob.glob("storage/RGCN_8x32_ROOT_SHARED_Until*dfa:True*_use_mean_guard_embed:False_use_onehot_guard_embed:False/train/"),
-    #                    glob.glob("onehot_storage/RGCN_8x32_ROOT_SHARED_Until*dfa:True*_use_mean_guard_embed:False_use_onehot_guard_embed:True/train/"),
-    #                    glob.glob("onehot_storage/RGCN_8x32_ROOT_Until*dfa:True*_use_mean_guard_embed:False_use_onehot_guard_embed:True/train/")]
+    # eventually_logs = [glob.glob("storage/RGCN_8x32_ROOT_SHARED_Until*dfa:False*/train/"),
+    #                 glob.glob("storage/RGCN_8x32_ROOT_SHARED_Until_1_2_1_2*dfa:True*use_mean_guard_embed:False/train/"),
+    #                    glob.glob("storage/RGCN_8x32_ROOT_Until*dfa:True*use_onehot_guard_embed:True/train/") ,
+    #                    glob.glob("mdp_state_storage/RGCN_8x32_ROOT_Until*dfa:True*/train/") ]
 
-    eventually_logs = [glob.glob("storage/RGCN_8x32_ROOT_SHARED_Until*dfa:False*/train/"),
-                    glob.glob("storage/RGCN_8x32_ROOT_SHARED_Until_1_2_1_2*dfa:True*use_mean_guard_embed:False/train/"),
-                       glob.glob("storage/RGCN_8x32_ROOT_Until*dfa:True*use_onehot_guard_embed:True/train/") ,
-                       glob.glob("mdp_state_storage/RGCN_8x32_ROOT_Until*dfa:True*/train/") ]
+    eventually_logs = [glob.glob("fresh_storage/RGCN_8x32_ROOT_Until_1_3_1_2*dfa:True*/train/")]
 
     # labels = ["AST RGCN (Baseline)", "DFA RGCN bugged", "DFA RGCN One-hot", "DFA GCN bugged", "DFA RGCN Non-shared One-hot", "DFA RGCN", "DFA RGCN Updated One-hot", "DFA RGCN Updated One-hot Non-shared"]
-    labels = ["RGCN AST (baseline)", "RGCN DFA", "RGCN One-hot", "RGCN MDP state"]
+    labels = ["RGCN ROOT DFA"]
     # labels = ["Deterministic Finite Automata", "Abstract Syntax Tree (Baseline)"]
     horizon = 10000000000
 
@@ -303,7 +300,7 @@ def plot_letter_env_until_comparison_experiments():
     for i in range(len(legend.get_lines())):
         legend.get_lines()[i].set_linewidth(3)
 
-    plt.savefig("figs/letter-env-until-comparison.pdf",bbox_inches='tight', pad_inches=0)
+    plt.savefig("figs/letter-env-until.pdf",bbox_inches='tight', pad_inches=0)
 
 
 def plot_letter_env_dfa_experiments():
@@ -838,8 +835,8 @@ def plot_toy_experiments():
 
 #plot_letter_env_experiments()
 # plot_letter_env_dfa_experiments()
-# plot_zone_env_until_comparison_experiments()
 plot_letter_env_new_sampling_experiments()
+# plot_letter_env_until_comparison_experiments()
 # plot_letter_env_until_comparison_experiments()
 # plot_minigrid_env_dfa_experiments()
 # plot_pretraining_experiments()
