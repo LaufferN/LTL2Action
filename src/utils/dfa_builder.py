@@ -20,7 +20,7 @@ class DFABuilder(object):
     def __ring_key__(self):
         return "DFABuilder"
 
-    @ring.lru(maxsize=100000)
+    # @ring.lru(maxsize=100000)
     def __call__(self, nxg, nxg_hash, library="dgl"):
         """print(formula)
         print("Number of nodes:", len(nxg.nodes))

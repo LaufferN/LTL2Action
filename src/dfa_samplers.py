@@ -93,7 +93,7 @@ class DFASampler():
             embeddings.append(temp)
         return embeddings
 
-    @ring.lru(maxsize=100000)
+    # @ring.lru(maxsize=100000)
     def _get_onehot_guard_embeddings(self, guard):
         is_there_onehot = False
         is_there_all_zero = False
@@ -120,7 +120,7 @@ class DFASampler():
                 return False
         return True
 
-    @ring.lru(maxsize=100000)
+    # @ring.lru(maxsize=100000)
     def _format(self, mvc_dfa, minimize=True):
         """ converts a mvc format dfa into a networkx dfa """
 
@@ -194,7 +194,7 @@ class DFASampler():
 
         return nxg
 
-    @ring.lru(maxsize=100000)
+    # @ring.lru(maxsize=100000)
     def _get_dfa_from_ltl(self, formula):
         formatted_formula = formatLTL(formula, self.propositions)
         generic_formula, prop_mapping = self._get_generic_formula(formatted_formula)
@@ -323,12 +323,12 @@ class DFASampler():
         # dfa_from_ltl = self._get_dfa_from_ltl(formula)
         # dfa_copy = deepcopy(dfa_from_ltl) # We might receive a cached dfa so we have to deepcopy
         # return dfa_copy
-        formula = self.sample_ltl_formula()
-        dfa_from_ltl = self._get_dfa_from_ltl(formula)
-        dfa_copy = deepcopy(dfa_from_ltl) # We might receive a cached dfa so we have to deepcopy
-        return dfa_copy
-        # dfa = self.sample_dfa_formula()
-        # return self._format(dfa)
+        # formula = self.sample_ltl_formula()
+        # dfa_from_ltl = self._get_dfa_from_ltl(formula)
+        # dfa_copy = deepcopy(dfa_from_ltl) # We might receive a cached dfa so we have to deepcopy
+        # return dfa_copy
+        dfa = self.sample_dfa_formula()
+        return deepcopy(self._format(dfa))
 
 # Samples from one of the other samplers at random. The other samplers are sampled by their default args.
 class SuperSampler(DFASampler):
@@ -526,7 +526,7 @@ class UntilTaskSampler(DFASampler):
  
             # Adding the until task to the conjunction of formulas that the agent have to solve
             if dfa_task is None: dfa_task = until_task_mvc
-            else:           dfa_task = until_task_mvc & dfa_task
+            else:                dfa_task = until_task_mvc & dfa_task
         return dfa_task
 
     def sample_ltl_formula(self):

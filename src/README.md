@@ -25,7 +25,7 @@ Use the same hyperparameters as the non-pretrained counterpart (reported above) 
 ### ZoneEnv (requires Safety Gym/Mujoco)
 Myopic: `train_agent.py --algo ppo --env Zones-5-v0 --gnn GRU --progression-mode partial --ltl-sampler Until_1_2_1_1 --frames 22000000 --frames-per-proc 4096 --batch-size 1024 --lr 0.0003 --discount 0.998 --entropy-coef 0.003 --log-interval 1 --save-interval 2 --epochs 10`
 
-GNN: `train_agent.py --also ppo --env Zones-5-v0 --ltl-sampler Until_1_2_1_1 --frames-per-proc 4096 --batch-size 2048 --lr 0.0003 --discount 0.998 --entropy-coef 0.003 --log-interval 1 --save-interval 2 --epochs 10 --frames 22000000` (add `--pretrained-gnn` for pretrained version)
+GNN: `train_agent.py --algo ppo --env Zones-5-v0 --ltl-sampler Until_1_2_1_1 --frames-per-proc 4096 --batch-size 2048 --lr 0.0003 --discount 0.998 --entropy-coef 0.003 --log-interval 1 --save-interval 2 --epochs 10 --frames 22000000` (add `--pretrained-gnn` for pretrained version)
 
 ### MiniGrid (toy experiment)
 GNN+progression: `train_agent.py --algo ppo --env Adversarial-v0 --ltl-sampler Adversarial --frames-per-proc 1024  --discount 0.96 --log-interval 1 --save-interval 50 --frames 3000000`

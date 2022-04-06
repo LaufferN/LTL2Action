@@ -43,3 +43,4 @@ ring
 pydot
 python-sat
 ltlf2dfa
+pythomata
