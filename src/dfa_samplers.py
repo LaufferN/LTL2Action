@@ -148,7 +148,12 @@ class DFASampler():
             if accepting:
                 accepting_states.append(start)
             for action, end in transitions.items():
-                nxg.add_edge(start, str(end), label=action)
+                if nxg.has_edge(start, str(end)):
+                    existing_label = nxg.get_edge_data(start, str(end))['label']
+                    nxg.add_edge(start, str(end), label='{} | {}'.format(existing_label, action))
+                    # print('{} | {}'.format(existing_label, action))
+                else:
+                    nxg.add_edge(start, str(end), label=action)
 
         rejecting_states = []
         for node in nxg.nodes:
@@ -515,7 +520,7 @@ class UntilTaskSampler(DFASampler):
             for j in range(1,n_levels):
                 avoidance_list.append((p[b+1], p[b]))
                 b +=2
-            until_task_nfa = avoidance(avoidance_list, set(self.propositions))
+            until_task_nfa = avoidance(avoidance_list[::-1], set(self.propositions))
             until_task_dfa = until_task_nfa.determinize().trim().minimize()
             until_task_mvc = dfa.DFA(
                 start=until_task_dfa.initial_state,
