@@ -88,12 +88,13 @@ class DFASampler():
         for model in models:
             temp = [0.0] * FEATURE_SIZE
             for a in model:
-                atom = seen_atoms[abs(a) - 1]
-                temp[self.propositions.index(atom)] = 1.0 if a > 0 else -1.0
+                if a > 0:
+                    atom = seen_atoms[abs(a) - 1]
+                    temp[self.propositions.index(atom)] = 1.0
             embeddings.append(temp)
         return embeddings
 
-    # @ring.lru(maxsize=100000)
+    @ring.lru(maxsize=100000)
     def _get_onehot_guard_embeddings(self, guard):
         is_there_onehot = False
         is_there_all_zero = False
@@ -120,7 +121,6 @@ class DFASampler():
                 return False
         return True
 
-    # @ring.lru(maxsize=100000)
     def _format(self, mvc_dfa, minimize=True):
         """ converts a mvc format dfa into a networkx dfa """
 
@@ -199,7 +199,7 @@ class DFASampler():
 
         return nxg
 
-    # @ring.lru(maxsize=100000)
+    @ring.lru(maxsize=100000)
     def _get_dfa_from_ltl(self, formula):
         formatted_formula = formatLTL(formula, self.propositions)
         generic_formula, prop_mapping = self._get_generic_formula(formatted_formula)
@@ -322,16 +322,6 @@ class DFASampler():
         return dfa
 
     def sample(self):
-        # formula = self.sample_ltl_formula()
-        # while not self.is_in_dfa_db(formula):
-        #     formula = self.sample_ltl_formula()
-        # dfa_from_ltl = self._get_dfa_from_ltl(formula)
-        # dfa_copy = deepcopy(dfa_from_ltl) # We might receive a cached dfa so we have to deepcopy
-        # return dfa_copy
-        # formula = self.sample_ltl_formula()
-        # dfa_from_ltl = self._get_dfa_from_ltl(formula)
-        # dfa_copy = deepcopy(dfa_from_ltl) # We might receive a cached dfa so we have to deepcopy
-        # return dfa_copy
         dfa = self.sample_dfa_formula()
         return deepcopy(self._format(dfa))
 
@@ -448,7 +438,6 @@ def _accept_reach_avoid(sub_dfa, reach, avoid, alphabet):
         transition=transition,
     )
 
-# @ring.lru(maxsize=100000)
 def avoidance(reach_avoids: list[tuple[str, str]], alphabet: set[str]) -> NFA:
     n = len(reach_avoids)
     states = {f'q{i}' for i in range(n+1)} | {'fail'}

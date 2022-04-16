@@ -1,4 +1,3 @@
-import ring
 import dgl
 
 edge_types = ["self", "normal-to-temp", "temp-to-normal"]
@@ -16,12 +15,7 @@ class DFABuilder(object):
         self.use_mean_guard_embed = use_mean_guard_embed
         self.use_onehot_guard_embed = use_onehot_guard_embed
 
-    # To make the caching work.
-    def __ring_key__(self):
-        return "DFABuilder"
-
-    # @ring.lru(maxsize=100000)
-    def __call__(self, nxg, nxg_hash, library="dgl"):
+    def __call__(self, nxg, library="dgl"):
         """print(formula)
         print("Number of nodes:", len(nxg.nodes))
         print("Number of edges:", len(nxg.edges))
