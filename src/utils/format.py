@@ -161,13 +161,13 @@ def preprocess_nxgs(nxgs, builder, done=None, progression_info=None, prev_prepro
     This function receives DFA represented as NetworkX graphs and convert them into inputs for a GNN
     """
     if done is None or progression_info is None or prev_preprocessed_obs is None:
-        return np.array([[builder(nxg, nx.weisfeiler_lehman_graph_hash(nxg, node_attr="feat")).to(device)] for nxg in nxgs])
+        return np.array([[builder(nxg).to(device)] for nxg in nxgs])
     else:
         new_dfas = []
         for i in range(len(progression_info)):
             if done[i] or progression_info[i] != 0.0:
                 # either the episode ended or we progressed
-                new_dfas.append([builder(nxgs[i], nx.weisfeiler_lehman_graph_hash(nxgs[i], node_attr="feat")).to(device)])
+                new_dfas.append([builder(nxgs[i]).to(device)])
             else:
                 # the episode did not end and we didn't progress
                 new_dfas.append(prev_preprocessed_obs[i])

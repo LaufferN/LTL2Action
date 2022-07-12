@@ -38,8 +38,9 @@ urllib3==1.25.10
 Werkzeug==1.0.1
 wrapt==1.12.1
 zipp==3.1.0
-dfa==4.3.3
+dfa
 ring
 pydot
 python-sat
 ltlf2dfa
+pythomata

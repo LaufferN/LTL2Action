@@ -17,6 +17,7 @@ import networkx as nx
 from copy import deepcopy
 from pysat.solvers import Solver
 from ltlf2dfa.parser.ltlf import LTLfParser
+from pythomata.impl.simple import SimpleNFA as NFA 
 import dfa
 try:
     from utils.format_ltl import formatLTL
@@ -87,8 +88,9 @@ class DFASampler():
         for model in models:
             temp = [0.0] * FEATURE_SIZE
             for a in model:
-                atom = seen_atoms[abs(a) - 1]
-                temp[self.propositions.index(atom)] = 1.0 if a > 0 else -1.0
+                if a > 0:
+                    atom = seen_atoms[abs(a) - 1]
+                    temp[self.propositions.index(atom)] = 1.0
             embeddings.append(temp)
         return embeddings
 
@@ -119,7 +121,6 @@ class DFASampler():
                 return False
         return True
 
-    # @ring.lru(maxsize=100000)
     def _format(self, mvc_dfa, minimize=True):
         """ converts a mvc format dfa into a networkx dfa """
 
@@ -147,7 +148,12 @@ class DFASampler():
             if accepting:
                 accepting_states.append(start)
             for action, end in transitions.items():
-                nxg.add_edge(start, str(end), label=action)
+                if nxg.has_edge(start, str(end)):
+                    existing_label = nxg.get_edge_data(start, str(end))['label']
+                    nxg.add_edge(start, str(end), label='{} | {}'.format(existing_label, action))
+                    # print('{} | {}'.format(existing_label, action))
+                else:
+                    nxg.add_edge(start, str(end), label=action)
 
         rejecting_states = []
         for node in nxg.nodes:
@@ -316,14 +322,8 @@ class DFASampler():
         return dfa
 
     def sample(self):
-        # formula = self.sample_ltl_formula()
-        # while not self.is_in_dfa_db(formula):
-        #     formula = self.sample_ltl_formula()
-        # dfa_from_ltl = self._get_dfa_from_ltl(formula)
-        # dfa_copy = deepcopy(dfa_from_ltl) # We might receive a cached dfa so we have to deepcopy
-        # return dfa_copy
         dfa = self.sample_dfa_formula()
-        return self._format(dfa)
+        return deepcopy(self._format(dfa))
 
 # Samples from one of the other samplers at random. The other samplers are sampled by their default args.
 class SuperSampler(DFASampler):
@@ -388,14 +388,47 @@ def _accept_reach_avoid(sub_dfa, reach, avoid, alphabet):
     def transition(s, c):
         reach_avoid_state = s[0]
         sub_dfa_state = s[1]
-        next_sub_dfa_state = sub_dfa._transition(sub_dfa_state, c)
-        if reach_avoid_state != 0:
+
+        if reach_avoid_state == 0b10:
+            if c in avoid:
+                # reset the sub dfa and go back to the initial state
+                next_sub_dfa_state = sub_dfa.start
+                return (0b11, next_sub_dfa_state)
+            next_sub_dfa_state = sub_dfa._transition(sub_dfa_state, c)
             return (reach_avoid_state, next_sub_dfa_state)
-        if c in reach:
+        elif reach_avoid_state == 0b01:
+            return (reach_avoid_state, sub_dfa_state)
+        elif c in reach:
+            next_sub_dfa_state = sub_dfa._transition(sub_dfa_state, c)
             return (0b10, next_sub_dfa_state)
         elif c in avoid:
-            return (0b01, next_sub_dfa_state)
-        return (reach_avoid_state, next_sub_dfa_state)
+            return (0b01, sub_dfa_state)
+        return (reach_avoid_state, sub_dfa_state)
+
+        # if reach_avoid_state == 0b10:
+        #     next_sub_dfa_state = sub_dfa._transition(sub_dfa_state, c)
+        #     return (reach_avoid_state, next_sub_dfa_state)
+        # elif reach_avoid_state == 0b01:
+        #     return (reach_avoid_state, sub_dfa_state)
+        # elif c in reach:
+        #     next_sub_dfa_state = sub_dfa._transition(sub_dfa_state, c)
+        #     return (0b10, next_sub_dfa_state)
+        # elif c in avoid:
+        #     return (0b01, sub_dfa_state)
+        # return (reach_avoid_state, sub_dfa_state)
+
+        # # if we've in the rejecting states, stay here
+        # if reach_avoid_state == 0b01:
+        #     return (reach_avoid_state, next_sub_dfa_state)
+        # # if we hit an avoid prop, go to the rejecting state
+        # elif c in avoid:
+        #     return (0b01, next_sub_dfa_state)
+        # # if we hit a reach prop, go to the accepting state
+        # elif c in reach:
+        #     return (0b10, next_sub_dfa_state)
+        # # otherwise, only progress the sub_dfa
+        # return (reach_avoid_state, next_sub_dfa_state)
+
 
     return dfa.DFA(
         start=(0b00, sub_dfa.start),
@@ -405,8 +438,37 @@ def _accept_reach_avoid(sub_dfa, reach, avoid, alphabet):
         transition=transition,
     )
 
+def avoidance(reach_avoids: list[tuple[str, str]], alphabet: set[str]) -> NFA:
+    n = len(reach_avoids)
+    states = {f'q{i}' for i in range(n+1)} | {'fail'}
+    aps = set.union(*map(set, zip(*reach_avoids)))
+    if alphabet is None:
+        alphabet = aps
+    assert aps <= alphabet
+    transitions = {
+        f'q{n}': {c: {f'q{n}'} for c in alphabet},
+        'fail': {c: {'fail'} for c in alphabet},
+    }
+    for i, (reach, avoid) in enumerate(reach_avoids):
+        assert reach != avoid
+        state = f'q{i}'
 
-def _reach_avoid(reach, avoid, alphabet=frozenset({1, 2, 3, 4, 5})):
+        edges = {}
+        for char in alphabet - {reach, avoid}:
+            edges[char] = {state}
+        edges[avoid] = {'fail'}
+        edges[reach] = {f'q{i+1}', state}
+        transitions[state] = edges
+
+    return NFA(
+        states=states,
+        alphabet=alphabet,
+        transition_function=transitions,
+        initial_state='q0',
+        accepting_states={f'q{n}'}
+    )
+
+def _reach_avoid(reach, avoid, alphabet):
     # assert not (reach & avoid)
 
     def transition(s, c):
@@ -437,22 +499,49 @@ class UntilTaskSampler(DFASampler):
 
         n_conjs = random.randint(*self.conjunctions)
         p = random.sample(self.propositions,2*self.levels[1]*n_conjs)
-        dfa = None
+        dfa_task = None
         b = 0
         for i in range(n_conjs):
             n_levels = random.randint(*self.levels)
             # Sampling an until task of *n_levels* levels
-            # until_task = ('until',('not',p[b]),p[b+1])
-            until_task = _reach_avoid(p[b+1], p[b], self.propositions)
+            avoidance_list = [(p[b+1], p[b])]
             b +=2
             for j in range(1,n_levels):
-                # until_task = ('until',('not',p[b]),('and', p[b+1], until_task))
-                until_task = _accept_reach_avoid(until_task, p[b+1], p[b], self.propositions)
+                avoidance_list.append((p[b+1], p[b]))
+                b +=2
+            until_task_nfa = avoidance(avoidance_list[::-1], set(self.propositions))
+            until_task_dfa = until_task_nfa.determinize().trim().minimize()
+            until_task_mvc = dfa.DFA(
+                start=until_task_dfa.initial_state,
+                inputs=self.propositions,
+                label=lambda s: s in until_task_dfa.accepting_states,
+                transition=lambda s, c: until_task_dfa.transition_function[s][c],
+            ).normalize()
+ 
+            # Adding the until task to the conjunction of formulas that the agent have to solve
+            if dfa_task is None: dfa_task = until_task_mvc
+            else:                dfa_task = until_task_mvc & dfa_task
+        return dfa_task
+
+    def sample_ltl_formula(self):
+        # Sampling a conjuntion of *n_conjs* (not p[0]) Until (p[1]) formulas of *n_levels* levels
+        n_conjs = random.randint(*self.conjunctions)
+        p = random.sample(self.propositions,2*self.levels[1]*n_conjs)
+        ltl = None
+        b = 0
+        for i in range(n_conjs):
+            n_levels = random.randint(*self.levels)
+            # Sampling an until task of *n_levels* levels
+            until_task = ('until',('not',p[b]),p[b+1])
+            b +=2
+            for j in range(1,n_levels):
+                until_task = ('until',('not',p[b]),('and', p[b+1], until_task))
                 b +=2
             # Adding the until task to the conjunction of formulas that the agent have to solve
-            if dfa is None: dfa = until_task
-            else:           dfa = until_task & dfa
-        return dfa
+            if ltl is None: ltl = until_task
+            else:           ltl = ('and',until_task,ltl)
+        return ltl
+
 
 class UntilLTLTaskSampler(DFASampler):
     def __init__(self, propositions, min_levels=1, max_levels=2, min_conjunctions=1 , max_conjunctions=2):
@@ -654,8 +743,7 @@ def draw(G, path):
 
 if __name__ == '__main__':
     import sys
-    # props = "abcdefghijkl"
-    props = "abcdefghijklmnopqrstuvwxyz"
+    props = "abcd"
     sampler_id = sys.argv[1]
     sampler = getDFASampler(sampler_id, props)
     draw_path = "sample_dfa.png"
