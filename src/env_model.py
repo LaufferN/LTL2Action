@@ -3,6 +3,7 @@ import torch.nn as nn
 
 from envs import *
 from gym.envs.classic_control import PendulumEnv
+from envs.gridworld.gridworld_env import GridworldEnv
 
 
 def getEnvModel(env, obs_space):
@@ -16,6 +17,8 @@ def getEnvModel(env, obs_space):
         return ZonesEnvModel(obs_space)
     if isinstance(env, PendulumEnv):
         return PendulumEnvModel(obs_space)
+    if isinstance(env, GridworldEnv):
+        return GridworldEnvModel(obs_space)
     # Add your EnvModel here...
 
 
@@ -41,6 +44,24 @@ class EnvModel(nn.Module):
 
     def forward(self, obs):
         return None
+
+    def size(self):
+        return self.embedding_size
+
+class GridworldEnvModel(EnvModel):
+    def __init__(self, obs_space):
+        super().__init__(obs_space)
+        self.width = obs_space['image'][0]
+        self.height = obs_space['image'][1]
+        self.embedding_size =  self.width * self.height
+
+    def forward(self, obs):
+        if "image" in obs.keys():
+            x = obs.image
+            x = x.reshape(x.shape[0], -1) # flatten observation
+            return x
+
+        return super().forward(obs)
 
     def size(self):
         return self.embedding_size

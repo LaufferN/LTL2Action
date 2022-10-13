@@ -1,4 +1,4 @@
-from multiprocessing import Process, Pipe
+from multiprocess import Process, Pipe
 import gym
 
 def worker(conn, env):

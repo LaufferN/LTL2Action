@@ -4,6 +4,7 @@ from envs.gym_letters.letter_env import LetterEnv
 from envs.gym_letters.simple_ltl_env import SimpleLTLEnv
 from envs.minigrid.minigrid_env import MinigridEnv
 from envs.safety.zones_env import ZonesEnv
+from envs.gridworld.gridworld_env import GridworldEnv
 
 __all__ = ["LetterEnv", "SimpleLTLEnv", "MinigridEnv", "ZonesEnv"]
 
@@ -97,3 +98,17 @@ register(
 register(
     id='Zones-5-v1',
     entry_point='envs.safety.zones_env:ZonesEnv5Fixed')
+
+### Gridworld
+register(
+    id='Gridworld-v1',
+    entry_point='envs.gridworld.gridworld_env:GridworldEnv1')
+
+register(
+    id='Gridworld-v2',
+    entry_point='envs.gridworld.gridworld_env:GridworldEnv2')
+
+register(
+    id='Gridworld-v3',
+    entry_point='envs.gridworld.gridworld_env:GridworldEnv3')
+

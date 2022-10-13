@@ -16,6 +16,7 @@ import networkx as nx
 from utils.parameters import FEATURE_SIZE
 
 from envs import *
+from envs.gridworld.gridworld_env import GridworldEnv
 from ltl_wrappers import LTLEnv
 from dfa_wrappers import DFAEnv
 
@@ -82,7 +83,7 @@ def get_obss_preprocessor(env, gnn, progression_mode, use_dfa, use_mean_guard_em
             raise ValueError("Unknown observation space: " + str(obs_space))
     elif isinstance(env, DFAEnv): # DFAEnv Wrapped env
         env = env.unwrapped
-        if isinstance(env, LetterEnv) or isinstance(env, MinigridEnv) or isinstance(env, ZonesEnv):
+        if isinstance(env, LetterEnv) or isinstance(env, MinigridEnv) or isinstance(env, ZonesEnv) or isinstance(env, GridworldEnv):
             if progression_mode == "partial":
                 obs_space = {"image": obs_space.spaces["features"].shape, "progress_info": len(vocab_space)}
                 def preprocess_obss(obss, device=None):
@@ -126,6 +127,7 @@ def get_obss_preprocessor(env, gnn, progression_mode, use_dfa, use_mean_guard_em
                     })
 
             preprocess_obss.vocab = vocab
+
 
         else:
             raise ValueError("Unknown observation space: " + str(obs_space))

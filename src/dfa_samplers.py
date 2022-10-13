@@ -12,12 +12,14 @@ import pydot
 import signal
 import random
 import pickle
+import dill
 import numpy as np
 import networkx as nx
 from copy import deepcopy
 from pysat.solvers import Solver
 from ltlf2dfa.parser.ltlf import LTLfParser
 from pythomata.impl.simple import SimpleNFA as NFA 
+from scipy.special import softmax
 import dfa
 try:
     from utils.format_ltl import formatLTL
@@ -121,7 +123,7 @@ class DFASampler():
                 return False
         return True
 
-    def _format(self, mvc_dfa, minimize=True):
+    def dfa2nxg(self, mvc_dfa, minimize=True):
         """ converts a mvc format dfa into a networkx dfa """
 
         if minimize:
@@ -130,15 +132,7 @@ class DFASampler():
         dfa_dict, init_node = dfa.dfa2dict(mvc_dfa)
         init_node = str(init_node)
 
-        # nodes = {
-        #     k: pydot.Node(i+1, label=f"{k}\n---\n{v}")
-        #     for i, (k, (v, _)) in enumerate(dfa_dict.items())
-        # }
-        # pydot_graph = pydot.Graph()
         nxg = nx.DiGraph()
-        # init_node = pydot.Node(0, shape="point", label="")
-        # pydot_graph.add_node(init_node)
-        # pydot_graph.add_edge(pydot.Edge(init_node, nodes[init]))
 
         accepting_states = []
         for start, (accepting, transitions) in dfa_dict.items():
@@ -155,11 +149,16 @@ class DFASampler():
                 else:
                     nxg.add_edge(start, str(end), label=action)
 
+        return init_node, accepting_states, nxg
+
+
+    def _format(self, init_node, accepting_states, nxg):
+        print('init', init_node)
+        print('accepting', accepting_states)
         rejecting_states = []
         for node in nxg.nodes:
             if self._is_sink_state(node, nxg) and node not in accepting_states:
                 rejecting_states.append(node)
-
 
         for node in nxg.nodes:
             nxg.nodes[node]["feat"] = np.array([[0.0] * FEATURE_SIZE])
@@ -178,6 +177,7 @@ class DFASampler():
 
         for e in edges:
             guard = nxg.edges[e]["label"]
+            print(e, guard)
             nxg.remove_edge(*e)
             if e[0] == e[1]:
                 continue # We define self loops below
@@ -323,7 +323,8 @@ class DFASampler():
 
     def sample(self):
         dfa = self.sample_dfa_formula()
-        return deepcopy(self._format(dfa))
+        init_node, accepting_states, nxg = self.dfa2nxg(dfa)
+        return deepcopy(self._format(init_node,accepting_states,nxg))
 
 # Samples from one of the other samplers at random. The other samplers are sampled by their default args.
 class SuperSampler(DFASampler):
@@ -487,6 +488,86 @@ def _reach_avoid(reach, avoid, alphabet):
         label=lambda s: s == 0b10,
         transition=transition,
     )
+
+class UniversalSampler(DFASampler):
+    def __init__(self, propositions, temp='0.5'):
+        super().__init__(propositions)
+        with open("dfas/enumerated_gridworld_dfas.pickle", 'rb') as f:
+            enumerated_dfas = dill.load(f)
+
+        temp = float(temp)
+        augmented_props = list(propositions)
+        augmented_props.remove('white')
+
+        self.enumerated_dfas = [dfa.DFA.from_int(dfa_int, inputs=augmented_props) for dfa_int in enumerated_dfas]
+        sizes = np.array([len(bin(dfa_int)) for dfa_int in enumerated_dfas])
+        # print(np.average(sizes))
+        self.weights = softmax(-sizes * temp)
+
+        # self.no_sink_dfas = []
+        # self.sink_dfas = []
+        # for dfaa in self.enumerated_dfas:
+        #     _, accepting_nodes, nxg = self.dfa2nxg(dfaa)
+        #     has_sink = False
+        #     for node in nxg.nodes:
+        #         if node in accepting_nodes:
+        #             continue
+        #         for edge in nxg.edges:
+        #             if node == edge[0] and node != edge[1]: # If there is an outgoing edge to another node, then it is not an accepting state
+        #                 break
+        #         else:
+        #             has_sink = True
+        #             break
+        #     if has_sink:
+        #         self.sink_dfas.append(dfaa)
+        #     else:
+        #         self.no_sink_dfas.append(dfaa)
+
+        # print("~~~~~~~~~~~~~~~~~OUTPUTING NOW~~~~~~~~~~~~~~")
+        # print(len(self.no_sink_dfas))
+        # print(len(self.sink_dfas))
+
+    def sample_dfa_formula(self):
+        # random_size = np.random.choice(self.sizes, p=self.weights)
+        # return deepcopy(np.random.choice(self.enumerated_dfas_dict[random_size]))
+
+        return deepcopy(np.random.choice(self.enumerated_dfas, p=self.weights))
+
+class FixedGridworldSampler(DFASampler):
+    def __init__(self, propositions):
+        super().__init__(propositions)
+
+    def transition(self, s, c):
+        if s == 0:
+            if c == 'red':
+                s = 1 # fail
+            elif c == 'blue':
+                s = 2 # got wet
+            elif c == 'yellow':
+                s = 3 # success
+        elif s == 2:
+            if c == 'red' or c == 'yellow':
+                s = 1 # fail
+            elif c == 'green':
+                s = 0 # back to start
+        elif s == 3:
+            if c == 'blue':
+                s = 2 # got wet
+            if c == 'red':
+                s = 1 # fail
+
+        return s
+
+
+    def sample_dfa_formula(self):
+        fixed_dfa = dfa.DFA(start=0,
+                            inputs={'blue', 'green', 'red', 'yellow', 'white'},
+                            outputs={False, True},
+                            label=lambda s: s == 3,
+                            transition=self.transition)
+
+        return fixed_dfa
+
 
 class UntilTaskSampler(DFASampler):
     def __init__(self, propositions, min_levels=1, max_levels=2, min_conjunctions=1 , max_conjunctions=2):
@@ -732,6 +813,10 @@ def getDFASampler(sampler_id, propositions):
         return AdversarialEnvSampler(propositions)
     elif (tokens[0] == "Eventually"):
         return EventuallySampler(propositions, tokens[1], tokens[2], tokens[3], tokens[4])
+    elif (tokens[0] == "Universal"):
+        return UniversalSampler(propositions, tokens[1])
+    elif (tokens[0] == "FixedGridworld"):
+        return FixedGridworldSampler(propositions)
     else: # "Default"
         return DefaultSampler(propositions)
 
@@ -743,10 +828,10 @@ def draw(G, path):
 
 if __name__ == '__main__':
     import sys
-    props = "abcd"
+    props = ["yellow", "green", "blue", "red"]
     sampler_id = sys.argv[1]
     sampler = getDFASampler(sampler_id, props)
     draw_path = "sample_dfa.png"
     dfa = sampler.sample()
-    # draw(dfa, draw_path)
+    draw(dfa, draw_path)
 
